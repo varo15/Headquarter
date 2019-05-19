@@ -18,13 +18,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class EmailPasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
     //defining view objects
     private static final String TAG = "EmailPassword";
     private EditText TextEmail;
     private EditText TextPassword;
     private Button btnRegistrar;
+    private Button btnLogin;
     private ProgressDialog progressDialog;
 
 
@@ -44,27 +45,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         TextPassword = (EditText) findViewById(R.id.TxtPassword);
 
         btnRegistrar = (Button) findViewById(R.id.botonRegistrar);
+        btnLogin = findViewById(R.id.botonLogin);
 
         progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
         btnRegistrar.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
 
 
         //Obtenemos el email y la contraseña desde las cajas de texto
         String email = TextEmail.getText().toString().trim();
         String password = TextPassword.getText().toString().trim();
-
-        //Verificamos que las cajas de texto no esten vacías
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Se debe ingresar un email", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Falta ingresar la contraseña", Toast.LENGTH_LONG).show();
-            return;
-        }
 
     }
 
@@ -76,8 +68,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.botonRegistrar) {
+
+            createAccount(TextEmail.getText().toString(), TextPassword.getText().toString());
+        } else if (i == R.id.botonLogin) {
+            signIn(TextEmail.getText().toString(), TextPassword.getText().toString());
+        }
+    }
+
+    /*
+        Metodos de registro, login, validacion
+     */
+
+    //Metodo de Registro de nuevo usuario
     private void createAccount(String email, String password) {
         Log.d(TAG, "createAccount:" + email);
+        if (!validateForm()) {
+            return;
+        }
 
         progressDialog.show();
 
@@ -90,24 +101,83 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+                            Toast.makeText(EmailPasswordActivity.this, "Usuario registrado", Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Error en el registro",
+                            Toast.makeText(EmailPasswordActivity.this, "Error en el registro",
                                     Toast.LENGTH_SHORT).show();
                         }
 
                         // [START_EXCLUDE]
-                            progressDialog.dismiss();
+                        progressDialog.dismiss();
                         // [END_EXCLUDE]
                     }
                 });
         // [END create_user_with_email]
     }
 
+    //Metodo de Sign In
+    private void signIn(String email, String password) {
+        Log.d(TAG, "signIn:" + email);
+        if (!validateForm()) {
+            return;
+        }
 
-    @Override
-    public void onClick(View v) {
-        createAccount(TextEmail.getText().toString(), TextPassword.getText().toString());
+        progressDialog.show();
+
+        // [START sign_in_with_email]
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            Toast.makeText(EmailPasswordActivity.this, "Usuario Logeado", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        // [START_EXCLUDE]
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(EmailPasswordActivity.this, "Usuario Logeado", Toast.LENGTH_SHORT).show();
+                        }
+                        progressDialog.dismiss();
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END sign_in_with_email]
     }
+
+
+    //Metodo de validacion de campos
+    private boolean validateForm() {
+        boolean valid = true;
+
+        String email = TextEmail.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            TextEmail.setError("Required.");
+            valid = false;
+        } else {
+            TextEmail.setError(null);
+        }
+
+        String password = TextPassword.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            TextPassword.setError("Required.");
+            valid = false;
+        } else {
+            TextPassword.setError(null);
+        }
+
+        return valid;
+    }
+
+
 }
