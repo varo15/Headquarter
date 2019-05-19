@@ -24,8 +24,6 @@ public class EmailPasswordActivity extends AppCompatActivity implements View.OnC
     private static final String TAG = "EmailPassword";
     private EditText TextEmail;
     private EditText TextPassword;
-    private Button btnRegistrar;
-    private Button btnLogin;
     private ProgressDialog progressDialog;
 
 
@@ -44,8 +42,8 @@ public class EmailPasswordActivity extends AppCompatActivity implements View.OnC
         TextEmail = (EditText) findViewById(R.id.TxtEmail);
         TextPassword = (EditText) findViewById(R.id.TxtPassword);
 
-        btnRegistrar = (Button) findViewById(R.id.botonRegistrar);
-        btnLogin = findViewById(R.id.botonLogin);
+        Button btnRegistrar = (Button) findViewById(R.id.botonRegistrar);
+        Button btnLogin = findViewById(R.id.botonLogin);
 
         progressDialog = new ProgressDialog(this);
 
