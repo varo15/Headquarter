@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.google.android.gms.tasks.Task;
 import com.headquarter.R;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity  {
     private Statement statement;
     private ResultSet resultSet;
     private Button button;
-    private String query;
+    private String [] query;
     private String sql = "SELECT * FROM jugador";
 
 
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity  {
                 MainActivity.this.startActivity(loginIntent);
                 Consulta consulta = new Consulta();
                 consulta.execute();
-                System.out.println("Hola: " + resultSet);
 
             }
         });
@@ -65,7 +65,17 @@ public class MainActivity extends AppCompatActivity  {
             try {
                 System.out.println("Conection: " + connection);
                 statement = connection.createStatement();
+                System.out.println("Statement: " + statement);
                 resultSet = statement.executeQuery(sql);
+                System.out.println("Resultset: " + resultSet);
+                resultSet.beforeFirst();
+                while (resultSet.next()){
+                    String id = resultSet.getString("nombre");
+                    System.out.println("id: " + id);
+                }
+
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Error: " + connection);
@@ -73,12 +83,6 @@ public class MainActivity extends AppCompatActivity  {
             return null;
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            System.out.println("Avoid:" + aVoid);
-            super.onPostExecute(aVoid);
-
-        }
     }
 
 
