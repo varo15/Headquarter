@@ -12,7 +12,7 @@ class ConnectionDB extends AsyncTask<Void, Void, Void> {
     private String url = "jdbc:mysql://db4free.net:3306/"+dbname+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     private String user = "desmond";
     private String passwd = "123456789";
-    private Connection conn;
+    private Connection conn = null;
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -36,4 +36,5 @@ class ConnectionDB extends AsyncTask<Void, Void, Void> {
         conn = DriverManager.getConnection(url, user, passwd);
         return conn;
     }
+
 }

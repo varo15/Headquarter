@@ -14,7 +14,7 @@ import com.headquarter.com.headquarter.activity.activity.fragment.EventsFragment
 import com.headquarter.com.headquarter.activity.activity.fragment.EventsRegisteredFragment;
 import com.headquarter.com.headquarter.activity.activity.fragment.ProfileFragment;
 
-public class MenuActivity extends AppCompatActivity {
+public class BottomNavigationViewActivity extends AppCompatActivity {
 
     final Fragment fragment1 = new EventsFragment();
     final Fragment fragment2 = new EventsRegisteredFragment();

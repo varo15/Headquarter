@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".com.headquarter.activity.activity.EditDataUserActivity"></activity>
         <activity
-            android:name=".com.headquarter.activity.activity.MenuActivity"
-            android:label="@string/title_activity_menu"></activity>
-        <activity android:name=".com.headquarter.activity.activity.EmailPasswordActivity" />
-        <activity android:name=".com.headquarter.activity.activity.Welcome" />
+            android:name=".com.headquarter.activity.activity.BottomNavigationViewActivity"
+            android:label="@string/title_activity_menu" />
+        <activity android:name=".com.headquarter.activity.activity.LogInActivity" />
         <activity android:name=".com.headquarter.activity.activity.BaseActivity" />
         <activity android:name=".com.headquarter.activity.activity.MainActivity">
             <intent-filter>
