@@ -4,9 +4,7 @@ import android.os.AsyncTask;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 class ConnectionDB extends AsyncTask<Void, Void, Void> {
 
@@ -14,23 +12,28 @@ class ConnectionDB extends AsyncTask<Void, Void, Void> {
     private String url = "jdbc:mysql://db4free.net:3306/"+dbname+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     private String user = "desmond";
     private String passwd = "123456789";
+    private Connection conn;
 
     @Override
     protected Void doInBackground(Void... voids) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(url,user,passwd);
+            conn = DriverManager.getConnection(url,user,passwd);
 
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM campo");
-
-            rs.next();
-            System.out.println(rs.getString(2));
-            conn.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Connection closeConnection() throws SQLException {
+        conn.close();
+        return conn;
+    }
+
+    public Connection getConnection() throws SQLException {
+        conn = DriverManager.getConnection(url, user, passwd);
+        return conn;
     }
 }

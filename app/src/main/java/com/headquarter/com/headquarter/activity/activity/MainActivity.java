@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import com.headquarter.R;
 
+import java.sql.SQLException;
+
 public class MainActivity extends AppCompatActivity  {
 
     private Button button;
