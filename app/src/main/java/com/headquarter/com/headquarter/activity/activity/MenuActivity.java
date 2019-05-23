@@ -49,6 +49,8 @@ public class MenuActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.mTextMessage);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        new ConnectionDB().execute();
+
         fragmentManager.beginTransaction().add(R.id.main_fragment_placeholder, fragment3, "3").hide(fragment3).commit();
         fragmentManager.beginTransaction().add(R.id.main_fragment_placeholder, fragment2, "2").hide(fragment2).commit();
         fragmentManager.beginTransaction().add(R.id.main_fragment_placeholder, fragment1, "1").commit();
