@@ -16,16 +16,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
+import com.headquarter.com.headquarter.activity.activity.ConnectionDB;
 import com.headquarter.com.headquarter.activity.activity.LogInActivity;
-import com.headquarter.com.headquarter.activity.activity.MainActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import java.sql.ResultSet;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,15 +33,14 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
-    private GoogleSignInClient googleSignInClient;
-    private LogInActivity logInActivity;
     private TextView userEmail;
     private TextView userName;
     private ImageView userImage;
     private Button buttonLogOut;
     private View view;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private GoogleSignInOptions gso;
+
+
 
 
     public ProfileFragment() {
@@ -52,6 +50,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
@@ -146,4 +145,5 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
     }
+
 }
