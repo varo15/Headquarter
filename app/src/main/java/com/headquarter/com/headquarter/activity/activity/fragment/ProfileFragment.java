@@ -75,6 +75,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         sql = "SELECT * FROM `jugador` WHERE idGoogle = '" + user.getUid() + "'";
 
 
+
+
         new ProfileTask().execute();
 
     }
@@ -84,6 +86,13 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        userImage = view.findViewById(R.id.userImage);
+        Picasso.get().load(user.getPhotoUrl()).resize(500, 500).transform(new CircleTransform()).into(userImage);
+
+        userEmail = view.findViewById(R.id.userEmail);
+        userEmail.setVisibility(View.VISIBLE);
+        userEmail.setText(user.getEmail());
 
         buttonLogOut = view.findViewById(R.id.buttonLogOut);
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
@@ -188,11 +197,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
     private class ProfileTask extends AsyncTask {
-
-        @Override
-        protected void onPreExecute() {
-
-        }
 
         @Override
         protected Object doInBackground(Object[] objects) {
