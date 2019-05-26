@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
     private EditText TextEmail;
     private EditText TextPassword;
     private TextView TextUser;
+    private ProgressBar progressBar;
 
 
     //Declaramos un objeto firebaseAuth
@@ -52,6 +54,7 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
         TextEmail = findViewById(R.id.textEmail2);
         TextPassword = findViewById(R.id.textPassword);
         TextUser = findViewById(R.id.textEmail2);
+        progressBar = findViewById(R.id.progressBar);
 
 
         //attaching listener to button
@@ -100,7 +103,7 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
-        showProgressDialog();
+        progressBar.setVisibility(View.VISIBLE);
         // [END_EXCLUDE]
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -120,7 +123,8 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
                         }
 
                         // [START_EXCLUDE]
-                        hideProgressDialog();
+
+                        progressBar.setVisibility(View.GONE);
                         // [END_EXCLUDE]
                     }
                 });
@@ -151,7 +155,7 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
             return;
         }
 
-        showProgressDialog();
+        progressBar.setVisibility(View.VISIBLE);
 
         // [START create_user_with_email]
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -170,7 +174,8 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        hideProgressDialog();
+
+                        progressBar.setVisibility(View.GONE);
 
                     }
                 });
@@ -193,7 +198,7 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
         if (!validateForm()) {
             return;
         }
-        showProgressDialog();
+        progressBar.setVisibility(View.VISIBLE);
 
         // [START sign_in_with_email]
         firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -212,7 +217,7 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
                             Toast.makeText(LogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
 
-                        hideProgressDialog();
+                        progressBar.setVisibility(View.GONE);
 
                     }
                 });
@@ -261,7 +266,7 @@ public class LogInActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void updateUI(FirebaseUser user) {
-        hideProgressDialog();
+        progressBar.setVisibility(View.GONE);
         if (user != null) {
             Intent menuIntent = new Intent(this, BottomNavigationViewActivity.class);
             LogInActivity.this.startActivity(menuIntent);
