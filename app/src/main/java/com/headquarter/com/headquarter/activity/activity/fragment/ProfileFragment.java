@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
-import com.headquarter.com.headquarter.activity.activity.ConnectionDB;
 import com.headquarter.com.headquarter.activity.activity.LogInActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -55,6 +53,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private View view;
     private ResultSet resultSet;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     //Variable consulta sql
     private String sql;
@@ -68,17 +67,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         sql = "SELECT * FROM `jugador` WHERE idGoogle = '" + user.getUid() + "'";
-
-
-
-
         new ProfileTask().execute();
-
     }
 
     @Override
@@ -107,6 +99,18 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                     System.out.println(e);
                 }
 
+
+            }
+        });
+
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        swipeRefreshLayout = view.findViewById(R.id.pullToRefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new ProfileTask().execute();
             }
         });
 
@@ -155,7 +159,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onRefresh() {
-
     }
 
 
@@ -201,9 +204,9 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         @Override
         protected Object doInBackground(Object[] objects) {
 
-            progressBar = view.findViewById(R.id.progressBar);
-            progressBar.setVisibility(View.VISIBLE);
+
             try {
+
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
@@ -219,15 +222,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         @Override
         protected void onPostExecute(Object o) {
 
+            progressBar.setVisibility(View.GONE);
+            showUserData();
+            swipeRefreshLayout.setRefreshing(false);
 
-            try {
-                progressBar.setVisibility(View.GONE);
-                showUserData();
-                BottomNavigationViewActivity.connection.close();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
         }
     }

@@ -49,32 +49,6 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-    /*private class Consulta extends AsyncTask<Void,Void,Void>{
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                System.out.println("Conection: " + connection);
-                statement = connection.createStatement();
-                System.out.println("Statement: " + statement);
-                resultSet = statement.executeQuery(sql);
-                System.out.println("Resultset: " + resultSet);
-                resultSet.beforeFirst();
-                while (resultSet.next()){
-                    String id = resultSet.getString("nombre");
-                    System.out.println("id: " + id);
-                }
-
-
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Error: " + connection);
-            }
-            return null;
-        }
-
-    }*/
 
 
 
