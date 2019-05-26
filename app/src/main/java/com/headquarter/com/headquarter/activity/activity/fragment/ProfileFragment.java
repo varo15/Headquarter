@@ -191,10 +191,12 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         @Override
         protected void onPreExecute() {
+
         }
 
         @Override
         protected Object doInBackground(Object[] objects) {
+
             progressBar = view.findViewById(R.id.progressBar);
             progressBar.setVisibility(View.VISIBLE);
             try {
@@ -207,7 +209,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 e.printStackTrace();
             }
 
-            progressBar.setVisibility(View.GONE);
             return null;
         }
 
@@ -216,6 +217,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
             try {
+                progressBar.setVisibility(View.GONE);
                 showUserData();
                 BottomNavigationViewActivity.connection.close();
 
