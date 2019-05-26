@@ -64,6 +64,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         // Required empty public constructor
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         user = firebaseAuth.getCurrentUser();
         sql = "SELECT * FROM `jugador` WHERE idGoogle = '" + user.getUid() + "'";
 
-        //
 
         new ProfileTask().execute();
 
@@ -195,7 +195,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         @Override
         protected Object doInBackground(Object[] objects) {
-
+            progressBar = view.findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.VISIBLE);
             try {
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
@@ -206,6 +207,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 e.printStackTrace();
             }
 
+            progressBar.setVisibility(View.GONE);
             return null;
         }
 
