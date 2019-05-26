@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,17 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.ConnectionDB;
+import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
 import com.headquarter.com.headquarter.activity.activity.LogInActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,12 +39,13 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private FirebaseUser user;
     private TextView userEmail;
     private TextView userName;
+    private TextView userDNI;
     private ImageView userImage;
     private Button buttonLogOut;
     private View view;
+    private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
-
-
+    private String sql;
 
 
     public ProfileFragment() {
@@ -54,6 +59,9 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        sql = "SELECT * FROM `jugador` WHERE idGoogle = '4kl2hv7YvFUPJ7qpxixcovtKrVx2' ";
+        System.out.println(sql);
+        new ProfileTask().execute();
 
     }
 
@@ -144,6 +152,34 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
 
 
+    }
+
+    private class ProfileTask extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            try {
+                Statement statement = BottomNavigationViewActivity.connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+                resultSet.next();
+                System.out.println(resultSet.getString("DNI"));
+                userDNI = view.findViewById(R.id.userDNI);
+                userDNI.setText(resultSet.getString("DNI"));
+
+                BottomNavigationViewActivity.connection.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+
+
+        }
     }
 
 }

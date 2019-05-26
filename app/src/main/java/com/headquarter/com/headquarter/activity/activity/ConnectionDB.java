@@ -2,12 +2,9 @@ package com.headquarter.com.headquarter.activity.activity;
 
 import android.os.AsyncTask;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class ConnectionDB extends AsyncTask<Void, Void, Connection> {
 
@@ -16,10 +13,6 @@ public class ConnectionDB extends AsyncTask<Void, Void, Connection> {
     private String user = "desmond";
     private String passwd = "123456789";
     private Connection conn;
-    private Statement statement;
-    private ResultSet resultSet;
-    private String sql;
-    private Array resultado;
 
 
     @Override
@@ -38,6 +31,6 @@ public class ConnectionDB extends AsyncTask<Void, Void, Connection> {
     @Override
     protected void onPostExecute(Connection connection) {
         //System.out.println("Conexion jdbc: " + connection);
-        MainActivity.connection = connection;
+        BottomNavigationViewActivity.connection = connection;
     }
 }

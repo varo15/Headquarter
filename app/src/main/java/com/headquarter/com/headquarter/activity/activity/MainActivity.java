@@ -19,7 +19,6 @@ import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity  {
 
-    public static Connection connection;
     private Statement statement;
     private ResultSet resultSet;
     private Button button;
@@ -33,8 +32,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ConnectionDB task = new ConnectionDB();
-        task.execute();
+
 
 
 
@@ -45,20 +43,13 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 Intent loginIntent = new Intent(MainActivity.this, LogInActivity.class);
                 MainActivity.this.startActivity(loginIntent);
-                Consulta consulta = new Consulta();
-                consulta.execute();
-
             }
         });
 
     }
 
-    public void getConnection(){
-        ConnectionDB task = new ConnectionDB();
-        task.execute();
-    }
 
-    private class Consulta extends AsyncTask<Void,Void,Void>{
+    /*private class Consulta extends AsyncTask<Void,Void,Void>{
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -83,7 +74,7 @@ public class MainActivity extends AppCompatActivity  {
             return null;
         }
 
-    }
+    }*/
 
 
 
