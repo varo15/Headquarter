@@ -69,7 +69,9 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
-        sql = "SELECT * FROM `jugador` WHERE idGoogle = '" + user.getUid() + "'";
+        sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
+                "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
+                "WHERE jugador.idGoogle = '" + user.getUid() + "'";
         new ProfileTask().execute();
     }
 
@@ -145,7 +147,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userTeam = view.findViewById(R.id.userTeam);
             userTeam.setVisibility(View.VISIBLE);
-            userTeam.setText(resultSet.getString("id_equipo_fk"));
+            userTeam.setText(resultSet.getString("nombreEquipo"));
 
             userFAANumber = view.findViewById(R.id.userFAANumber);
             userFAANumber.setVisibility(View.VISIBLE);
