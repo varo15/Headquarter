@@ -66,14 +66,13 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
                 "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
                 "WHERE jugador.idGoogle = '" + user.getUid() + "'";
         new ProfileTask().execute();
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -148,7 +147,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userTeam = view.findViewById(R.id.userTeam);
             userTeam.setVisibility(View.VISIBLE);
-
             userTeam.setText(resultSet.getString("nombreEquipo"));
 
             userFAANumber = view.findViewById(R.id.userFAANumber);
@@ -205,21 +203,18 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private class ProfileTask extends AsyncTask {
 
-
-
         @Override
         protected Object doInBackground(Object[] objects) {
 
 
             try {
+
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
 
 
-
             } catch (SQLException e) {
-                System.out.println("CAGADA");
                 e.printStackTrace();
             }
 
@@ -228,6 +223,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         @Override
         protected void onPostExecute(Object o) {
+
             progressBar.setVisibility(View.GONE);
             showUserData();
             swipeRefreshLayout.setRefreshing(false);
@@ -235,4 +231,5 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         }
     }
+
 }
