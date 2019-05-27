@@ -16,4 +16,14 @@
     <string name="events">Eventos</string>
     <string name="eventsRegistered">Eventos Registrados</string>
     <string name="profile">Perfil</string>
+    <string name="useremail">userEmail</string>
+    <string name="logOut">Log Out</string>
+    <string name="userName">userName</string>
+    <string name="Password">Password:</string>
+    <string name="FAANumber">Numero FAA</string>
+    <string name="date">Fecha Nacimiento</string>
+    <string name="DNI">DNI</string>
+    <string name="completeProfile">Necesitamos que completes los datos de tu perfil.</string>
+    <string name="Passord">Password</string>
+    <string name="userDNI">userDNI</string>
 </resources>

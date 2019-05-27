@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.headquarter.R;
 
 
-public class EmailPasswordActivity extends BaseActivity implements View.OnClickListener {
+public class LogInActivity extends BaseActivity implements View.OnClickListener {
 
     //defining view objects
     private static final String TAG = "EmailPassword";
@@ -35,6 +36,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
     private EditText TextEmail;
     private EditText TextPassword;
     private TextView TextUser;
+    private ProgressBar progressBar;
 
 
     //Declaramos un objeto firebaseAuth
@@ -52,15 +54,16 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
         TextEmail = findViewById(R.id.textEmail2);
         TextPassword = findViewById(R.id.textPassword);
         TextUser = findViewById(R.id.textEmail2);
+        progressBar = findViewById(R.id.progressBar);
 
 
         //attaching listener to button
         findViewById(R.id.botonRegistrar).setOnClickListener(this);
         findViewById(R.id.botonLogin).setOnClickListener(this);
-        findViewById(R.id.botonLogOut).setOnClickListener(this);
         findViewById(R.id.botonGoogle).setOnClickListener(this);
 
         // [START config_signin]
+
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -94,12 +97,13 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
             }
         }
     }
+
     // [END onactivityresult]
     // [START auth_with_google]
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
-        showProgressDialog();
+        progressBar.setVisibility(View.VISIBLE);
         // [END_EXCLUDE]
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -119,7 +123,8 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
                         }
 
                         // [START_EXCLUDE]
-                        hideProgressDialog();
+
+                        progressBar.setVisibility(View.GONE);
                         // [END_EXCLUDE]
                     }
                 });
@@ -150,7 +155,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
             return;
         }
 
-        showProgressDialog();
+        progressBar.setVisibility(View.VISIBLE);
 
         // [START create_user_with_email]
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -165,11 +170,12 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this, "Error en el registro",
+                            Toast.makeText(LogInActivity.this, "Error en el registro",
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        hideProgressDialog();
+
+                        progressBar.setVisibility(View.GONE);
 
                     }
                 });
@@ -192,7 +198,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
         if (!validateForm()) {
             return;
         }
-        showProgressDialog();
+        progressBar.setVisibility(View.VISIBLE);
 
         // [START sign_in_with_email]
         firebaseAuth.signInWithEmailAndPassword(email, password)
@@ -203,15 +209,15 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            Toast.makeText(EmailPasswordActivity.this, "Sesion iniciada", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogInActivity.this, "Sesion iniciada", Toast.LENGTH_SHORT).show();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
 
-                        hideProgressDialog();
+                        progressBar.setVisibility(View.GONE);
 
                     }
                 });
@@ -223,7 +229,7 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
         Metodo signOut
         Email
      */
-    private void signOut() {
+    public void signOut() {
         // Firebase sign out
         firebaseAuth.signOut();
 
@@ -260,17 +266,15 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
     }
 
     private void updateUI(FirebaseUser user) {
-        hideProgressDialog();
+        progressBar.setVisibility(View.GONE);
         if (user != null) {
-            Intent menuIntent = new Intent(this, MenuActivity.class);
-            EmailPasswordActivity.this.startActivity(menuIntent);
+            Intent menuIntent = new Intent(this, BottomNavigationViewActivity.class);
+            LogInActivity.this.startActivity(menuIntent);
 
         } else {
-            TextUser.setText("Problemas");
 
             findViewById(R.id.botonRegistrar).setVisibility(View.VISIBLE);
             findViewById(R.id.botonLogin).setVisibility(View.VISIBLE);
-            findViewById(R.id.botonLogOut).setVisibility(View.GONE);
         }
     }
 
@@ -282,9 +286,6 @@ public class EmailPasswordActivity extends BaseActivity implements View.OnClickL
             createAccount(TextEmail.getText().toString(), TextPassword.getText().toString());
         } else if (i == R.id.botonLogin) {
             signIn(TextEmail.getText().toString(), TextPassword.getText().toString());
-
-        } else if (i == R.id.botonLogOut) {
-            signOut();
         } else if (i == R.id.botonGoogle) {
             signInGoogle();
 
