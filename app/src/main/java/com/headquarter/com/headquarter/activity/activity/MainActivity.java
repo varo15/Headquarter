@@ -49,7 +49,14 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
-
-
+    @Override
+    protected void onDestroy() {
+        try {
+            BottomNavigationViewActivity.connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al cerrar la conexion en MainActivity");
+        }
+        super.onDestroy();
+    }
 }
