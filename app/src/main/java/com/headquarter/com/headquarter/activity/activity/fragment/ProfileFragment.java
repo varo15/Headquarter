@@ -70,6 +70,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         sql = "SELECT * FROM `jugador` WHERE idGoogle = '" + user.getUid() + "'";
+        //sql = "SELECT `jugador`.*, `equipo`.`nombre`, `jugador`.`idGoogle` FROM `jugador` LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo` WHERE `jugador`.`idGoogle` = '4kl2hv7YvFUPJ7qpxixcovtKrVx2'";
         new ProfileTask().execute();
     }
 
@@ -145,7 +146,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userTeam = view.findViewById(R.id.userTeam);
             userTeam.setVisibility(View.VISIBLE);
-            userTeam.setText(resultSet.getString("id_equipo_fk"));
+
+            userTeam.setText(resultSet.getString(1));
 
             userFAANumber = view.findViewById(R.id.userFAANumber);
             userFAANumber.setVisibility(View.VISIBLE);
@@ -201,6 +203,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private class ProfileTask extends AsyncTask {
 
+
+
         @Override
         protected Object doInBackground(Object[] objects) {
 
@@ -212,7 +216,9 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 resultSet.next();
 
 
+
             } catch (SQLException e) {
+                System.out.println("CAGADA");
                 e.printStackTrace();
             }
 
@@ -221,7 +227,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         @Override
         protected void onPostExecute(Object o) {
-
             progressBar.setVisibility(View.GONE);
             showUserData();
             swipeRefreshLayout.setRefreshing(false);
@@ -229,5 +234,4 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         }
     }
-
 }
