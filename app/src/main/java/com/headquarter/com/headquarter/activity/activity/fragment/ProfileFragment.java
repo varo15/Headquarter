@@ -66,12 +66,14 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
-        sql = "SELECT * FROM `jugador` WHERE idGoogle = '" + user.getUid() + "'";
-        //sql = "SELECT `jugador`.*, `equipo`.`nombre`, `jugador`.`idGoogle` FROM `jugador` LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo` WHERE `jugador`.`idGoogle` = '4kl2hv7YvFUPJ7qpxixcovtKrVx2'";
+        sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
+                "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
+                "WHERE jugador.idGoogle = '" + user.getUid() + "'";
         new ProfileTask().execute();
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -147,7 +149,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
             userTeam = view.findViewById(R.id.userTeam);
             userTeam.setVisibility(View.VISIBLE);
 
-            userTeam.setText(resultSet.getString(1));
+            userTeam.setText(resultSet.getString("nombreEquipo"));
 
             userFAANumber = view.findViewById(R.id.userFAANumber);
             userFAANumber.setVisibility(View.VISIBLE);
@@ -210,7 +212,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
             try {
-
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
