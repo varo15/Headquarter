@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -17,6 +19,7 @@ import com.headquarter.com.headquarter.activity.activity.fragment.EventsRegister
 import com.headquarter.com.headquarter.activity.activity.fragment.ProfileFragment;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class BottomNavigationViewActivity extends AppCompatActivity {
 

@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".com.headquarter.activity.activity.fragment.EventsFragment">
+    android:orientation="vertical"
+    tools:context=".com.headquarter.activity.activity.fragment.EventsFragment" >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/txtTituloEventos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/events"
+        android:textSize="30sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/events" />
-
-</FrameLayout>
+        android:background="#00C21818" />
+</LinearLayout>
