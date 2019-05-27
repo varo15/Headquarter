@@ -1,23 +1,23 @@
 <resources>
-    <string name="app_name">HQ</string>
+    <string name="app_name">Headquarter</string>
     <string name="SignUp">Registrar</string>
     <string name="SignIn">Acceder</string>
+    <string name="logOut">Log Out</string>
     <string name="loading">Cargando...</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_profile">Profile</string>
+    <string name="title_notifications">Notifications</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name">Nombre:</string>
     <string name="email">Email:</string>
-    <string name="title_notifications">Notifications</string>
     <string name="events">Eventos</string>
     <string name="eventsRegistered">Eventos Registrados</string>
     <string name="profile">Perfil</string>
     <string name="useremail">userEmail</string>
-    <string name="logOut">Log Out</string>
     <string name="userName">userName</string>
     <string name="Password">Password:</string>
     <string name="FAANumber">Numero FAA</string>
