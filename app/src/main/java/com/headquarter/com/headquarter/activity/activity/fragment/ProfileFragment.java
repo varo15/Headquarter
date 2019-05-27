@@ -145,10 +145,9 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
             userPhone.setVisibility(View.VISIBLE);
             userPhone.setText(resultSet.getString("telefono"));
 
-            //Setear el Nombre del equipo
             userTeam = view.findViewById(R.id.userTeam);
             userTeam.setVisibility(View.VISIBLE);
-            userTeam.setText(resultSet.getString("nombreEquipo"));
+            userTeam.setText(resultSet.getString("id_equipo_fk"));
 
             userFAANumber = view.findViewById(R.id.userFAANumber);
             userFAANumber.setVisibility(View.VISIBLE);
