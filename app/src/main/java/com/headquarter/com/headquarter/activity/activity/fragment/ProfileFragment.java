@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,64 +15,80 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.ConnectionDB;
+import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
 import com.headquarter.com.headquarter.activity.activity.LogInActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
+    //Variables datos del usuario
     private TextView userEmail;
     private TextView userName;
+    private TextView userDNI;
+    private TextView userBirthDate;
+    private TextView userPhone;
+    private TextView userTeam;
+    private TextView userFAANumber;
     private ImageView userImage;
+
+
     private Button buttonLogOut;
     private View view;
+    private ResultSet resultSet;
+    private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-
+    //Variable consulta sql
+    private String sql;
 
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
-
+        sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
+                "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
+                "WHERE jugador.idGoogle = '" + user.getUid() + "'";
+        new ProfileTask().execute();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                showUserData();
-            }
-        });
+        userImage = view.findViewById(R.id.userImage);
+        Picasso.get().load(user.getPhotoUrl()).resize(500, 500).transform(new CircleTransform()).into(userImage);
+
+        userEmail = view.findViewById(R.id.userEmail);
+        userEmail.setVisibility(View.VISIBLE);
+        userEmail.setText(user.getEmail());
 
         buttonLogOut = view.findViewById(R.id.buttonLogOut);
-
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,28 +101,66 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                     System.out.println(e);
                 }
 
+
             }
         });
-        showUserData();
+
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        swipeRefreshLayout = view.findViewById(R.id.pullToRefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new ProfileTask().execute();
+            }
+        });
 
         return view;
     }
 
     public void showUserData() {
 
-        userImage = view.findViewById(R.id.userImage);
-        Picasso.get().load(user.getPhotoUrl()).resize(500, 500).transform(new CircleTransform()).into(userImage);
+        try {
+            userImage = view.findViewById(R.id.userImage);
+            Picasso.get().load(user.getPhotoUrl()).resize(500, 500).transform(new CircleTransform()).into(userImage);
 
-        userEmail = view.findViewById(R.id.userEmail);
-        userEmail.setText(user.getEmail());
+            userEmail = view.findViewById(R.id.userEmail);
+            userEmail.setVisibility(View.VISIBLE);
+            userEmail.setText(user.getEmail());
 
-        userName = view.findViewById(R.id.userName);
-        userName.setText(user.getDisplayName());
+            userName = view.findViewById(R.id.userName);
+            userName.setVisibility(View.VISIBLE);
+            userName.setText(user.getDisplayName());
+
+            userDNI = view.findViewById(R.id.userDNI);
+            userDNI.setVisibility(View.VISIBLE);
+            userDNI.setText(resultSet.getString("DNI"));
+
+            userBirthDate = view.findViewById(R.id.userDate);
+            userBirthDate.setVisibility(View.VISIBLE);
+            userBirthDate.setText(resultSet.getString("fecha_nacimiento"));
+
+            userPhone = view.findViewById(R.id.userPhone);
+            userPhone.setVisibility(View.VISIBLE);
+            userPhone.setText(resultSet.getString("telefono"));
+
+            userTeam = view.findViewById(R.id.userTeam);
+            userTeam.setVisibility(View.VISIBLE);
+            userTeam.setText(resultSet.getString("nombreEquipo"));
+
+            userFAANumber = view.findViewById(R.id.userFAANumber);
+            userFAANumber.setVisibility(View.VISIBLE);
+            userFAANumber.setText(resultSet.getString("numero_FAA"));
+
+
+        } catch (Exception e) {
+
+        }
     }
 
     @Override
     public void onRefresh() {
-
     }
 
 
@@ -144,6 +199,37 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
 
 
+    }
+
+    private class ProfileTask extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+
+            try {
+
+                Statement statement = BottomNavigationViewActivity.connection.createStatement();
+                resultSet = statement.executeQuery(sql);
+                resultSet.next();
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+
+            progressBar.setVisibility(View.GONE);
+            showUserData();
+            swipeRefreshLayout.setRefreshing(false);
+
+
+        }
     }
 
 }

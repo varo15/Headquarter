@@ -24,4 +24,6 @@
     <string name="date">Fecha Nacimiento</string>
     <string name="DNI">DNI</string>
     <string name="completeProfile">Necesitamos que completes los datos de tu perfil.</string>
+    <string name="Passord">Password</string>
+    <string name="userDNI">userDNI</string>
 </resources>
