@@ -42,7 +42,7 @@ public class EventsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     //Array donde se guardan los datos
-    static ArrayList<ArrayList> listOfEvents = new ArrayList<ArrayList>();
+    ArrayList<ArrayList> listOfEvents = new ArrayList<ArrayList>();
 
 
     public EventsFragment() {
@@ -55,10 +55,7 @@ public class EventsFragment extends Fragment {
         //Lamamos al emtodo para obtener el usuario y preparar la consulta
         getUser();
         //Preparamos la consulta con el uui de nuestro usuario logeado
-        sql = "SELECT `partida`.*, `participa`.*, `jugador`.`DNI` FROM `partida`" +
-                "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
-                "LEFT JOIN `jugador` ON `participa`.`idGoogle_fk` = `jugador`.`idGoogle`" +
-                "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "'" ;
+        sql = "SELECT * FROM partida";
 
         //Ejecutar la tarea que devulve la consulta
         new EventsTask().execute();
@@ -75,13 +72,6 @@ public class EventsFragment extends Fragment {
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
         listDatos = new ArrayList<String>();
-
-        for (int i = 0; i < 50; i++) {
-            listDatos.add("Dato " + i);
-        }
-
-        AdapterRecycler adapter = new AdapterRecycler(listDatos);
-        recycler.setAdapter(adapter);
 
         //ProgressBar
         progressBar = view.findViewById(R.id.progressBar);
@@ -101,12 +91,13 @@ public class EventsFragment extends Fragment {
 
     private class EventsTask extends AsyncTask {
 
-
         @Override
         protected Object doInBackground(Object[] objects) {
 
 
             try {
+                listOfEvents.clear();
+                listDatos.clear();
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
                 ResultSetMetaData rsm = resultSet.getMetaData();
@@ -152,6 +143,14 @@ public class EventsFragment extends Fragment {
     private void loadEventsCards() {
         //En este metodo ira todo el codigo necesario para que se carguen los datos y se dibujen los cardviews, antes de que se dibujen se mostrara el fragment en blanco con el progresbar dando vueltas
         //Una vez que carguen, el progressbar se desactiva y se pintan las tarjetas
+
+        System.out.println(listOfEvents.size());
+        System.out.println(listDatos.size());
+        for(int i=0;i<listOfEvents.size();i++){
+            listDatos.add(listOfEvents.get(i).get(1).toString());
+        }
+        AdapterRecycler adapter = new AdapterRecycler(listDatos);
+        recycler.setAdapter(adapter);
     }
 
     /*
