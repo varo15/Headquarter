@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         userImage = view.findViewById(R.id.userImage);
-        Picasso.get().load(user.getPhotoUrl()).resize(500, 500).transform(new CircleTransform()).into(userImage);
+        Picasso.get().load(user.getPhotoUrl()).resize(550, 550).transform(new CircleTransform()).into(userImage);
 
         userEmail = view.findViewById(R.id.userEmail);
         userEmail.setVisibility(View.VISIBLE);
@@ -124,7 +124,9 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         try {
             userImage = view.findViewById(R.id.userImage);
-            Picasso.get().load(user.getPhotoUrl()).resize(500, 500).transform(new CircleTransform()).into(userImage);
+
+            Picasso.get().load(user.getPhotoUrl()).resize(550, 550).transform(new CircleTransform()).into(userImage);
+
 
             userEmail = view.findViewById(R.id.userEmail);
             userEmail.setVisibility(View.VISIBLE);
@@ -206,7 +208,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private class ProfileTask extends AsyncTask {
 
 
-
         @Override
         protected Object doInBackground(Object[] objects) {
 
@@ -215,7 +216,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
-
 
 
             } catch (SQLException e) {

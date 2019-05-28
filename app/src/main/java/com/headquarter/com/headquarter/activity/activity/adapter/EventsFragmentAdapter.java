@@ -9,22 +9,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.headquarter.R;
+import com.headquarter.com.headquarter.activity.activity.others.Partida;
 
 import java.util.ArrayList;
 
-/*
- *
- * [idPartida, nombrePartida, guion, fecha, foto, aforo, tipo, campo, nombreCampo]
- * [1, Operacion Cascanueces, 0, 2019-05-09, ����������������, 40, Guionizada, 1, La Barganiza]
- *
- */
 
 
 public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAdapter.ViewHolderRecycler> {
 
-    ArrayList<ArrayList> listDatos;
+    ArrayList<Partida> listDatos;
 
-    public EventsFragmentAdapter(ArrayList<ArrayList> listDatos) {
+    public EventsFragmentAdapter(ArrayList<Partida> listDatos) {
         this.listDatos = listDatos;
     }
 
@@ -39,7 +34,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolderRecycler viewHolderRecycler, int i) {
 
-            viewHolderRecycler.asignarDatos(listDatos.get(i));
+        viewHolderRecycler.asignarDatos(listDatos.get(i));
     }
 
     @Override
@@ -48,33 +43,37 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
     }
 
     public class ViewHolderRecycler extends RecyclerView.ViewHolder {
-        String partidaId;
-        TextView partidaTitulo;
-        TextView partidaFecha;
-        TextView partidaTipo;
-        TextView partidaCampo;
+
+        int partidaId;
+        TextView txtPartidaTitulo;
+        TextView txtPartidaFecha;
+        TextView txtPartidaTipo;
+        TextView txtPartidaCampo;
+
+
 
         public ViewHolderRecycler(@NonNull View itemView) {
             super(itemView);
-            partidaTitulo = itemView.findViewById(R.id.txtTituloEvento);
-            partidaFecha = itemView.findViewById(R.id.txtFecha);
-            partidaTipo = itemView.findViewById(R.id.txtTipo);
-            partidaCampo = itemView.findViewById(R.id.txtCampo);
+            txtPartidaTitulo = itemView.findViewById(R.id.txtTituloEvento);
+            txtPartidaFecha = itemView.findViewById(R.id.txtFecha);
+            txtPartidaTipo = itemView.findViewById(R.id.txtTipo);
+            txtPartidaCampo = itemView.findViewById(R.id.txtCampo);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), partidaTitulo.getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Hola", Toast.LENGTH_SHORT).show();
                 }
             });
         }
 
-        public void asignarDatos(ArrayList datos) {
-            partidaId = datos.get(0).toString();
-            partidaTitulo.setText(datos.get(1).toString());
-            partidaFecha.setText("Fecha: "+datos.get(3).toString());
-            partidaTipo.setText("Tipo: "+datos.get(6).toString());
-            partidaCampo.setText("Campo: "+datos.get(8).toString());
+        public void asignarDatos(Partida partida) {
+            partidaId = partida.getIdPartida();
+            txtPartidaTitulo.setText(partida.getNombrePartida());
+            txtPartidaFecha.setText(partida.getFechaPartida().toString());
+            txtPartidaTipo.setText("Tipo: " + partida.getTipoPartida());
+            txtPartidaCampo.setText("Campo: " + partida.getCampoPartida());
+
         }
     }
 }
