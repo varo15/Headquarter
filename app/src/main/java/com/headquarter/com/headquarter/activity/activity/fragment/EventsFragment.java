@@ -149,7 +149,7 @@ public class EventsFragment extends Fragment {
         for(int i=0;i<listOfEvents.size();i++){
             listDatos.add(listOfEvents.get(i).get(1).toString());
         }
-        AdapterRecycler adapter = new AdapterRecycler(listDatos);
+        AdapterRecycler adapter = new AdapterRecycler(listOfEvents);
         recycler.setAdapter(adapter);
     }
 
