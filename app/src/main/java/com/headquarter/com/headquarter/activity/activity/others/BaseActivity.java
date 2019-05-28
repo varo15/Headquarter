@@ -1,4 +1,4 @@
-package com.headquarter.com.headquarter.activity.activity;
+package com.headquarter.com.headquarter.activity.activity.others;
 
 import android.app.ProgressDialog;
 import android.content.Context;

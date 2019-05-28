@@ -6,20 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.fragment.EventsFragment;
 import com.headquarter.com.headquarter.activity.activity.fragment.EventsRegisteredFragment;
 import com.headquarter.com.headquarter.activity.activity.fragment.ProfileFragment;
+import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 
 public class BottomNavigationViewActivity extends AppCompatActivity {
 
@@ -31,7 +26,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
     Fragment active = fragment1;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = new BottomNavigationView.OnNavigationItemSelectedListener(){
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -70,4 +65,9 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().hide(active).show(fragmentName).commit();
         active = fragmentName;
     }
+
+    public void onListFragmentInteraction(){
+
+    }
+
 }
