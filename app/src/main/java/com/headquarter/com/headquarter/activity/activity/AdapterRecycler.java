@@ -1,13 +1,17 @@
 package com.headquarter.com.headquarter.activity.activity;
 
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.headquarter.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -41,14 +45,25 @@ public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHo
     public class ViewHolderRecycler extends RecyclerView.ViewHolder {
 
         TextView dato;
+        TextView fecha;
+        TextView tipo;
+        TextView campo;
+        ImageView imagen;
 
         public ViewHolderRecycler(@NonNull View itemView) {
             super(itemView);
             dato = itemView.findViewById(R.id.txtTituloEvento);
+            fecha = itemView.findViewById(R.id.txtFecha);
+            tipo = itemView.findViewById(R.id.txtTipo);
+            campo = itemView.findViewById(R.id.txtCampo);
+            imagen = itemView.findViewById(R.id.imagen);
         }
 
         public void asignarDatos(ArrayList datos) {
             dato.setText(datos.get(1).toString());
+            fecha.setText("Fecha: "+datos.get(3).toString());
+            tipo.setText("Tipo: "+datos.get(6).toString());
+            campo.setText("Campo: "+datos.get(7).toString());
         }
     }
 }
