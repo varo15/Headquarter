@@ -16,7 +16,7 @@
             android:name=".com.headquarter.activity.activity.BottomNavigationViewActivity"
             android:label="@string/title_activity_menu" />
         <activity android:name=".com.headquarter.activity.activity.LogInActivity" />
-        <activity android:name=".com.headquarter.activity.activity.BaseActivity" />
+        <activity android:name=".com.headquarter.activity.activity.others.BaseActivity" />
         <activity android:name=".com.headquarter.activity.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

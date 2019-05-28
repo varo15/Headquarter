@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.headquarter.R;
+import com.headquarter.com.headquarter.activity.activity.others.BaseActivity;
 
 
 public class LogInActivity extends BaseActivity implements View.OnClickListener {

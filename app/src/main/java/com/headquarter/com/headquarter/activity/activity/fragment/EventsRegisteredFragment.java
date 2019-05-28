@@ -16,8 +16,7 @@ import android.widget.ProgressBar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.AdapterRecycler;
-import com.headquarter.com.headquarter.activity.activity.AdapterRecyclerRegistered;
+import com.headquarter.com.headquarter.activity.activity.adapter.EventsRegisteredFragmentAdapter;
 import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
 
 import java.sql.ResultSet;
@@ -55,10 +54,10 @@ public class EventsRegisteredFragment extends Fragment {
         //Lamamos al emtodo para obtener el usuario y preparar la consulta
         getUser();
         //Preparamos la consulta con el uui de nuestro usuario logeado
-        sql = "SELECT `partida`.*, `participa`.*, `jugador`.`DNI` FROM `partida`" +
+        sql = "SELECT `partida`.*, `participa`.`idGoogle_fk`, `campo`.`nombreCampo`FROM `partida`" +
                 "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
-                "LEFT JOIN `jugador` ON `participa`.`idGoogle_fk` = `jugador`.`idGoogle`" +
-                "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "'" ;
+                "LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo`" +
+                "WHERE `participa`.`idGoogle_fk` = '" + user.getUid() + "'";
 
         //Ejecutar la tarea que devulve la consulta
         new EventsRegisteredTask().execute();
@@ -73,14 +72,6 @@ public class EventsRegisteredFragment extends Fragment {
         recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        listDatos = new ArrayList<String>();
-
-        for (int i = 0; i < 10; i++) {
-            listDatos.add("Dato " + i);
-        }
-
-        AdapterRecyclerRegistered adapter = new AdapterRecyclerRegistered(getListOfEventsRegistered);
-        recycler.setAdapter(adapter);
 
         //ProgressBar
         progressBar = view.findViewById(R.id.progressBar);
@@ -105,7 +96,7 @@ public class EventsRegisteredFragment extends Fragment {
 
 
             try {
-
+                getListOfEventsRegistered.clear();
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
                 ResultSetMetaData rsm = resultSet.getMetaData();
@@ -121,19 +112,14 @@ public class EventsRegisteredFragment extends Fragment {
                         event.add(resultSet.getString(i));
                     }
                     getListOfEventsRegistered.add(event);
+                    System.out.println(getListOfEventsRegistered);
                 }
+
 
 
             } catch (SQLException e) {
                 System.out.println("CAGADA");
                 e.printStackTrace();
-            }finally {
-                System.out.println("----------------------Esto pertenece al EventsRegisteredFragment----------------------");
-                int i;
-                for (i = 0; i < getListOfEventsRegistered.size(); i++) {
-                    System.out.println("\n");
-                    System.out.println(getListOfEventsRegistered.get(i) + "\n");
-                }
             }
 
             return null;
@@ -152,6 +138,9 @@ public class EventsRegisteredFragment extends Fragment {
     private void loadEventsRegisteredCards() {
         //En este metodo ira todo el codigo necesario para que se carguen los datos y se dibujen los cardviews, antes de que se dibujen se mostrara el fragment en blanco con el progresbar dando vueltas
         //Una vez que carguen, el progressbar se desactiva y se pintan las tarjetas
+
+        EventsRegisteredFragmentAdapter adapter = new EventsRegisteredFragmentAdapter(getListOfEventsRegistered);
+        recycler.setAdapter(adapter);
     }
 
     /*

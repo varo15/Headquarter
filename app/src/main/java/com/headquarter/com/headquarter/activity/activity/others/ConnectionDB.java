@@ -1,6 +1,8 @@
-package com.headquarter.com.headquarter.activity.activity;
+package com.headquarter.com.headquarter.activity.activity.others;
 
 import android.os.AsyncTask;
+
+import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
