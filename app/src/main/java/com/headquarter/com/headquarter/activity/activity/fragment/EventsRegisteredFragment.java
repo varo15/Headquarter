@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.AdapterRecycler;
+import com.headquarter.com.headquarter.activity.activity.AdapterRecyclerRegistered;
 import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
 
 import java.sql.ResultSet;
@@ -78,7 +79,7 @@ public class EventsRegisteredFragment extends Fragment {
             listDatos.add("Dato " + i);
         }
 
-        AdapterRecycler adapter = new AdapterRecycler(getListOfEventsRegistered);
+        AdapterRecyclerRegistered adapter = new AdapterRecyclerRegistered(getListOfEventsRegistered);
         recycler.setAdapter(adapter);
 
         //ProgressBar

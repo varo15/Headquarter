@@ -21,11 +21,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHolderRecycler> {
+public class AdapterRecyclerRegistered extends RecyclerView.Adapter<AdapterRecyclerRegistered.ViewHolderRecycler> {
 
     ArrayList<ArrayList> listDatos;
 
-    public AdapterRecycler(ArrayList<ArrayList> listDatos) {
+    public AdapterRecyclerRegistered(ArrayList<ArrayList> listDatos) {
         this.listDatos = listDatos;
     }
 
@@ -40,7 +40,7 @@ public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolderRecycler viewHolderRecycler, int i) {
 
-            viewHolderRecycler.asignarDatos(listDatos.get(i));
+        viewHolderRecycler.asignarDatos(listDatos.get(i));
     }
 
     @Override
