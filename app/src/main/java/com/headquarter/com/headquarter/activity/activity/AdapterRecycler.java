@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHolderRecycler> {
 
-    ArrayList<String> listDatos;
+    ArrayList<ArrayList> listDatos;
 
-    public AdapterRecycler(ArrayList<String> listDatos) {
+    public AdapterRecycler(ArrayList<ArrayList> listDatos) {
         this.listDatos = listDatos;
     }
 
@@ -47,8 +47,8 @@ public class AdapterRecycler extends RecyclerView.Adapter<AdapterRecycler.ViewHo
             dato = itemView.findViewById(R.id.txtTituloEvento);
         }
 
-        public void asignarDatos(String datos) {
-            dato.setText(datos);
+        public void asignarDatos(ArrayList datos) {
+            dato.setText(datos.get(1).toString());
         }
     }
 }

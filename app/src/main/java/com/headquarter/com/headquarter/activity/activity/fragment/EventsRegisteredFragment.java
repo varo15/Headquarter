@@ -78,7 +78,7 @@ public class EventsRegisteredFragment extends Fragment {
             listDatos.add("Dato " + i);
         }
 
-        AdapterRecycler adapter = new AdapterRecycler(listDatos);
+        AdapterRecycler adapter = new AdapterRecycler(getListOfEventsRegistered);
         recycler.setAdapter(adapter);
 
         //ProgressBar
