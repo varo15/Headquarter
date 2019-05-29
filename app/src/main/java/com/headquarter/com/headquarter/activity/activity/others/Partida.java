@@ -2,7 +2,9 @@ package com.headquarter.com.headquarter.activity.activity.others;
 
 import java.sql.Blob;
 import java.util.Date;
-
+/*
+ * Objeto Partida
+ */
 public class Partida {
 
     public int idPartida;
