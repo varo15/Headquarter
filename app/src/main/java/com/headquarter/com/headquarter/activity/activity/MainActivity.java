@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.google.android.gms.tasks.Task;
 import com.headquarter.R;
+import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -52,7 +53,8 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onDestroy() {
         try {
-            BottomNavigationViewActivity.connection.close();
+            BottomNavigationViewActivity.statement.close();
+            ConnectionDB.conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error al cerrar la conexion en MainActivity");

@@ -213,7 +213,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
             try {
-                Statement statement = BottomNavigationViewActivity.connection.createStatement();
+                Statement statement = BottomNavigationViewActivity.statement;
+
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
 

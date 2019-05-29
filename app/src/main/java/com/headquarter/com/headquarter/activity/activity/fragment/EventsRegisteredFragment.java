@@ -97,7 +97,8 @@ public class EventsRegisteredFragment extends Fragment {
 
             try {
 
-                Statement statement = BottomNavigationViewActivity.connection.createStatement();
+                Statement statement = BottomNavigationViewActivity.statement;
+
                 resultSet = statement.executeQuery(sql);
                 resultSet.beforeFirst();
                 getListOfEventsRegistered.clear();

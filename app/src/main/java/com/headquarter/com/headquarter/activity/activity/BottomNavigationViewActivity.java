@@ -15,6 +15,7 @@ import com.headquarter.com.headquarter.activity.activity.fragment.ProfileFragmen
 import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.Connection;
+import java.sql.Statement;
 
 public class BottomNavigationViewActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
     final Fragment fragment2 = new EventsRegisteredFragment();
     final Fragment fragment3 = new ProfileFragment();
     final FragmentManager fragmentManager = getSupportFragmentManager();
-    public static Connection connection;
+    public static Statement statement;
     Fragment active = fragment1;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
