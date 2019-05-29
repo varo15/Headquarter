@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HQ</string>
+    <string name="app_name">Headquarter</string>
     <string name="SignUp">Registrar</string>
     <string name="SignIn">Acceder</string>
     <string name="loading">Cargando...</string>

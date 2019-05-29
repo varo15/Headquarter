@@ -6,12 +6,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_headquarter"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_headquarter_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".com.headquarter.activity.activity.EditDataUserActivity"></activity>
         <activity
             android:name=".com.headquarter.activity.activity.BottomNavigationViewActivity"
             android:label="@string/title_activity_menu" />
