@@ -16,11 +16,11 @@ import android.widget.ProgressBar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.adapter.EventsRegisteredFragmentAdapter;
 import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
+import com.headquarter.com.headquarter.activity.activity.adapter.EventsRegisteredFragmentAdapter;
+import com.headquarter.com.headquarter.activity.activity.others.Partida;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -34,7 +34,6 @@ public class EventsRegisteredFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
-    ArrayList<String> listDatos;
     RecyclerView recycler;
     private ResultSet resultSet;
     private String sql;
@@ -42,7 +41,7 @@ public class EventsRegisteredFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     //ArrayList necesarios para la carga de datos
-    static ArrayList<ArrayList> getListOfEventsRegistered = new ArrayList<ArrayList>();
+    static ArrayList<Partida> getListOfEventsRegistered = new ArrayList<>();
 
     public EventsRegisteredFragment() {
         // Required empty public constructor
@@ -54,10 +53,11 @@ public class EventsRegisteredFragment extends Fragment {
         //Lamamos al emtodo para obtener el usuario y preparar la consulta
         getUser();
         //Preparamos la consulta con el uui de nuestro usuario logeado
-        sql = "SELECT `partida`.*, `participa`.`idGoogle_fk`, `campo`.`nombreCampo`FROM `partida`" +
-                "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
+        sql = "SELECT `partida`.*, `campo`.`nombreCampo`, `participa`.*, `jugador`.`idGoogle` FROM `partida`" +
                 "LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo`" +
-                "WHERE `participa`.`idGoogle_fk` = '" + user.getUid() + "'";
+                "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
+                "LEFT JOIN `jugador` ON `participa`.`idGoogle_fk` = `jugador`.`idGoogle`" +
+                "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "'";
 
         //Ejecutar la tarea que devulve la consulta
         new EventsRegisteredTask().execute();
@@ -96,29 +96,29 @@ public class EventsRegisteredFragment extends Fragment {
 
 
             try {
-                getListOfEventsRegistered.clear();
+
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
-                ResultSetMetaData rsm = resultSet.getMetaData();
                 resultSet.beforeFirst();
-
-                int columsNumber = rsm.getColumnCount();
-                int i;
+                getListOfEventsRegistered.clear();
 
                 while (resultSet.next()) {
-                    //Cremos un array nuevo por cada fila de la consulta y lo guardamos en listOfEvents
-                    ArrayList<String> event = new ArrayList<String>();
-                    for (i = 1; i <= columsNumber; i++) {
-                        event.add(resultSet.getString(i));
-                    }
-                    getListOfEventsRegistered.add(event);
-                    System.out.println(getListOfEventsRegistered);
+                    Partida partida = new Partida();
+
+                    partida.setIdPartida(resultSet.getInt("idPartida"));
+                    partida.setNombrePartida(resultSet.getString("nombrePartida"));
+                    partida.setGuionPartida(resultSet.getBlob("guionPartida"));
+                    partida.setFechaPartida(resultSet.getDate("fechaPartida"));
+                    partida.setFotoPartida(resultSet.getBlob("fotoPartida"));
+                    partida.setAforoPartida(resultSet.getString("aforoPartida"));
+                    partida.setTipoPartida(resultSet.getString("tipoPartida"));
+                    partida.setCampoPartida(resultSet.getString("nombreCampo"));
+
+                    getListOfEventsRegistered.add(partida);
                 }
 
 
-
             } catch (SQLException e) {
-                System.out.println("CAGADA");
                 e.printStackTrace();
             }
 

@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.adapter.EventsFragmentAdapter;
 import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
+import com.headquarter.com.headquarter.activity.activity.others.Partida;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -34,7 +35,6 @@ public class EventsFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
-    ArrayList<String> listDatos;
     RecyclerView recycler;
     private ResultSet resultSet;
     private String sql;
@@ -42,7 +42,7 @@ public class EventsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     //Array donde se guardan los datos
-    ArrayList<ArrayList> listOfEvents = new ArrayList<ArrayList>();
+    ArrayList<Partida> listOfEvents = new ArrayList<>();
 
 
     public EventsFragment() {
@@ -95,24 +95,27 @@ public class EventsFragment extends Fragment {
 
 
             try {
-                listOfEvents.clear();
+
                 Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
-                ResultSetMetaData rsm = resultSet.getMetaData();
-
-                int columnsNumber = rsm.getColumnCount();
-                int i;
-
                 resultSet.beforeFirst();
+                listOfEvents.clear();
 
                 while (resultSet.next()) {
-                    //Cremos un array nuevo por cada fila de la consulta y lo guardamos en listOfEvents
-                    ArrayList<String> event = new ArrayList<String>();
-                    for (i = 1; i <= columnsNumber; i++) {
-                        event.add(resultSet.getString(i));
-                    }
-                    listOfEvents.add(event);
+                    Partida partida = new Partida();
+
+                    partida.setIdPartida(resultSet.getInt("idPartida"));
+                    partida.setNombrePartida(resultSet.getString("nombrePartida"));
+                    partida.setGuionPartida(resultSet.getBlob("guionPartida"));
+                    partida.setFechaPartida(resultSet.getDate("fechaPartida"));
+                    partida.setFotoPartida(resultSet.getBlob("fotoPartida"));
+                    partida.setAforoPartida(resultSet.getString("aforoPartida"));
+                    partida.setTipoPartida(resultSet.getString("tipoPartida"));
+                    partida.setCampoPartida(resultSet.getString("nombreCampo"));
+
+                    listOfEvents.add(partida);
                 }
+
 
             } catch (SQLException e) {
                 e.printStackTrace();
