@@ -2,6 +2,7 @@ package com.headquarter.com.headquarter.activity.activity.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -67,6 +68,10 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
             txtPartidaCampo = itemView.findViewById(R.id.txtCampo);
             imgPartidaFoto = itemView.findViewById(R.id.imagen);
 
+            txtPartidaFecha.setTypeface(txtPartidaFecha.getTypeface(), Typeface.BOLD);
+            txtPartidaTipo.setTypeface(txtPartidaFecha.getTypeface(), Typeface.BOLD);
+            txtPartidaCampo.setTypeface(txtPartidaFecha.getTypeface(), Typeface.BOLD);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,7 +83,7 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
         public void asignarDatos(Partida partida) {
             partidaId = partida.getIdPartida();
             txtPartidaTitulo.setText(partida.getNombrePartida());
-            txtPartidaFecha.setText(partida.getFechaPartida().toString());
+            txtPartidaFecha.setText("Fecha: "+ partida.getFechaPartida().toString());
             txtPartidaTipo.setText("Tipo: " + partida.getTipoPartida());
             txtPartidaCampo.setText("Campo: " + partida.getCampoPartida());
 
