@@ -31,7 +31,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
     @Override
     public ViewHolderRecycler onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list, null, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item2_list, null, false);
         return new ViewHolderRecycler(view);
     }
 
@@ -74,11 +74,11 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
         }
 
         public void asignarDatos(Partida partida) {
-            partidaId = partida.getIdPartida();
+            /*partidaId = partida.getIdPartida();
             txtPartidaTitulo.setText(partida.getNombrePartida());
             txtPartidaFecha.setText(partida.getFechaPartida().toString());
             txtPartidaTipo.setText("Tipo: " + partida.getTipoPartida());
-            txtPartidaCampo.setText("Campo: " + partida.getCampoPartida());
+            txtPartidaCampo.setText("Campo: " + partida.getCampoPartida());*/
             getEventImage(partida);
 
         }
