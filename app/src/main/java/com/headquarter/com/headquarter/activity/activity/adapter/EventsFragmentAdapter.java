@@ -1,18 +1,22 @@
 package com.headquarter.com.headquarter.activity.activity.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.others.Partida;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
-
 
 
 public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAdapter.ViewHolderRecycler> {
@@ -49,7 +53,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
         TextView txtPartidaFecha;
         TextView txtPartidaTipo;
         TextView txtPartidaCampo;
-
+        ImageView imgPartidaFoto;
 
 
         public ViewHolderRecycler(@NonNull View itemView) {
@@ -58,6 +62,8 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
             txtPartidaFecha = itemView.findViewById(R.id.txtFecha);
             txtPartidaTipo = itemView.findViewById(R.id.txtTipo);
             txtPartidaCampo = itemView.findViewById(R.id.txtCampo);
+            imgPartidaFoto = itemView.findViewById(R.id.imagen);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +79,22 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
             txtPartidaFecha.setText(partida.getFechaPartida().toString());
             txtPartidaTipo.setText("Tipo: " + partida.getTipoPartida());
             txtPartidaCampo.setText("Campo: " + partida.getCampoPartida());
+            getEventImage(partida);
 
+        }
+
+        private void getEventImage(Partida partida) {
+            Blob blob = partida.getFotoPartida();
+            int blobLength = 0;
+            try {
+                blobLength = (int) blob.length();
+                byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                blob.free();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
+                imgPartidaFoto.setImageBitmap(bitmap);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

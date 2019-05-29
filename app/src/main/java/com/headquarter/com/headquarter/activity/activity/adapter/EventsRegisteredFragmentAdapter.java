@@ -1,5 +1,7 @@
 package com.headquarter.com.headquarter.activity.activity.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +16,10 @@ import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.others.Partida;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
-
 
 
 public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<EventsRegisteredFragmentAdapter.ViewHolderRecycler> {
@@ -66,7 +70,7 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), txtPartidaTitulo.getText() , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), txtPartidaTitulo.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -78,6 +82,22 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
             txtPartidaTipo.setText("Tipo: " + partida.getTipoPartida());
             txtPartidaCampo.setText("Campo: " + partida.getCampoPartida());
 
+            getEventImage(partida);
+
+        }
+
+        private void getEventImage(Partida partida) {
+            Blob blob = partida.getFotoPartida();
+            int blobLength = 0;
+            try {
+                blobLength = (int) blob.length();
+                byte[] blobAsBytes = blob.getBytes(1, blobLength);
+                blob.free();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
+                imgPartidaFoto.setImageBitmap(bitmap);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
