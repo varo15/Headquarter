@@ -1,4 +1,4 @@
-package com.headquarter.com.headquarter.activity.activity.others;
+package com.headquarter.com.headquarter.activity.activity.objects;
 
 import java.util.Date;
 

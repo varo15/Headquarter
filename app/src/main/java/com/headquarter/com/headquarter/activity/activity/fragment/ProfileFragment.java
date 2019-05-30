@@ -21,9 +21,9 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
-import com.headquarter.com.headquarter.activity.activity.LogInActivity;
-import com.headquarter.com.headquarter.activity.activity.others.Jugador;
+import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
+import com.headquarter.com.headquarter.activity.activity.activity.LogInActivity;
+import com.headquarter.com.headquarter.activity.activity.objects.Jugador;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 

@@ -3,7 +3,6 @@ package com.headquarter.com.headquarter.activity.activity.adapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,10 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.others.Partida;
-import com.squareup.picasso.Picasso;
+import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
-import java.io.File;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,9 +1,10 @@
 
-package com.headquarter.com.headquarter.activity.activity;
+package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +26,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.others.BaseActivity;
 
 
-public class LogInActivity extends BaseActivity implements View.OnClickListener {
+public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
 
     //defining view objects
     private static final String TAG = "EmailPassword";

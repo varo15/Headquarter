@@ -1,5 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.adapter;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -15,8 +16,10 @@ import android.widget.Toast;
 
 import com.headquarter.R;
 
-import com.headquarter.com.headquarter.activity.activity.others.Partida;
+import com.headquarter.com.headquarter.activity.activity.EventActivity;
+import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
+import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,7 +54,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
 
     public class ViewHolderRecycler extends RecyclerView.ViewHolder {
 
-        int partidaId;
+        Partida partidaSaved;
         TextView txtPartidaTitulo;
         TextView txtPartidaFecha;
         TextView txtPartidaTipo;
@@ -59,7 +62,8 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
         ImageView imgPartidaFoto;
 
 
-        public ViewHolderRecycler(@NonNull View itemView) {
+        public ViewHolderRecycler(@NonNull final View itemView) {
+
             super(itemView);
             txtPartidaTitulo = itemView.findViewById(R.id.txtTituloEvento);
             txtPartidaFecha = itemView.findViewById(R.id.txtFecha);
@@ -75,13 +79,18 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(v.getContext(), "Hola", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(), EventActivity.class);
+                    EventActivity.partida = partidaSaved;
+                    v.getContext().startActivity(intent);
+
+
                 }
             });
         }
 
         public void asignarDatos(Partida partida) {
-            partidaId = partida.getIdPartida();
+
+            partidaSaved = partida;
             txtPartidaTitulo.setText(partida.getNombrePartida());
             txtPartidaFecha.setText("Fecha: "+ partida.getFechaPartida().toString());
             txtPartidaTipo.setText("Tipo: " + partida.getTipoPartida());

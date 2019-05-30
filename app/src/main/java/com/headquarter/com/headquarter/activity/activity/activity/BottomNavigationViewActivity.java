@@ -1,4 +1,4 @@
-package com.headquarter.com.headquarter.activity.activity;
+package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.fragment.EventsFragment;
@@ -59,6 +60,8 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
 
         ConnectionDB connectionDB = new ConnectionDB();
         connectionDB.execute();
+
+        Toast.makeText(this, "Hackeando el servidor...espere", Toast.LENGTH_LONG).show();
 
     }
 
