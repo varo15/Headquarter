@@ -16,9 +16,9 @@ import android.widget.ProgressBar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
+import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
 import com.headquarter.com.headquarter.activity.activity.adapter.EventsRegisteredFragmentAdapter;
-import com.headquarter.com.headquarter.activity.activity.others.Partida;
+import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -12,11 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".com.headquarter.activity.activity.BottomNavigationViewActivity"
+            android:name=".com.headquarter.activity.activity.activity.EventRegisteredActivity"
+            android:label="@string/title_activity_event_registered"
+            android:theme="@style/NoActionBar"></activity>
+        <activity
+            android:name=".com.headquarter.activity.activity.activity.EventActivity"
+            android:label="@string/title_activity_event"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".com.headquarter.activity.activity.activity.BottomNavigationViewActivity"
             android:label="@string/title_activity_menu" />
-        <activity android:name=".com.headquarter.activity.activity.LogInActivity" />
-        <activity android:name=".com.headquarter.activity.activity.others.BaseActivity" />
-        <activity android:name=".com.headquarter.activity.activity.MainActivity">
+        <activity android:name=".com.headquarter.activity.activity.activity.LogInActivity" />
+        <activity android:name=".com.headquarter.activity.activity.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
