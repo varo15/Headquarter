@@ -8,7 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,6 +17,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="310dp"
+                android:layout_marginBottom="310dp"
+                app:layout_constraintBottom_toTopOf="@+id/buttonLogOut"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/profileCard"
@@ -33,20 +45,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0">
 
-                <android.support.constraint.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="47dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/userImage"
@@ -75,154 +78,121 @@
                         android:id="@+id/textViewEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="92dp"
-                        android:layout_marginTop="64dp"
-                        android:layout_marginBottom="16dp"
                         android:text="@string/email"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userImage"
-                        app:layout_constraintVertical_bias="0.0" />
+                        tools:layout_editor_absoluteX="84dp"
+                        tools:layout_editor_absoluteY="224dp" />
 
                     <TextView
                         android:id="@+id/userEmail"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="22dp"
+                        android:layout_height="19dp"
                         android:text="@string/useremail"
                         android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="@+id/textViewEmail"
-                        app:layout_constraintStart_toEndOf="@+id/textViewEmail"
-                        app:layout_constraintTop_toTopOf="@+id/textViewEmail" />
+                        tools:layout_editor_absoluteX="144dp"
+                        tools:layout_editor_absoluteY="224dp" />
 
                     <TextView
                         android:id="@+id/textViewName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="76dp"
-                        android:layout_marginTop="64dp"
-                        android:layout_marginBottom="16dp"
                         android:text="@string/name"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userImage"
-                        app:layout_constraintVertical_bias="0.094" />
+                        tools:layout_editor_absoluteX="76dp"
+                        tools:layout_editor_absoluteY="259dp" />
 
                     <TextView
                         android:id="@+id/textViewDNI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="104dp"
-                        android:layout_marginTop="64dp"
-                        android:layout_marginBottom="16dp"
                         android:text="@string/DNI"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userImage"
-                        app:layout_constraintVertical_bias="0.172" />
+                        tools:layout_editor_absoluteX="104dp"
+                        tools:layout_editor_absoluteY="289dp" />
 
                     <TextView
                         android:id="@+id/userName"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="22dp"
+                        android:layout_height="19dp"
                         android:text="@string/userName"
                         android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="@+id/textViewName"
-                        app:layout_constraintStart_toEndOf="@+id/textViewName"
-                        app:layout_constraintTop_toTopOf="@+id/textViewName" />
+                        tools:layout_editor_absoluteX="152dp"
+                        tools:layout_editor_absoluteY="259dp" />
 
                     <TextView
                         android:id="@+id/userDNI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:text="@string/userDNI"
                         android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="@+id/userName"
-                        app:layout_constraintTop_toBottomOf="@+id/userName" />
+                        tools:layout_editor_absoluteX="152dp"
+                        tools:layout_editor_absoluteY="288dp" />
 
                     <TextView
                         android:id="@+id/textViewFechaNacimiento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="26dp"
-                        android:layout_marginTop="22dp"
                         android:text="@string/date"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewDNI" />
+                        tools:layout_editor_absoluteX="26dp"
+                        tools:layout_editor_absoluteY="330dp" />
 
                     <TextView
                         android:id="@+id/userDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:text="@string/date"
                         android:visibility="visible"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/textViewFechaNacimiento"
-                        app:layout_constraintStart_toEndOf="@+id/textViewFechaNacimiento" />
+                        tools:layout_editor_absoluteX="158dp"
+                        tools:layout_editor_absoluteY="330dp" />
 
                     <TextView
                         android:id="@+id/textViewTelefono"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="33dp"
-                        android:layout_marginEnd="1dp"
                         android:text="Telefono"
-                        app:layout_constraintEnd_toEndOf="@+id/textViewFechaNacimiento"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewFechaNacimiento" />
+                        tools:layout_editor_absoluteX="84dp"
+                        tools:layout_editor_absoluteY="382dp" />
 
                     <TextView
                         android:id="@+id/userPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="17dp"
                         android:text="TextView"
                         android:visibility="visible"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/textViewTelefono"
-                        app:layout_constraintStart_toEndOf="@+id/textViewTelefono" />
+                        tools:layout_editor_absoluteX="158dp"
+                        tools:layout_editor_absoluteY="382dp" />
 
                     <TextView
                         android:id="@+id/textViewTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:layout_marginEnd="16dp"
                         android:text="Equipo"
-                        app:layout_constraintEnd_toEndOf="@+id/textViewTelefono"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewTelefono" />
+                        tools:layout_editor_absoluteX="81dp"
+                        tools:layout_editor_absoluteY="419dp" />
 
                     <TextView
                         android:id="@+id/userTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
                         android:text="TextView"
                         android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="@+id/userPhone"
-                        app:layout_constraintTop_toBottomOf="@+id/userPhone" />
+                        tools:layout_editor_absoluteX="158dp"
+                        tools:layout_editor_absoluteY="419dp" />
 
                     <TextView
                         android:id="@+id/textViewFAANumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/FAANumber"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/userFAANumber"
-                        app:layout_constraintEnd_toEndOf="@+id/textViewTeam"
-                        app:layout_constraintStart_toEndOf="@+id/textViewTeam" />
+                        tools:layout_editor_absoluteX="84dp"
+                        tools:layout_editor_absoluteY="454dp" />
 
                     <TextView
                         android:id="@+id/userFAANumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="68dp"
-                        android:layout_marginTop="16dp"
                         android:text="TextView"
                         android:visibility="visible"
-                        app:layout_constraintStart_toEndOf="@+id/textViewFAANumber"
-                        app:layout_constraintTop_toBottomOf="@+id/userTeam" />
-
-                </android.support.constraint.ConstraintLayout>
+                        tools:layout_editor_absoluteX="233dp"
+                        tools:layout_editor_absoluteY="454dp" />
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
 
@@ -237,7 +207,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileCard" />
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
