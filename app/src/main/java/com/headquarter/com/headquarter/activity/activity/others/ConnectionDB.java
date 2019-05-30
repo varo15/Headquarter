@@ -35,7 +35,6 @@ public class ConnectionDB extends AsyncTask<Void, Void, Statement> {
 
     @Override
     protected void onPostExecute(Statement statement) {
-        //System.out.println("Conexion jdbc: " + connection);
         BottomNavigationViewActivity.statement = statement;
     }
 }

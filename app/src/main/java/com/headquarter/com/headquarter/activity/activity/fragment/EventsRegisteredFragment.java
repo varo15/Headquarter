@@ -64,6 +64,7 @@ public class EventsRegisteredFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -88,7 +89,9 @@ public class EventsRegisteredFragment extends Fragment {
         return view;
     }
 
-    private class EventsRegisteredTask extends AsyncTask {
+    
+
+    public class EventsRegisteredTask extends AsyncTask {
 
 
         @Override
