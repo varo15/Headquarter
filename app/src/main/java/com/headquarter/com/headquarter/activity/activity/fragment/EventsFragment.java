@@ -55,8 +55,7 @@ public class EventsFragment extends Fragment {
         //Lamamos al emtodo para obtener el usuario y preparar la consulta
         getUser();
         //Preparamos la consulta con el uui de nuestro usuario logeado
-        sql = "SELECT `partida`.*, `campo`.`nombreCampo`FROM `partida`LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo` ORDER BY partida.idPartida DESC
-";
+        sql = "SELECT `partida`.*, `campo`.`nombreCampo`FROM `partida`LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo` ORDER BY partida.idPartida DESC";
 
         //Ejecutar la tarea que devulve la consulta
         new EventsTask().execute();
