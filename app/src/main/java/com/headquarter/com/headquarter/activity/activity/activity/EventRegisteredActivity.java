@@ -1,6 +1,5 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,15 +9,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.fragment.EventsRegisteredFragment;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -35,6 +32,7 @@ public class EventRegisteredActivity extends AppCompatActivity {
     public static Partida partida;
 
     public View activityView;
+    public ImageView imagenPartida;
 
 
     @Override
@@ -92,10 +90,13 @@ public class EventRegisteredActivity extends AppCompatActivity {
     private void mostrarDatosPartida() {
         TextView titulo = findViewById(R.id.textView2);
         titulo.setText(partida.getNombrePartida());
+        //------------------------Aqui se define el imageview y se le asigna el contendio que esta guardado en la clase partida
+        imagenPartida = findViewById(R.id.imageView);
+        imagenPartida.setImageBitmap(partida.getFotoPartidaBitmap());
         /*
          *Llamada al metodo que pinta la imagen en el ImageView corespondiente
          */
-        getEventImage(partida);
+
     }
 
     private void getEventImage(Partida partida) {
