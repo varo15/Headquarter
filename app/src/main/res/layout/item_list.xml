@@ -36,9 +36,10 @@
             <TextView
                 android:id="@+id/txtTituloEvento"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@drawable/listgrad"
                 android:fontFamily="sans-serif-black"
+                android:gravity="bottom"
                 android:text="titulo evento"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
