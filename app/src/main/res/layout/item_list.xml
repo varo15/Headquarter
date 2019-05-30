@@ -37,7 +37,7 @@
                 android:id="@+id/txtTituloEvento"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#B3000000"
+                android:background="@drawable/listgrad"
                 android:fontFamily="sans-serif-black"
                 android:text="titulo evento"
                 android:textAlignment="center"
