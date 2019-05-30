@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".com.headquarter.activity.activity.EventActivity"
-            android:label="@string/title_activity_event"
+            android:name=".com.headquarter.activity.activity.activity.EventRegisteredActivity"
+            android:label="@string/title_activity_event_registered"
             android:theme="@style/NoActionBar"></activity>
+        <activity
+            android:name=".com.headquarter.activity.activity.activity.EventActivity"
+            android:label="@string/title_activity_event"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".com.headquarter.activity.activity.activity.BottomNavigationViewActivity"
             android:label="@string/title_activity_menu" />

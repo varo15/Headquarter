@@ -27,4 +27,5 @@
     <string name="Passord">Password</string>
     <string name="userDNI">userDNI</string>
     <string name="title_activity_event">EventActivity</string>
+    <string name="title_activity_event_registered">EventRegisteredActivity</string>
 </resources>

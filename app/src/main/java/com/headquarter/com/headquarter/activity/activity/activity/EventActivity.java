@@ -1,8 +1,7 @@
-package com.headquarter.com.headquarter.activity.activity;
+package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,23 +15,19 @@ import android.widget.Toast;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
-import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.SQLException;
 
 public class EventActivity extends AppCompatActivity {
 
 
-
-
     public static Partida partida;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
         /*
@@ -47,7 +42,8 @@ public class EventActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EventActivity.this, "Prepara tu fusil, ya esta apuntado!!!", Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, "Prepara tu fusil, ya esta apuntado!!!", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
     }

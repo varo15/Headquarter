@@ -12,14 +12,12 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.headquarter.R;
 
-import com.headquarter.com.headquarter.activity.activity.EventActivity;
+import com.headquarter.com.headquarter.activity.activity.activity.EventActivity;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
-import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -54,7 +52,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
 
     public class ViewHolderRecycler extends RecyclerView.ViewHolder {
 
-        Partida partidaSaved;
+        Partida partidaSelected;
         TextView txtPartidaTitulo;
         TextView txtPartidaFecha;
         TextView txtPartidaTipo;
@@ -80,7 +78,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
                 public void onClick(View v) {
 
                     Intent intent = new Intent(v.getContext(), EventActivity.class);
-                    EventActivity.partida = partidaSaved;
+                    EventActivity.partida = partidaSelected;
                     v.getContext().startActivity(intent);
 
 
@@ -90,9 +88,9 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
 
         public void asignarDatos(Partida partida) {
 
-            partidaSaved = partida;
+            partidaSelected = partida;
             txtPartidaTitulo.setText(partida.getNombrePartida());
-            txtPartidaFecha.setText("Fecha: "+ partida.getFechaPartida().toString());
+            txtPartidaFecha.setText("Fecha: " + partida.getFechaPartida().toString());
             txtPartidaTipo.setText("Tipo: " + partida.getTipoPartida());
             txtPartidaCampo.setText("Campo: " + partida.getCampoPartida());
             getEventImage(partida);
