@@ -99,20 +99,6 @@ public class EventRegisteredActivity extends AppCompatActivity {
 
     }
 
-    private void getEventImage(Partida partida) {
-        Blob blob = partida.getFotoPartida();
-        int blobLength = 0;
-        try {
-            blobLength = (int) blob.length();
-            byte[] blobAsBytes = blob.getBytes(1, blobLength);
-            blob.free();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
-            //imagenPartida.setImageBitmap(bitmap);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     private class BorrarPartidaTask extends AsyncTask<Void, Void, Boolean> {
 
         private boolean success;
