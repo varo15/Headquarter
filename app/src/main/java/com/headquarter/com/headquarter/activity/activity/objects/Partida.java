@@ -1,5 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.objects;
 
+import android.graphics.Bitmap;
 import android.os.Parcelable;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class Partida {
     public Blob guionPartida;
     public Date fechaPartida;
     public Blob fotoPartida;
+    public Bitmap fotoPartidaBitmap;
     public String aforoPartida;
     public String tipoPartida;
     public String campoPartida;
@@ -22,15 +24,24 @@ public class Partida {
     public Partida() {
     }
 
-    public Partida(int idPartida, String nombrePartida, Blob guionPartida, Date fechaPartida, Blob fotoPartida, String aforoPartida, String tipoPartida, String campoPartida) {
+    public Partida(int idPartida, String nombrePartida, Blob guionPartida, Date fechaPartida, Blob fotoPartida, Bitmap fotoPartidaBitmap, String aforoPartida, String tipoPartida, String campoPartida) {
         this.idPartida = idPartida;
         this.nombrePartida = nombrePartida;
         this.guionPartida = guionPartida;
         this.fechaPartida = fechaPartida;
         this.fotoPartida = fotoPartida;
+        this.fotoPartidaBitmap = fotoPartidaBitmap;
         this.aforoPartida = aforoPartida;
         this.tipoPartida = tipoPartida;
         this.campoPartida = campoPartida;
+    }
+
+    public Bitmap getFotoPartidaBitmap() {
+        return fotoPartidaBitmap;
+    }
+
+    public void setFotoPartidaBitmap(Bitmap fotoPartidaBitmap) {
+        this.fotoPartidaBitmap = fotoPartidaBitmap;
     }
 
     public int getIdPartida() {
