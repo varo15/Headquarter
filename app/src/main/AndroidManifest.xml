@@ -10,10 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_headquarter_round"
         android:supportsRtl="true"
-
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".com.headquarter.activity.activity.activity.RegisterActivity"></activity>
-
         <activity
             android:name=".com.headquarter.activity.activity.activity.EventRegisteredActivity"
             android:label="@string/title_activity_event_registered"
@@ -25,12 +23,13 @@
         <activity
             android:name=".com.headquarter.activity.activity.activity.BottomNavigationViewActivity"
             android:label="@string/title_activity_menu" />
-
         <activity android:name=".com.headquarter.activity.activity.activity.LogInActivity" />
         <activity android:name=".com.headquarter.activity.activity.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
