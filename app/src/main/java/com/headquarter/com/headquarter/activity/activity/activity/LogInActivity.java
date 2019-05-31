@@ -2,6 +2,7 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.headquarter.R;
+import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,6 +49,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     //Declaramos un objeto firebaseAuth
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -268,14 +276,19 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(FirebaseUser user) {
         progressBar.setVisibility(View.GONE);
-        if (user != null) {
-            Intent menuIntent = new Intent(this, BottomNavigationViewActivity.class);
-            LogInActivity.this.startActivity(menuIntent);
 
+
+
+        if (user != null) {
+            firebaseUser = user;
+            new CheckIfUserExist().execute();
+            /*Intent menuIntent = new Intent(this, BottomNavigationViewActivity.class);
+            LogInActivity.this.startActivity(menuIntent);
+*/
         } else {
 
-            findViewById(R.id.botonRegistrar).setVisibility(View.VISIBLE);
-            findViewById(R.id.botonLogin).setVisibility(View.VISIBLE);
+            /*findViewById(R.id.botonRegistrar).setVisibility(View.VISIBLE);
+            findViewById(R.id.botonLogin).setVisibility(View.VISIBLE);*/
         }
     }
 
@@ -290,6 +303,52 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         } else if (i == R.id.botonGoogle) {
             signInGoogle();
 
+        }
+    }
+
+    public class CheckIfUserExist extends AsyncTask<Void, Void, Boolean> {
+
+        private Boolean checkUser = false;
+
+
+
+        @Override
+        protected void onPreExecute() {
+            new ConnectionDB().execute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+
+            String sql = "SELECT `jugador`.`registrado`, `jugador`.`idGoogle`" +
+                    "FROM `jugador`" +
+                    "WHERE `jugador`.`idGoogle` = '" + firebaseUser.getUid() + "'";
+            Connection connection = ConnectionDB.conn;
+            try {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+                resultSet.next();
+                checkUser = resultSet.getBoolean("registrado");
+
+            } catch (SQLException e) {
+                checkUser = false;
+                e.printStackTrace();
+            }
+            return checkUser;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            progressBar.setVisibility(View.GONE);
+            if (aBoolean) {
+                Intent menuIntent = new Intent(LogInActivity.this, BottomNavigationViewActivity.class);
+                LogInActivity.this.startActivity(menuIntent);
+
+            } else {
+                Intent registerIntent = new Intent(LogInActivity.this, RegisterActivity.class);
+                LogInActivity.this.startActivity(registerIntent);
+            }
+            super.onPostExecute(aBoolean);
         }
     }
 }
