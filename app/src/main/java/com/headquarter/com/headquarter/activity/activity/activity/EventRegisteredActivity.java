@@ -88,10 +88,10 @@ public class EventRegisteredActivity extends AppCompatActivity {
     }
 
     private void mostrarDatosPartida() {
-        TextView titulo = findViewById(R.id.textView2);
+        TextView titulo = findViewById(R.id.textView4);
         titulo.setText(partida.getNombrePartida());
         //------------------------Aqui se define el imageview y se le asigna el contendio que esta guardado en la clase partida
-        imagenPartida = findViewById(R.id.imageView);
+        imagenPartida = findViewById(R.id.imageView2);
         imagenPartida.setImageBitmap(partida.getFotoPartidaBitmap());
         /*
          *Llamada al metodo que pinta la imagen en el ImageView corespondiente
