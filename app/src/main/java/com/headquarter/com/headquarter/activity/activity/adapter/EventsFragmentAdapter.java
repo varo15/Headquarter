@@ -94,6 +94,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
             txtPartidaTipo.setText("Tipo: " + partida.getTipoPartida());
             txtPartidaCampo.setText("Campo: " + partida.getCampoPartida());
             getEventImage(partida);
+            imgPartidaFoto.setImageBitmap(partida.getFotoPartidaBitmap());
 
         }
 
@@ -105,7 +106,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
                 byte[] blobAsBytes = blob.getBytes(1, blobLength);
                 blob.free();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
-                imgPartidaFoto.setImageBitmap(bitmap);
+                partida.setFotoPartidaBitmap(bitmap);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

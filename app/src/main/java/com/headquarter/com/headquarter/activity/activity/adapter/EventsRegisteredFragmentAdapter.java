@@ -92,6 +92,8 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
 
             getEventImage(partida);
 
+            imgPartidaFoto.setImageBitmap(partida.getFotoPartidaBitmap());
+
         }
 
         private void getEventImage(Partida partida) {
@@ -102,7 +104,7 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
                 byte[] blobAsBytes = blob.getBytes(1, blobLength);
                 blob.free();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
-                imgPartidaFoto.setImageBitmap(bitmap);
+                partida.setFotoPartidaBitmap(bitmap);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
