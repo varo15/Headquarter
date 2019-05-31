@@ -1,4 +1,4 @@
-package com.headquarter.com.headquarter.activity.activity;
+package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -7,16 +7,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.fragment.EventsFragment;
 import com.headquarter.com.headquarter.activity.activity.fragment.EventsRegisteredFragment;
 import com.headquarter.com.headquarter.activity.activity.fragment.ProfileFragment;
+import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.Connection;
+import java.sql.Statement;
 
 public class BottomNavigationViewActivity extends AppCompatActivity {
 
@@ -24,11 +24,11 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
     final Fragment fragment2 = new EventsRegisteredFragment();
     final Fragment fragment3 = new ProfileFragment();
     final FragmentManager fragmentManager = getSupportFragmentManager();
-    public static Connection connection;
+    public static Statement statement;
     Fragment active = fragment1;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = new BottomNavigationView.OnNavigationItemSelectedListener(){
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -61,10 +61,17 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
         ConnectionDB connectionDB = new ConnectionDB();
         connectionDB.execute();
 
+        Toast.makeText(this, "Hackeando el servidor...espere", Toast.LENGTH_LONG).show();
+
     }
 
     public void showFragment(Fragment fragmentName) {
         fragmentManager.beginTransaction().hide(active).show(fragmentName).commit();
         active = fragmentName;
     }
+
+    public void onListFragmentInteraction(){
+
+    }
+
 }

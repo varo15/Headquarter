@@ -6,24 +6,30 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_headquarter"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_headquarter_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".com.headquarter.activity.activity.SplashActivity">
+
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".com.headquarter.activity.activity.activity.RegisterActivity"></activity>
+
+        <activity
+            android:name=".com.headquarter.activity.activity.activity.EventRegisteredActivity"
+            android:label="@string/title_activity_event_registered"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".com.headquarter.activity.activity.activity.EventActivity"
+            android:label="@string/title_activity_event"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".com.headquarter.activity.activity.activity.BottomNavigationViewActivity"
+            android:label="@string/title_activity_menu" />
+
+        <activity android:name=".com.headquarter.activity.activity.activity.LogInActivity" />
+        <activity android:name=".com.headquarter.activity.activity.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".com.headquarter.activity.activity.BottomNavigationViewActivity"
-            android:label="@string/title_activity_menu" />
-        <activity android:name=".com.headquarter.activity.activity.LogInActivity" />
-        <activity android:name=".com.headquarter.activity.activity.BaseActivity" />
-        <activity android:name=".com.headquarter.activity.activity.MainActivity">
 
         </activity>
     </application>

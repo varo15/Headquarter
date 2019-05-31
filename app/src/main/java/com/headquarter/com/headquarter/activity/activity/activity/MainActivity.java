@@ -1,17 +1,14 @@
-package com.headquarter.com.headquarter.activity.activity;
+package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.tasks.Task;
 import com.headquarter.R;
+import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
-import java.sql.Array;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -49,7 +46,15 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
-
-
+    @Override
+    protected void onDestroy() {
+        try {
+            BottomNavigationViewActivity.statement.close();
+            ConnectionDB.conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al cerrar la conexion en MainActivity");
+        }
+        super.onDestroy();
+    }
 }

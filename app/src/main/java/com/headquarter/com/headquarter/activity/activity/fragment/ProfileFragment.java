@@ -21,8 +21,9 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.BottomNavigationViewActivity;
-import com.headquarter.com.headquarter.activity.activity.LogInActivity;
+import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
+import com.headquarter.com.headquarter.activity.activity.activity.LogInActivity;
+import com.headquarter.com.headquarter.activity.activity.objects.Jugador;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -47,6 +48,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private TextView userTeam;
     private TextView userFAANumber;
     private ImageView userImage;
+    private Jugador jugador;
 
 
     private Button buttonLogOut;
@@ -66,13 +68,15 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        jugador = new Jugador();
         sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
                 "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
                 "WHERE jugador.idGoogle = '" + user.getUid() + "'";
         new ProfileTask().execute();
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -82,7 +86,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         userImage = view.findViewById(R.id.userImage);
-        Picasso.get().load(user.getPhotoUrl()).resize(500, 500).transform(new CircleTransform()).into(userImage);
+        Picasso.get().load(user.getPhotoUrl()).resize(550, 550).transform(new CircleTransform()).into(userImage);
 
         userEmail = view.findViewById(R.id.userEmail);
         userEmail.setVisibility(View.VISIBLE);
@@ -123,7 +127,9 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         try {
             userImage = view.findViewById(R.id.userImage);
-            Picasso.get().load(user.getPhotoUrl()).resize(500, 500).transform(new CircleTransform()).into(userImage);
+
+            Picasso.get().load(user.getPhotoUrl()).resize(550, 550).transform(new CircleTransform()).into(userImage);
+
 
             userEmail = view.findViewById(R.id.userEmail);
             userEmail.setVisibility(View.VISIBLE);
@@ -131,27 +137,27 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userName = view.findViewById(R.id.userName);
             userName.setVisibility(View.VISIBLE);
-            userName.setText(user.getDisplayName());
+            userName.setText(jugador.getNombre());
 
             userDNI = view.findViewById(R.id.userDNI);
             userDNI.setVisibility(View.VISIBLE);
-            userDNI.setText(resultSet.getString("DNI"));
+            userDNI.setText(jugador.getDNI());
 
             userBirthDate = view.findViewById(R.id.userDate);
             userBirthDate.setVisibility(View.VISIBLE);
-            userBirthDate.setText(resultSet.getString("fecha_nacimiento"));
+            userBirthDate.setText(jugador.getFechaNacimiento().toString());
 
             userPhone = view.findViewById(R.id.userPhone);
             userPhone.setVisibility(View.VISIBLE);
-            userPhone.setText(resultSet.getString("telefono"));
+            userPhone.setText(jugador.getTelefono());
 
             userTeam = view.findViewById(R.id.userTeam);
             userTeam.setVisibility(View.VISIBLE);
-            userTeam.setText(resultSet.getString("nombreEquipo"));
+            userTeam.setText(jugador.getEquipo());
 
             userFAANumber = view.findViewById(R.id.userFAANumber);
             userFAANumber.setVisibility(View.VISIBLE);
-            userFAANumber.setText(resultSet.getString("numero_FAA"));
+            userFAANumber.setText(jugador.getNumeroFAA());
 
 
         } catch (Exception e) {
@@ -203,18 +209,29 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private class ProfileTask extends AsyncTask {
 
+
         @Override
         protected Object doInBackground(Object[] objects) {
 
 
             try {
+                Statement statement = BottomNavigationViewActivity.statement;
 
-                Statement statement = BottomNavigationViewActivity.connection.createStatement();
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
+                jugador.setDNI(resultSet.getString("DNI"));
+                jugador.setNombre(resultSet.getString("nombreJugador"));
+                jugador.setFechaNacimiento(resultSet.getDate("fechaNacimiento"));
+                jugador.setEmail(resultSet.getString("emailJugador"));
+                jugador.setTelefono(resultSet.getString("telefonoJugador"));
+                jugador.setEquipo(resultSet.getString("nombreEquipo"));
+                jugador.setNumeroFAA(resultSet.getString("numeroFAA"));
+                jugador.setRegistrado(resultSet.getBoolean("registrado"));
+
 
 
             } catch (SQLException e) {
+                System.out.println("CAGADA");
                 e.printStackTrace();
             }
 
@@ -223,7 +240,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         @Override
         protected void onPostExecute(Object o) {
-
             progressBar.setVisibility(View.GONE);
             showUserData();
             swipeRefreshLayout.setRefreshing(false);
@@ -231,5 +247,4 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         }
     }
-
 }

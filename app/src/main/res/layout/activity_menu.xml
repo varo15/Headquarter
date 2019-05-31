@@ -5,13 +5,15 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".com.headquarter.activity.activity.BottomNavigationViewActivity">
+    tools:context=".com.headquarter.activity.activity.activity.BottomNavigationViewActivity">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/mTextMessage"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:layout_height="50dp"
+        android:background="#242222"
+        app:itemIconTint="@color/common_google_signin_btn_text_dark_default"
+        app:itemTextColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -22,10 +24,6 @@
         android:id="@+id/main_fragment_placeholder"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/mTextMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
