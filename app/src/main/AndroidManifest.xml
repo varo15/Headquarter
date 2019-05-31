@@ -11,10 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_headquarter_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".com.headquarter.activity.activity.activity.RegisterActivity"></activity>
         <activity
             android:name=".com.headquarter.activity.activity.activity.EventRegisteredActivity"
             android:label="@string/title_activity_event_registered"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".com.headquarter.activity.activity.activity.EventActivity"
             android:label="@string/title_activity_event"
