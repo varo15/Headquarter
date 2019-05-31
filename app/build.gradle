@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation project(path: ':mysql-connector-java-5.1.47-bin')
     implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
 }

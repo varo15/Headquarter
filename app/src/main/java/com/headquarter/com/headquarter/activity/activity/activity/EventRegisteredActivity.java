@@ -1,8 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,7 +17,6 @@ import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -88,14 +85,21 @@ public class EventRegisteredActivity extends AppCompatActivity {
     }
 
     private void mostrarDatosPartida() {
-        TextView titulo = findViewById(R.id.textView4);
-        titulo.setText(partida.getNombrePartida());
         //------------------------Aqui se define el imageview y se le asigna el contendio que esta guardado en la clase partida
-        imagenPartida = findViewById(R.id.imageView2);
+        imagenPartida = findViewById(R.id.imageEvent);
         imagenPartida.setImageBitmap(partida.getFotoPartidaBitmap());
-        /*
-         *Llamada al metodo que pinta la imagen en el ImageView corespondiente
-         */
+
+        TextView titulo = findViewById(R.id.title);
+        titulo.setText(partida.getNombrePartida());
+        TextView tipo = findViewById(R.id.tipo);
+        tipo.setText(partida.getTipoPartida());
+        TextView aforo = findViewById(R.id.aforo);
+        aforo.setText(partida.getAforoPartida());
+        TextView campo = findViewById(R.id.campo);
+        campo.setText(partida.getCampoPartida());
+        TextView fecha = findViewById(R.id.fecha);
+        fecha.setText(partida.getFechaPartida().toString());
+
 
     }
 
