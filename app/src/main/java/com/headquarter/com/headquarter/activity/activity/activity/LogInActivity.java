@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.headquarter.R;
+import com.headquarter.com.headquarter.activity.activity.fragment.EventsFragment;
 import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.Connection;
@@ -40,7 +41,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     //defining view objects
     private static final String TAG = "EmailPassword";
     private static final int RC_SIGN_IN = 9001;
-    private GoogleSignInClient mGoogleSignInClient;
+    public static GoogleSignInClient mGoogleSignInClient;
     private EditText TextEmail;
     private EditText TextPassword;
     private TextView TextUser;
@@ -56,20 +57,18 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+
         //inicializamos el objeto firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //Referenciamos los views
-        TextEmail = findViewById(R.id.textEmail2);
-        TextPassword = findViewById(R.id.textPassword);
-        TextUser = findViewById(R.id.textEmail2);
-        progressBar = findViewById(R.id.progressBar);
 
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
         //attaching listener to button
-        findViewById(R.id.botonRegistrar).setOnClickListener(this);
-        findViewById(R.id.botonLogin).setOnClickListener(this);
         findViewById(R.id.botonGoogle).setOnClickListener(this);
+
 
         // [START config_signin]
 
@@ -106,8 +105,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-
     // [END onactivityresult]
+
     // [START auth_with_google]
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
@@ -128,12 +127,11 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            updateUI(null);
                         }
 
                         // [START_EXCLUDE]
 
-                        progressBar.setVisibility(View.GONE);
+                        //progressBar.setVisibility(View.GONE);
                         // [END_EXCLUDE]
                     }
                 });
@@ -153,44 +151,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
-    /*
-        Metodo crateAccount Email & Pass
-        Crea una cuenta en Firebase con un usuario y contraseña
-     */
-    private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
-            return;
-        }
-
-        progressBar.setVisibility(View.VISIBLE);
-
-        // [START create_user_with_email]
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LogInActivity.this, "Error en el registro",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-
-                        progressBar.setVisibility(View.GONE);
-
-                    }
-                });
-        // [END create_user_with_email]
-    }
-
     // [START signinGoogle]
     private void signInGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -198,97 +158,15 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     }
     // [END signinGoogle]
 
-    /*
-        Metodo signIn Email & Pass
-        Inicia sesion en la aplicacion con un usuario y una contraseña ya existentes en Firebase
-     */
-    private void signIn(String email, String password) {
-        Log.d(TAG, "signIn:" + email);
-        if (!validateForm()) {
-            return;
-        }
-        progressBar.setVisibility(View.VISIBLE);
-
-        // [START sign_in_with_email]
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            Toast.makeText(LogInActivity.this, "Sesion iniciada", Toast.LENGTH_SHORT).show();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LogInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                        }
-
-                        progressBar.setVisibility(View.GONE);
-
-                    }
-                });
-        // [END sign_in_with_email]
-    }
-
-
-    /*
-        Metodo signOut
-        Email
-     */
-    public void signOut() {
-        // Firebase sign out
-        firebaseAuth.signOut();
-
-        // Google sign out
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        updateUI(null);
-                    }
-                });
-    }
-
-    private boolean validateForm() {
-        boolean valid = true;
-
-        String email = TextEmail.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            TextEmail.setError("Required.");
-            valid = false;
-        } else {
-            TextEmail.setError(null);
-        }
-
-        String password = TextPassword.getText().toString();
-        if (TextUtils.isEmpty(password)) {
-            TextPassword.setError("Required.");
-            valid = false;
-        } else {
-            TextPassword.setError(null);
-        }
-
-        return valid;
-    }
 
     private void updateUI(FirebaseUser user) {
-        progressBar.setVisibility(View.GONE);
-
-
 
         if (user != null) {
+            progressBar.setVisibility(View.VISIBLE);
             firebaseUser = user;
             new CheckIfUserExist().execute();
-            /*Intent menuIntent = new Intent(this, BottomNavigationViewActivity.class);
-            LogInActivity.this.startActivity(menuIntent);
-*/
-        } else {
+        }else {
 
-            /*findViewById(R.id.botonRegistrar).setVisibility(View.VISIBLE);
-            findViewById(R.id.botonLogin).setVisibility(View.VISIBLE);*/
         }
     }
 
@@ -296,13 +174,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         int i = v.getId();
-        if (i == R.id.botonRegistrar) {
-            createAccount(TextEmail.getText().toString(), TextPassword.getText().toString());
-        } else if (i == R.id.botonLogin) {
-            signIn(TextEmail.getText().toString(), TextPassword.getText().toString());
-        } else if (i == R.id.botonGoogle) {
+        if (i == R.id.botonGoogle) {
             signInGoogle();
-
         }
     }
 
@@ -310,12 +183,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
         private Boolean checkUser = false;
 
-
-
-        @Override
-        protected void onPreExecute() {
-            new ConnectionDB().execute();
-        }
 
         @Override
         protected Boolean doInBackground(Void... voids) {
@@ -339,13 +206,16 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
-            progressBar.setVisibility(View.GONE);
+
             if (aBoolean) {
+
                 Intent menuIntent = new Intent(LogInActivity.this, BottomNavigationViewActivity.class);
+                progressBar.setVisibility(View.GONE);
                 LogInActivity.this.startActivity(menuIntent);
 
             } else {
                 Intent registerIntent = new Intent(LogInActivity.this, RegisterActivity.class);
+                progressBar.setVisibility(View.GONE);
                 LogInActivity.this.startActivity(registerIntent);
             }
             super.onPostExecute(aBoolean);

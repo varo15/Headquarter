@@ -70,8 +70,5 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
         active = fragmentName;
     }
 
-    public void onListFragmentInteraction(){
-
-    }
 
 }

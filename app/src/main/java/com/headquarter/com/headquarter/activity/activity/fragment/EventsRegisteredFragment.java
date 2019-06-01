@@ -1,6 +1,7 @@
 package com.headquarter.com.headquarter.activity.activity.fragment;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,14 +35,18 @@ public class EventsRegisteredFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
-    RecyclerView recycler;
-    private ResultSet resultSet;
-    private String sql;
-    private ProgressBar progressBar;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    static RecyclerView recycler;
+    private static ResultSet resultSet;
+    private static String sql;
+    private static ProgressBar progressBar;
+    private static SwipeRefreshLayout swipeRefreshLayout;
 
     //ArrayList necesarios para la carga de datos
     static ArrayList<Partida> getListOfEventsRegistered = new ArrayList<>();
+
+    //Inicializamos el adapter
+    private EventsRegisteredFragmentAdapter adapter;
+
 
     public EventsRegisteredFragment() {
         // Required empty public constructor
@@ -60,7 +65,9 @@ public class EventsRegisteredFragment extends Fragment {
                 "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "'";
 
         //Ejecutar la tarea que devulve la consulta
-        new EventsRegisteredTask().execute();
+        //new EventsRegisteredTask().execute();
+
+        adapter = new EventsRegisteredFragmentAdapter(getListOfEventsRegistered);
         super.onCreate(savedInstanceState);
     }
 
@@ -89,10 +96,13 @@ public class EventsRegisteredFragment extends Fragment {
         return view;
     }
 
-    
+    @Override
+    public void onResume() {
+        new EventsRegisteredTask().execute();
+        super.onResume();
+    }
 
-    public class EventsRegisteredTask extends AsyncTask {
-
+    private class EventsRegisteredTask extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -139,11 +149,9 @@ public class EventsRegisteredFragment extends Fragment {
         }
     }
 
-    private void loadEventsRegisteredCards() {
+    public void loadEventsRegisteredCards() {
         //En este metodo ira todo el codigo necesario para que se carguen los datos y se dibujen los cardviews, antes de que se dibujen se mostrara el fragment en blanco con el progresbar dando vueltas
         //Una vez que carguen, el progressbar se desactiva y se pintan las tarjetas
-
-        EventsRegisteredFragmentAdapter adapter = new EventsRegisteredFragmentAdapter(getListOfEventsRegistered);
         recycler.setAdapter(adapter);
     }
 

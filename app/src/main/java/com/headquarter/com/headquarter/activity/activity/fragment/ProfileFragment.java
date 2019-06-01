@@ -99,6 +99,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 //Cerrar sesion y volver a la pagina principal
                 try {
                     firebaseAuth.signOut();
+
                     Intent intent = new Intent(getActivity(), LogInActivity.class);
                     startActivity(intent);
                 } catch (Exception e) {

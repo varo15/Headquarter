@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
+import com.headquarter.com.headquarter.activity.activity.fragment.EventsFragment;
 import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.ResultSet;
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity  {
     private String [] query;
     private String sql = "SELECT * FROM jugador";
 
+    private FirebaseAuth firebaseAuth;
+    public static FirebaseUser firebaseUser;
 
 
     @Override
@@ -29,10 +34,17 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
+        new ConnectionDB().execute();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null){
+            Intent menuIntent = new Intent(this, BottomNavigationViewActivity.class);
+            startActivity(menuIntent);
+        }else {
+            Intent loginIntent = new Intent(MainActivity.this, LogInActivity.class);
+            MainActivity.this.startActivity(loginIntent);
+        }
+/*
         button = findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +53,7 @@ public class MainActivity extends AppCompatActivity  {
                 Intent loginIntent = new Intent(MainActivity.this, LogInActivity.class);
                 MainActivity.this.startActivity(loginIntent);
             }
-        });
+        });*/
 
     }
 
