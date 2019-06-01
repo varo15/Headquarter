@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
+import com.headquarter.com.headquarter.activity.activity.activity.SplashScreenActivity;
 import com.headquarter.com.headquarter.activity.activity.adapter.EventsRegisteredFragmentAdapter;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
@@ -159,8 +160,7 @@ public class EventsRegisteredFragment extends Fragment {
         Metodo que nos devuelve el usuario de firebase
      */
     private void getUser() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        user = firebaseAuth.getCurrentUser();
+        user = SplashScreenActivity.firebaseUser;
     }
 
 }
