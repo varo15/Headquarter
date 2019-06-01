@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
 import com.headquarter.com.headquarter.activity.activity.activity.LogInActivity;
+import com.headquarter.com.headquarter.activity.activity.activity.SplashScreenActivity;
 import com.headquarter.com.headquarter.activity.activity.objects.Jugador;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -68,9 +69,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        user = firebaseAuth.getCurrentUser();
+        user = SplashScreenActivity.firebaseUser;
         jugador = new Jugador();
         sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
                 "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +

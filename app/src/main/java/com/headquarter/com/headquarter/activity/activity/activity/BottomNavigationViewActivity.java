@@ -16,6 +16,7 @@ import com.headquarter.com.headquarter.activity.activity.fragment.ProfileFragmen
 import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class BottomNavigationViewActivity extends AppCompatActivity {
@@ -70,5 +71,17 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
         active = fragmentName;
     }
 
+    @Override
+    protected void onDestroy() {
+        try {
+            BottomNavigationViewActivity.statement.close();
+            ConnectionDB.conn.close();
+            System.out.println("Conexion cerrada");
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al cerrar la conexion en MainActivity");
+        }
+        super.onDestroy();
+    }
 }
