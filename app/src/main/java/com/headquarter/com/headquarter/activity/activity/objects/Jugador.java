@@ -1,9 +1,12 @@
 package com.headquarter.com.headquarter.activity.activity.objects;
 
+import android.text.Editable;
+
 import java.util.Date;
 
 public class Jugador {
 
+    public String idGoogle;
     public String DNI;
     public String nombre;
     public Date fechaNacimiento;
@@ -17,7 +20,7 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(String DNI, String nombre, Date fechaNacimiento, String telefono, String email, int id_equipo_fk, String equipo, String numeroFAA, boolean registrado) {
+    public Jugador(String idGoogle, String DNI, String nombre, Date fechaNacimiento, String telefono, String email, int id_equipo_fk, String equipo, String numeroFAA, boolean registrado) {
         this.DNI = DNI;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
@@ -27,6 +30,14 @@ public class Jugador {
         this.equipo = equipo;
         this.numeroFAA = numeroFAA;
         this.registrado = registrado;
+    }
+
+    public String getIdGoogle() {
+        return idGoogle;
+    }
+
+    public void setIdGoogle(String idGoogle) {
+        this.idGoogle = idGoogle;
     }
 
     public String getDNI() {
@@ -99,6 +110,9 @@ public class Jugador {
 
     public void setRegistrado(boolean registrado) {
         this.registrado = registrado;
+    }
+
+    public void setFechaNacimiento(Editable text) {
     }
 }
 
