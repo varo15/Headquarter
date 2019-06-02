@@ -79,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             Statement statement = ConnectionDB.conn.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
+            statement.close();
             resultSet.beforeFirst();
             while (resultSet.next()){
                 Equipo equipo = new Equipo();
@@ -87,6 +88,8 @@ public class RegisterActivity extends AppCompatActivity {
                 equipo.setEscudoEquipo(resultSet.getBlob("escudoEquipo"));
                 teamsList.add(equipo);
             }
+
+            resultSet.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,6 +103,21 @@ public class RegisterActivity extends AppCompatActivity {
 
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
+        }
+    }
+
+    private class RegisterUserInDatabase extends AsyncTask{
+
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            try {
+                Statement statement = ConnectionDB.conn.createStatement();
+                ResultSet resultSet = statement.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }
