@@ -39,6 +39,11 @@ public class Equipo {
     public void setEscudoEquipo(Blob escudoEquipo) {
         this.escudoEquipo = escudoEquipo;
     }
+
+    @Override
+    public String toString() {
+        return nombreEquipo;
+    }
 }
 
 
