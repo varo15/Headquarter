@@ -1,7 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.fragment;
 
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -160,7 +159,9 @@ public class EventsRegisteredFragment extends Fragment {
         Metodo que nos devuelve el usuario de firebase
      */
     private void getUser() {
-        user = SplashScreenActivity.firebaseUser;
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
     }
 
 }

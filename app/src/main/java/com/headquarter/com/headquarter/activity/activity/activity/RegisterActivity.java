@@ -1,5 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,4 +34,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+private class PopulateTeamsSpinner extends AsyncTask{
+
+    String sql = "SELECT * FROM equipo";
+    @Override
+    protected Object doInBackground(Object[] objects) {
+        return null;
+    }
 }
+}
+

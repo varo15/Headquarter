@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        user = SplashScreenActivity.firebaseUser;
+        getUser();
         jugador = new Jugador();
         sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
                 "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
@@ -77,6 +77,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         new ProfileTask().execute();
         super.onCreate(savedInstanceState);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -229,7 +230,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 jugador.setRegistrado(resultSet.getBoolean("registrado"));
 
 
-
             } catch (SQLException e) {
                 System.out.println("CAGADA");
                 e.printStackTrace();
@@ -243,8 +243,11 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
             progressBar.setVisibility(View.GONE);
             showUserData();
             swipeRefreshLayout.setRefreshing(false);
-
-
         }
+    }
+
+    private void getUser() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
     }
 }
