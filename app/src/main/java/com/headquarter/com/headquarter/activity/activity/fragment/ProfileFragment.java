@@ -89,6 +89,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         userEmail.setVisibility(View.VISIBLE);
         userEmail.setText(user.getEmail());
 
+        userName = view.findViewById(R.id.userName);
+        userName.setVisibility(View.VISIBLE);
+        userName.setText(user.getDisplayName());
+
         buttonLogOut = view.findViewById(R.id.buttonLogOut);
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
