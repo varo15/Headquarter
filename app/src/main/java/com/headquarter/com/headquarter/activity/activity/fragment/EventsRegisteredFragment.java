@@ -58,12 +58,6 @@ public class EventsRegisteredFragment extends Fragment {
 
         //Lamamos al emtodo para obtener el usuario y preparar la consulta
         getUser();
-        //Preparamos la consulta con el uui de nuestro usuario logeado
-        sql = "SELECT `partida`.*, `campo`.`nombreCampo`, `participa`.*, `jugador`.`idGoogle` FROM `partida`" +
-                "LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo`" +
-                "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
-                "LEFT JOIN `jugador` ON `participa`.`idGoogle_fk` = `jugador`.`idGoogle`" +
-                "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "'";
 
         //Ejecutar la tarea que devulve la consulta
         //new EventsRegisteredTask().execute();
@@ -108,6 +102,13 @@ public class EventsRegisteredFragment extends Fragment {
         @Override
         protected Object doInBackground(Object[] objects) {
 
+
+            //Preparamos la consulta con el uui de nuestro usuario logeado
+            sql = "SELECT `partida`.*, `campo`.`nombreCampo`, `participa`.*, `jugador`.`idGoogle` FROM `partida`" +
+                    "LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo`" +
+                    "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
+                    "LEFT JOIN `jugador` ON `participa`.`idGoogle_fk` = `jugador`.`idGoogle`" +
+                    "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "' ORDER BY `partida`.`fechaPartida` DESC";
 
             try {
 
