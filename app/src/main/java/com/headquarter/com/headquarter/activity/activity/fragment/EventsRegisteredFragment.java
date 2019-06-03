@@ -1,7 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.fragment;
 
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -160,7 +160,10 @@ public class EventsRegisteredFragment extends Fragment {
         Metodo que nos devuelve el usuario de firebase
      */
     private void getUser() {
-        user = SplashScreenActivity.firebaseUser;
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+        Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
     }
 
 }

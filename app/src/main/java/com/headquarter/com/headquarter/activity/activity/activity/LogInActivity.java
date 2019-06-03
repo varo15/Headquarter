@@ -6,13 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -27,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.fragment.EventsFragment;
 import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.Connection;
@@ -42,36 +37,36 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "EmailPassword";
     private static final int RC_SIGN_IN = 9001;
     public static GoogleSignInClient mGoogleSignInClient;
-    private EditText TextEmail;
-    private EditText TextPassword;
-    private TextView TextUser;
-    private ProgressBar progressBar;
 
+    //Declaramos el progressbar
+    private ProgressBar progressBar;
 
     //Declaramos un objeto firebaseAuth
     private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser;
+    public static FirebaseUser firebaseUser = SplashScreenActivity.firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
         //inicializamos el objeto firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
-
-
+        firebaseUser = firebaseAuth.getCurrentUser();
+        //Vinculamos el progressbar y lo hacemos invisible
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
         //attaching listener to button
         findViewById(R.id.botonGoogle).setOnClickListener(this);
 
+        if (firebaseUser != null) {
+            //new CheckIfUserExist().execute();
+            findViewById(R.id.botonGoogle).setVisibility(View.GONE);
+            updateUI(firebaseUser);
+        }
 
         // [START config_signin]
-
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -80,8 +75,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         // [END config_signin]
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
     }
 
     // [START onactivityresult]
@@ -122,8 +115,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            updateUI(user);
+                            firebaseUser = firebaseAuth.getCurrentUser();
+                            updateUI(firebaseUser);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -142,14 +135,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         Meodo onStart
         Checkea si algun usuario se logeo alguna vez en la aplicacion y recupera sus datos
      */
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        updateUI(currentUser);
-
-    }
 
     // [START signinGoogle]
     private void signInGoogle() {
@@ -160,19 +145,14 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void updateUI(FirebaseUser user) {
-
         if (user != null) {
-            progressBar.setVisibility(View.VISIBLE);
-            firebaseUser = user;
+            progressBar.setVisibility(View.VISIBLE); //Se puede quitar??
             new CheckIfUserExist().execute();
-        }else {
-
         }
     }
 
     @Override
     public void onClick(View v) {
-
         int i = v.getId();
         if (i == R.id.botonGoogle) {
             signInGoogle();
@@ -181,12 +161,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     public class CheckIfUserExist extends AsyncTask<Void, Void, Boolean> {
 
-        private Boolean checkUser = false;
-
-
         @Override
         protected Boolean doInBackground(Void... voids) {
 
+            Boolean checkUser;
             String sql = "SELECT `jugador`.`registrado`, `jugador`.`idGoogle`" +
                     "FROM `jugador`" +
                     "WHERE `jugador`.`idGoogle` = '" + firebaseUser.getUid() + "'";
@@ -202,6 +180,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 e.printStackTrace();
             }
             return checkUser;
+
         }
 
         @Override
@@ -212,6 +191,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 Intent menuIntent = new Intent(LogInActivity.this, BottomNavigationViewActivity.class);
                 progressBar.setVisibility(View.GONE);
                 LogInActivity.this.startActivity(menuIntent);
+
 
             } else {
                 Intent registerIntent = new Intent(LogInActivity.this, RegisterActivity.class);

@@ -11,15 +11,15 @@ import java.util.Date;
  */
 public class Partida {
 
-    public int idPartida;
-    public String nombrePartida;
-    public Blob guionPartida;
-    public Date fechaPartida;
-    public Blob fotoPartida;
-    public Bitmap fotoPartidaBitmap;
-    public String aforoPartida;
-    public String tipoPartida;
-    public String campoPartida;
+    int idPartida;
+    String nombrePartida;
+    Blob guionPartida;
+    Date fechaPartida;
+    Blob fotoPartida;
+    Bitmap fotoPartidaBitmap;
+    String aforoPartida;
+    String tipoPartida;
+    String campoPartida;
 
     public Partida() {
     }

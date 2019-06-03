@@ -157,8 +157,8 @@ public class EventsFragment extends Fragment {
         Metodo que nos devuelve el usuario de firebase
      */
     private void getUser() {
-        user = SplashScreenActivity.firebaseUser;
-        /*user = firebaseAuth.getCurrentUser();
-        firebaseAuth = FirebaseAuth.getInstance();*/
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
     }
 }

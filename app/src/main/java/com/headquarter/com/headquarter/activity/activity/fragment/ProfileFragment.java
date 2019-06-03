@@ -49,7 +49,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private TextView userTeam;
     private TextView userFAANumber;
     private ImageView userImage;
-    private Jugador jugador;
+    private Jugador jugador = new Jugador();
 
 
     private Button buttonLogOut;
@@ -69,14 +69,12 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        user = SplashScreenActivity.firebaseUser;
-        jugador = new Jugador();
-        sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
-                "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
-                "WHERE jugador.idGoogle = '" + user.getUid() + "'";
+        getUser();
+
         new ProfileTask().execute();
         super.onCreate(savedInstanceState);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +88,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         userEmail = view.findViewById(R.id.userEmail);
         userEmail.setVisibility(View.VISIBLE);
         userEmail.setText(user.getEmail());
+
+        userName = view.findViewById(R.id.userName);
+        userName.setVisibility(View.VISIBLE);
+        userName.setText(user.getDisplayName());
 
         buttonLogOut = view.findViewById(R.id.buttonLogOut);
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +135,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userEmail = view.findViewById(R.id.userEmail);
             userEmail.setVisibility(View.VISIBLE);
-            userEmail.setText(user.getEmail());
+            userEmail.setText(jugador.getEmail());
 
             userName = view.findViewById(R.id.userName);
             userName.setVisibility(View.VISIBLE);
@@ -145,7 +147,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userBirthDate = view.findViewById(R.id.userDate);
             userBirthDate.setVisibility(View.VISIBLE);
-            userBirthDate.setText(jugador.getFechaNacimiento().toString());
+            userBirthDate.setText(jugador.getFechaNacimiento());
 
             userPhone = view.findViewById(R.id.userPhone);
             userPhone.setVisibility(View.VISIBLE);
@@ -213,21 +215,22 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         @Override
         protected Object doInBackground(Object[] objects) {
 
+            sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
+                    "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
+                    "WHERE jugador.idGoogle = '" + user.getUid() + "'";
 
             try {
                 Statement statement = BottomNavigationViewActivity.statement;
-
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
+
                 jugador.setDNI(resultSet.getString("DNI"));
-                jugador.setNombre(resultSet.getString("nombreJugador"));
-                jugador.setFechaNacimiento(resultSet.getDate("fechaNacimiento"));
+                jugador.setNombre(user.getDisplayName());
+                jugador.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
                 jugador.setEmail(resultSet.getString("emailJugador"));
-                jugador.setTelefono(resultSet.getString("telefonoJugador"));
+                jugador.setTelefono(user.getPhoneNumber());
                 jugador.setEquipo(resultSet.getString("nombreEquipo"));
                 jugador.setNumeroFAA(resultSet.getString("numeroFAA"));
-                jugador.setRegistrado(resultSet.getBoolean("registrado"));
-
 
 
             } catch (SQLException e) {
@@ -243,8 +246,11 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
             progressBar.setVisibility(View.GONE);
             showUserData();
             swipeRefreshLayout.setRefreshing(false);
-
-
         }
+    }
+
+    private void getUser() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
     }
 }

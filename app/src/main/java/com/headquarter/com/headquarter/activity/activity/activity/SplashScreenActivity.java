@@ -16,26 +16,22 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new ConnectionDB().execute();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-
-        new ConnectionDB().execute();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
         hideVirtualButtons();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                if (firebaseUser != null) {
-                    Intent menuIntent = new Intent(SplashScreenActivity.this, BottomNavigationViewActivity.class);
-                    startActivity(menuIntent);
-                } else {
-                    Intent loginIntent = new Intent(SplashScreenActivity.this, LogInActivity.class);
-                    startActivity(loginIntent);
-                }
+                Intent loginIntent = new Intent(SplashScreenActivity.this, LogInActivity.class);
+                startActivity(loginIntent);
+
 
                 finish();
             }

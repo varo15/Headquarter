@@ -80,7 +80,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error al cerrar la conexion en MainActivity");
+            System.out.println("Error al cerrar la conexion en BootnNav");
         }
         super.onDestroy();
     }

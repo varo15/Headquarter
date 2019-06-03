@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".com.headquarter.activity.activity.activity.EventActivity"
     tools:showIn="@layout/activity_event">
@@ -22,13 +23,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageEvent"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="fitXY"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:id="@+id/imageEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </android.support.v7.widget.CardView>
 
             <TextView
                 android:id="@+id/title"
@@ -40,7 +50,7 @@
                 android:paddingEnd="10dp"
                 android:text="TextView"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#525438"
                 android:textSize="30sp" />
 
             <View
@@ -49,7 +59,7 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="20dp"
-                android:background="#FFFFFF" />
+                android:background="#000000" />
 
             <TextView
                 android:id="@+id/txtTipo"
@@ -59,7 +69,7 @@
                 android:background="#000000"
                 android:paddingStart="10dp"
                 android:text="Tipo"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp" />
 
@@ -67,11 +77,12 @@
                 android:id="@+id/tipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif-black"
                 android:text="TextView"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
@@ -83,7 +94,7 @@
                 android:background="#000000"
                 android:paddingStart="10dp"
                 android:text="Aforo"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp" />
 
@@ -91,11 +102,12 @@
                 android:id="@+id/aforo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif-black"
                 android:text="TextView"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
@@ -107,7 +119,7 @@
                 android:background="#000000"
                 android:paddingStart="10dp"
                 android:text="Campo"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp" />
 
@@ -115,11 +127,12 @@
                 android:id="@+id/campo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif-black"
                 android:text="TextView"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
@@ -131,7 +144,7 @@
                 android:background="#000000"
                 android:paddingStart="10dp"
                 android:text="Fecha"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp" />
 
@@ -139,11 +152,12 @@
                 android:id="@+id/fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif-black"
                 android:text="TextView"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
@@ -155,7 +169,7 @@
                 android:background="#000000"
                 android:paddingStart="10dp"
                 android:text="TxtGuion"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp" />
 
