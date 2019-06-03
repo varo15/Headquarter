@@ -181,14 +181,14 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected Object doInBackground(Object[] objects) {
 
-            jugador.setDNI(DNI.getText().toString());
+            jugador.setDNI(DNI.getText().toString().toUpperCase());
             jugador.setIdGoogle(firebaseUser.getUid());
             jugador.setNombre(firebaseUser.getDisplayName());
             jugador.setFechaNacimiento(cumpleanios.getText().toString());
             jugador.setTelefono(firebaseUser.getPhoneNumber());
             jugador.setEmail(firebaseUser.getEmail());
             jugador.setId_equipo_fk(equipo.getIdEquipo());
-            jugador.setNumeroFAA(numeroFAA.getText().toString());
+            jugador.setNumeroFAA(numeroFAA.getText().toString().toUpperCase());
             jugador.setRegistrado(1);
 
             String sql = "INSERT INTO `jugador` (`DNI`, `idGoogle`, `nombreJugador`, `fechaNacimiento`, `telefonoJugador`, `emailJugador`, `id_equipo_fk`, `numeroFAA`, `registrado`)" +
@@ -198,16 +198,12 @@ public class RegisterActivity extends AppCompatActivity {
             try {
                 Statement statement = ConnectionDB.conn.createStatement();
                 statement.executeUpdate(sql);
+                Intent menuIntent = new Intent(RegisterActivity.this, BottomNavigationViewActivity.class);
+                startActivity(menuIntent);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            Intent menuIntent = new Intent(RegisterActivity.this, BottomNavigationViewActivity.class);
-            startActivity(menuIntent);
         }
     }
 }

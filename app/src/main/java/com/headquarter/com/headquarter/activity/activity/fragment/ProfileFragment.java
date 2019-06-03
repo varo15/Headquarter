@@ -221,10 +221,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 resultSet.next();
 
                 jugador.setDNI(resultSet.getString("DNI"));
-                jugador.setNombre(resultSet.getString("nombreJugador"));
+                jugador.setNombre(user.getDisplayName());
                 jugador.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
                 jugador.setEmail(resultSet.getString("emailJugador"));
-                jugador.setTelefono(resultSet.getString("telefonoJugador"));
+                jugador.setTelefono(user.getPhoneNumber());
                 jugador.setEquipo(resultSet.getString("nombreEquipo"));
                 jugador.setNumeroFAA(resultSet.getString("numeroFAA"));
 

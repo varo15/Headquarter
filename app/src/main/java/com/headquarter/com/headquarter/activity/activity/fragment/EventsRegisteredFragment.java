@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -162,6 +163,7 @@ public class EventsRegisteredFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
     }
 
 }
