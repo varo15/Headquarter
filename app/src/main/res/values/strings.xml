@@ -28,4 +28,5 @@
     <string name="userDNI">userDNI</string>
     <string name="title_activity_event">EventActivity</string>
     <string name="title_activity_event_registered">EventRegisteredActivity</string>
+    <string name="eres_miembro_faa">¿Eres miembro FAA?</string>
 </resources>

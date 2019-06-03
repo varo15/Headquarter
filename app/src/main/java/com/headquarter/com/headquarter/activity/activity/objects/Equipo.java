@@ -3,24 +3,24 @@ package com.headquarter.com.headquarter.activity.activity.objects;
 import java.sql.Blob;
 
 public class Equipo {
-    String idEquipo;
+    int idEquipo;
     String nombreEquipo;
     Blob escudoEquipo;
 
     public Equipo() {
     }
 
-    public Equipo(String idEquipo, String nombreEquipo, Blob escudoEquipo) {
+    public Equipo(int idEquipo, String nombreEquipo, Blob escudoEquipo) {
         this.idEquipo = idEquipo;
         this.nombreEquipo = nombreEquipo;
         this.escudoEquipo = escudoEquipo;
     }
 
-    public String getIdEquipo() {
+    public int getIdEquipo() {
         return idEquipo;
     }
 
-    public void setIdEquipo(String idEquipo) {
+    public void setIdEquipo(int idEquipo) {
         this.idEquipo = idEquipo;
     }
 

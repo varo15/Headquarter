@@ -6,13 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -27,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.fragment.EventsFragment;
 import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 
 import java.sql.Connection;
@@ -48,7 +43,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     //Declaramos un objeto firebaseAuth
     private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser = SplashScreenActivity.firebaseUser;
+    public static FirebaseUser firebaseUser = SplashScreenActivity.firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +52,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
         //inicializamos el objeto firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
-
+        firebaseUser = firebaseAuth.getCurrentUser();
         //Vinculamos el progressbar y lo hacemos invisible
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);

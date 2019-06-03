@@ -49,7 +49,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private TextView userTeam;
     private TextView userFAANumber;
     private ImageView userImage;
-    private Jugador jugador;
+    private Jugador jugador = new Jugador();
 
 
     private Button buttonLogOut;
@@ -70,10 +70,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         getUser();
-        jugador = new Jugador();
-        sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
-                "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
-                "WHERE jugador.idGoogle = '" + user.getUid() + "'";
+
         new ProfileTask().execute();
         super.onCreate(savedInstanceState);
     }
@@ -134,7 +131,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userEmail = view.findViewById(R.id.userEmail);
             userEmail.setVisibility(View.VISIBLE);
-            userEmail.setText(user.getEmail());
+            userEmail.setText(jugador.getEmail());
 
             userName = view.findViewById(R.id.userName);
             userName.setVisibility(View.VISIBLE);
@@ -146,7 +143,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userBirthDate = view.findViewById(R.id.userDate);
             userBirthDate.setVisibility(View.VISIBLE);
-            userBirthDate.setText(jugador.getFechaNacimiento().toString());
+            userBirthDate.setText(jugador.getFechaNacimiento());
 
             userPhone = view.findViewById(R.id.userPhone);
             userPhone.setVisibility(View.VISIBLE);
@@ -214,20 +211,22 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         @Override
         protected Object doInBackground(Object[] objects) {
 
+            sql = "SELECT `jugador`.*, `equipo`.`nombreEquipo` FROM `jugador`" +
+                    "LEFT JOIN `equipo` ON `jugador`.`id_equipo_fk` = `equipo`.`idEquipo`" +
+                    "WHERE jugador.idGoogle = '" + user.getUid() + "'";
 
             try {
                 Statement statement = BottomNavigationViewActivity.statement;
-
                 resultSet = statement.executeQuery(sql);
                 resultSet.next();
+
                 jugador.setDNI(resultSet.getString("DNI"));
                 jugador.setNombre(resultSet.getString("nombreJugador"));
-                jugador.setFechaNacimiento(resultSet.getDate("fechaNacimiento"));
+                jugador.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
                 jugador.setEmail(resultSet.getString("emailJugador"));
                 jugador.setTelefono(resultSet.getString("telefonoJugador"));
                 jugador.setEquipo(resultSet.getString("nombreEquipo"));
                 jugador.setNumeroFAA(resultSet.getString("numeroFAA"));
-                jugador.setRegistrado(resultSet.getBoolean("registrado"));
 
 
             } catch (SQLException e) {
