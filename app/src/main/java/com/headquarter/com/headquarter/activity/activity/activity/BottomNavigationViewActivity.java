@@ -1,6 +1,7 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -28,7 +29,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
     Fragment active = fragment1;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener(){
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -63,6 +64,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Hackeando el servidor...espere", Toast.LENGTH_LONG).show();
 
+
     }
 
     public void showFragment(Fragment fragmentName) {
@@ -82,5 +84,30 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
             System.out.println("Error al cerrar la conexion en BootnNav");
         }
         super.onDestroy();
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+
+
+    @Override
+
+    public void onBackPressed() {
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+
+        Toast.makeText(this, "Pulsa atras otra vez para salir", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+
     }
 }

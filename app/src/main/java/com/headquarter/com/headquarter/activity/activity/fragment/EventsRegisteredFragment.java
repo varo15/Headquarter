@@ -164,7 +164,6 @@ public class EventsRegisteredFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
-        Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
     }
 
 }
