@@ -133,8 +133,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void getSelectedTeam(View v) {
         equipo = (Equipo) spinner.getSelectedItem();
-        String idE = String.valueOf(equipo.getIdEquipo());
-        Toast.makeText(this, idE, Toast.LENGTH_SHORT).show();
     }
 
 
