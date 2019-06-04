@@ -2,7 +2,7 @@
     <string name="app_name">Headquarter</string>
     <string name="SignUp">Registrar</string>
     <string name="SignIn">Acceder</string>
-    <string name="loading">Cargando...</string>
+    <string name="loading">Cargando…</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -10,22 +10,40 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="appName">Headquarter</string>
+    <string name="enterAppButton">Acceder al cuartel general</string>
+    <string name="appIcon">Imagen de la aplicación</string>
     <string name="name">Nombre:</string>
     <string name="email">Email:</string>
     <string name="title_notifications">Notifications</string>
     <string name="events">Eventos</string>
     <string name="eventsRegistered">Registrados</string>
     <string name="profile">Perfil</string>
-    <string name="useremail">userEmail</string>
+    <string name="useremail">UserEmail</string>
     <string name="logOut">Log Out</string>
-    <string name="userName">userName</string>
+    <string name="userName">UserName</string>
     <string name="Password">Password:</string>
-    <string name="FAANumber">Numero FAA</string>
-    <string name="date">Fecha Nacimiento</string>
-    <string name="DNI">DNI</string>
+    <string name="FAANumber">Numero FAA:</string>
+    <string name="userFAA">UserFAA</string>
+    <string name="date">Fecha Nacimiento:</string>
+    <string name="userdate">UserDate</string>
+    <string name="phone">Telefono:</string>
+    <string name="userPhone">UserPhone</string>
+    <string name="team">Equipo:</string>
+    <string name="userteam">UserTeam</string>
+    <string name="DNI">DNI:</string>
     <string name="completeProfile">Necesitamos que completes los datos de tu perfil.</string>
     <string name="Passord">Password</string>
     <string name="userDNI">userDNI</string>
     <string name="title_activity_event">EventActivity</string>
     <string name="title_activity_event_registered">EventRegisteredActivity</string>
+    <string name="profileImage">Imagen de perfil</string>
+    <string name="eventImage">Imagen del evento</string>
+    <string name="eventTitle">Titulo del evento</string>
+    <string name="eventField">Campo</string>
+    <string name="eventType">Tipo</string>
+    <string name="eventDate">Fecha</string>
+    <string name="eventCapacity">Aforo</string>
+    <string name="eventScript">Guión</string>
+    <string name="eventScriptDownload">Descargar guión</string>
 </resources>
