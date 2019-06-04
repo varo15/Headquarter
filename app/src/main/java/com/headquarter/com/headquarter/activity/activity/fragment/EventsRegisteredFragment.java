@@ -1,7 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.fragment;
 
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

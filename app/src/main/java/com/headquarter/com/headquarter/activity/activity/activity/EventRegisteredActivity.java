@@ -1,7 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

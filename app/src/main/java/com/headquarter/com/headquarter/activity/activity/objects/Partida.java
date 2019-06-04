@@ -1,9 +1,7 @@
 package com.headquarter.com.headquarter.activity.activity.objects;
 
 import android.graphics.Bitmap;
-import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
 /*
