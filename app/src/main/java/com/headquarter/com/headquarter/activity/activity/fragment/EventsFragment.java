@@ -119,7 +119,6 @@ public class EventsFragment extends Fragment {
 
                     partida.setIdPartida(resultSet.getInt("idPartida"));
                     partida.setNombrePartida(resultSet.getString("nombrePartida"));
-                    partida.setGuionPartida(resultSet.getBlob("guionPartida"));
                     partida.setFechaPartida(resultSet.getDate("fechaPartida"));
                     partida.setFotoPartida(resultSet.getBlob("fotoPartida"));
                     partida.setAforoPartida(resultSet.getString("aforoPartida"));

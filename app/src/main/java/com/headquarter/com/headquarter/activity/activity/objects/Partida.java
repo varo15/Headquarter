@@ -13,7 +13,6 @@ public class Partida {
 
     int idPartida;
     String nombrePartida;
-    Blob guionPartida;
     Date fechaPartida;
     Blob fotoPartida;
     Bitmap fotoPartidaBitmap;
@@ -24,10 +23,9 @@ public class Partida {
     public Partida() {
     }
 
-    public Partida(int idPartida, String nombrePartida, Blob guionPartida, Date fechaPartida, Blob fotoPartida, Bitmap fotoPartidaBitmap, String aforoPartida, String tipoPartida, String campoPartida) {
+    public Partida(int idPartida, String nombrePartida, Date fechaPartida, Blob fotoPartida, Bitmap fotoPartidaBitmap, String aforoPartida, String tipoPartida, String campoPartida) {
         this.idPartida = idPartida;
         this.nombrePartida = nombrePartida;
-        this.guionPartida = guionPartida;
         this.fechaPartida = fechaPartida;
         this.fotoPartida = fotoPartida;
         this.fotoPartidaBitmap = fotoPartidaBitmap;
@@ -60,13 +58,6 @@ public class Partida {
         this.nombrePartida = nombrePartida;
     }
 
-    public Blob getGuionPartida() {
-        return guionPartida;
-    }
-
-    public void setGuionPartida(Blob guionPartida) {
-        this.guionPartida = guionPartida;
-    }
 
     public Date getFechaPartida() {
         return fechaPartida;
