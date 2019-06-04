@@ -14,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText numeroFAA;
     EditText DNI;
     EditText cumpleanios;
+    EditText telefono;
     Spinner spinner;
     Button button;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -55,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         checkbox = findViewById(R.id.checkBox);
         numeroFAA = findViewById(R.id.editNumero);
         DNI = findViewById(R.id.editDNI);
+        telefono = findViewById(R.id.editPhone);
         cumpleanios = findViewById(R.id.birthday);
         spinner = findViewById(R.id.spinner);
         button = findViewById(R.id.button2);
@@ -181,7 +182,7 @@ public class RegisterActivity extends AppCompatActivity {
             jugador.setIdGoogle(firebaseUser.getUid());
             jugador.setNombre(firebaseUser.getDisplayName());
             jugador.setFechaNacimiento(cumpleanios.getText().toString());
-            jugador.setTelefono(firebaseUser.getPhoneNumber());
+            jugador.setTelefono(telefono.getText().toString());
             jugador.setEmail(firebaseUser.getEmail());
             jugador.setId_equipo_fk(equipo.getIdEquipo());
             jugador.setNumeroFAA(numeroFAA.getText().toString().toUpperCase());

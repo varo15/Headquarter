@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
 import com.headquarter.com.headquarter.activity.activity.activity.LogInActivity;
-import com.headquarter.com.headquarter.activity.activity.activity.SplashScreenActivity;
 import com.headquarter.com.headquarter.activity.activity.objects.Jugador;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -151,7 +150,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             userPhone = view.findViewById(R.id.userPhone);
             userPhone.setVisibility(View.VISIBLE);
-            userPhone.setText(user.getPhoneNumber());
+            userPhone.setText(jugador.telefono);
 
             userTeam = view.findViewById(R.id.userTeam);
             userTeam.setVisibility(View.VISIBLE);
@@ -228,7 +227,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 jugador.setNombre(user.getDisplayName());
                 jugador.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
                 jugador.setEmail(resultSet.getString("emailJugador"));
-                jugador.setTelefono(user.getPhoneNumber());
+                jugador.setTelefono(resultSet.getString("telefonoJugador"));
                 jugador.setEquipo(resultSet.getString("nombreEquipo"));
                 jugador.setNumeroFAA(resultSet.getString("numeroFAA"));
 
