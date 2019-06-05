@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".com.headquarter.activity.activity.fragment.ProfileFragment">
@@ -21,11 +22,11 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/profileCard"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="32dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/buttonLogOut"
@@ -36,7 +37,7 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <ProgressBar
                         android:id="@+id/progressBar"
@@ -52,11 +53,12 @@
 
                     <ImageView
                         android:id="@+id/userImage"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:contentDescription="@string/userImageDescription"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.498"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:src="@tools:sample/avatars"
@@ -66,7 +68,7 @@
                         android:id="@+id/userName"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userName"
                         android:textAlignment="center"
@@ -80,7 +82,7 @@
 
                     <View
                         android:id="@+id/divider"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
@@ -95,10 +97,10 @@
                         android:id="@+id/textViewEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/email"
                         android:textColor="#000000"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -106,12 +108,14 @@
                         android:id="@+id/userEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
+                        android:layout_marginStart="24dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/useremail"
                         android:textColor="#000000"
                         android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
@@ -119,23 +123,25 @@
                         android:id="@+id/textViewDNI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/DNI"
                         android:textColor="#000000"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+                        app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
                     <TextView
                         android:id="@+id/userDNI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userDNI"
                         android:textColor="#000000"
                         android:visibility="visible"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/divider9"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewDNI" />
 
@@ -143,36 +149,38 @@
                         android:id="@+id/textViewFechaNacimiento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/date"
                         android:textColor="#000000"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userDNI" />
+                        app:layout_constraintStart_toEndOf="@+id/divider9"
+                        app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
                     <TextView
                         android:id="@+id/userDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/date"
                         android:textColor="#000000"
                         android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/divider9"
                         app:layout_constraintTop_toBottomOf="@+id/textViewFechaNacimiento" />
 
                     <TextView
                         android:id="@+id/textViewTelefono"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/phone"
                         android:textColor="#000000"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userDate" />
+                        app:layout_constraintTop_toBottomOf="@+id/divider12" />
 
                     <TextView
                         android:id="@+id/userPhone"
@@ -184,6 +192,7 @@
                         android:textColor="#000000"
                         android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewTelefono" />
 
@@ -191,23 +200,26 @@
                         android:id="@+id/textViewTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/team"
                         android:textColor="#000000"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userPhone" />
+                        app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
                     <TextView
                         android:id="@+id/userTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userTeam"
                         android:textColor="#000000"
                         android:visibility="visible"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/divider9"
+                        app:layout_constraintHorizontal_bias="0.536"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewTeam" />
 
@@ -215,25 +227,89 @@
                         android:id="@+id/textViewFAANumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/FAANumber"
                         android:textColor="#000000"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userTeam" />
+                        app:layout_constraintStart_toEndOf="@+id/divider9"
+                        app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
                     <TextView
                         android:id="@+id/userFAANumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userFAA"
                         android:textColor="#000000"
                         android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="@+id/divider10"
+                        app:layout_constraintStart_toEndOf="@+id/divider9"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewFAANumber" />
+
+                    <View
+                        android:id="@+id/divider8"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/userPhone" />
+
+                    <View
+                        android:id="@+id/divider9"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintBottom_toTopOf="@+id/divider11"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider8" />
+
+                    <View
+                        android:id="@+id/divider10"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?android:attr/listDivider"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewFAANumber" />
+                        app:layout_constraintTop_toBottomOf="@+id/userDate" />
+
+                    <View
+                        android:id="@+id/divider11"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/userFAANumber" />
+
+                    <View
+                        android:id="@+id/divider12"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
@@ -249,6 +325,7 @@
                 android:backgroundTint="#525438"
                 android:text="@string/logOut"
                 android:textColor="#FFFFFF"
+                android:background="@drawable/rounded_buttons"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

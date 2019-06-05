@@ -81,18 +81,17 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        userImage = view.findViewById(R.id.userImage);
-        Picasso.get().load(user.getPhotoUrl()).resize(550, 550).transform(new CircleTransform()).into(userImage);
+        initializeComponents();
 
-        userEmail = view.findViewById(R.id.userEmail);
+        userImage = view.findViewById(R.id.userImage);
+        Picasso.get().load(user.getPhotoUrl()).resize(600, 600).transform(new CircleTransform()).into(userImage);
+
         userEmail.setVisibility(View.VISIBLE);
         userEmail.setText(user.getEmail());
 
-        userName = view.findViewById(R.id.userName);
         userName.setVisibility(View.VISIBLE);
         userName.setText(user.getDisplayName());
 
-        buttonLogOut = view.findViewById(R.id.buttonLogOut);
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,46 +123,54 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         return view;
     }
 
+    public void initializeComponents() {
+        userEmail = view.findViewById(R.id.userEmail);
+        userEmail.setVisibility(View.GONE);
+        userName = view.findViewById(R.id.userName);
+        userName.setVisibility(View.GONE);
+        userDNI = view.findViewById(R.id.userDNI);
+        userDNI.setVisibility(View.GONE);
+        userBirthDate = view.findViewById(R.id.userDate);
+        userBirthDate.setVisibility(View.GONE);
+        userPhone = view.findViewById(R.id.userPhone);
+        userPhone.setVisibility(View.GONE);
+        userTeam = view.findViewById(R.id.userTeam);
+        userTeam.setVisibility(View.GONE);
+        userFAANumber = view.findViewById(R.id.userFAANumber);
+        userFAANumber.setVisibility(View.GONE);
+        userEmail = view.findViewById(R.id.userEmail);
+        userEmail.setVisibility(View.GONE);
+        buttonLogOut = view.findViewById(R.id.buttonLogOut);
+    }
+
     public void showUserData() {
 
-        try {
             userImage = view.findViewById(R.id.userImage);
 
-            Picasso.get().load(user.getPhotoUrl()).resize(550, 550).transform(new CircleTransform()).into(userImage);
+        Picasso.get().load(user.getPhotoUrl()).resize(650, 650).transform(new CircleTransform()).into(userImage);
 
 
-            userEmail = view.findViewById(R.id.userEmail);
             userEmail.setVisibility(View.VISIBLE);
             userEmail.setText(jugador.getEmail());
 
-            userName = view.findViewById(R.id.userName);
             userName.setVisibility(View.VISIBLE);
             userName.setText(jugador.getNombre());
 
-            userDNI = view.findViewById(R.id.userDNI);
             userDNI.setVisibility(View.VISIBLE);
             userDNI.setText(jugador.getDNI());
 
-            userBirthDate = view.findViewById(R.id.userDate);
             userBirthDate.setVisibility(View.VISIBLE);
             userBirthDate.setText(jugador.getFechaNacimiento());
 
-            userPhone = view.findViewById(R.id.userPhone);
             userPhone.setVisibility(View.VISIBLE);
             userPhone.setText(jugador.telefono);
 
-            userTeam = view.findViewById(R.id.userTeam);
             userTeam.setVisibility(View.VISIBLE);
             userTeam.setText(jugador.getEquipo());
 
-            userFAANumber = view.findViewById(R.id.userFAANumber);
             userFAANumber.setVisibility(View.VISIBLE);
             userFAANumber.setText(jugador.getNumeroFAA());
 
-
-        } catch (Exception e) {
-
-        }
     }
 
     @Override
@@ -171,6 +178,9 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
 
+    /*
+     *Metodo que permite dar una forma redonda a la imagen del usuario
+     */
     public class CircleTransform implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {
@@ -205,11 +215,12 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
             return "circle";
         }
 
-
     }
 
+    /*
+     *Clase Asincrona en la cual se realiza la consulta de los datos del jugador
+     */
     private class ProfileTask extends AsyncTask {
-
 
         @Override
         protected Object doInBackground(Object[] objects) {
