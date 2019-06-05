@@ -10,6 +10,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="appName">Headquarter</string>
+    <string name="welcome">Bienvenido</string>
     <string name="appImageDescription">Logo de la aplicación</string>
     <string name="eventImageDescription">Imagen del evento</string>
     <string name="eventTitle">Titulo del evento</string>
