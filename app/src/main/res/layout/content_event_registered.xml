@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_light_background"
+    android:background="#FFFFFF"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".com.headquarter.activity.activity.activity.EventActivity"
     tools:showIn="@layout/activity_event">
@@ -36,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal"
+                    android:contentDescription="@string/eventImageDescription"
                     android:scaleType="fitXY"
                     tools:srcCompat="@tools:sample/avatars" />
             </android.support.v7.widget.CardView>
@@ -48,7 +49,7 @@
                 android:background="#00FFFFFF"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="TextView"
+                android:text="@string/eventTitle"
                 android:textAlignment="textStart"
                 android:textColor="#525438"
                 android:textSize="30sp" />
@@ -68,7 +69,7 @@
                 android:layout_marginVertical="10dp"
                 android:background="#00FFFFFF"
                 android:paddingHorizontal="10dp"
-                android:text="Tipo"
+                android:text="@string/eventType"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="24sp" />
@@ -81,7 +82,7 @@
                 android:background="#00FFFFFF"
                 android:fontFamily="sans-serif-black"
                 android:paddingHorizontal="30dp"
-                android:text="TextView"
+                android:text="@string/eventType"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="18sp" />
@@ -103,7 +104,7 @@
                 android:layout_marginTop="20dp"
                 android:background="#00FFFFFF"
                 android:paddingHorizontal="10dp"
-                android:text="Aforo"
+                android:text="@string/eventSize"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="24sp" />
@@ -116,7 +117,7 @@
                 android:background="#00FFFFFF"
                 android:fontFamily="sans-serif-black"
                 android:paddingHorizontal="30dp"
-                android:text="TextView"
+                android:text="@string/eventSize"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="18sp" />
@@ -138,7 +139,7 @@
                 android:layout_marginTop="20dp"
                 android:background="#00FFFFFF"
                 android:paddingHorizontal="10dp"
-                android:text="Campo"
+                android:text="@string/eventField"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="24sp" />
@@ -151,7 +152,7 @@
                 android:background="#00FFFFFF"
                 android:fontFamily="sans-serif-black"
                 android:paddingHorizontal="30dp"
-                android:text="TextView"
+                android:text="@string/eventField"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="18sp" />
@@ -173,7 +174,7 @@
                 android:layout_marginTop="20dp"
                 android:background="#00FFFFFF"
                 android:paddingHorizontal="10dp"
-                android:text="Fecha"
+                android:text="@string/eventDate"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="24sp" />
@@ -186,7 +187,7 @@
                 android:background="#00FFFFFF"
                 android:fontFamily="sans-serif-black"
                 android:paddingHorizontal="30dp"
-                android:text="TextView"
+                android:text="@string/eventDate"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="18sp" />
@@ -208,7 +209,7 @@
                 android:layout_marginTop="20dp"
                 android:background="#00FFFFFF"
                 android:paddingHorizontal="10dp"
-                android:text="TxtGuion"
+                android:text="@string/eventScript"
                 android:textAlignment="textStart"
                 android:textColor="#000000"
                 android:textSize="24sp" />
@@ -218,7 +219,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#373A24"
-                android:text="Descargar guión" />
+                android:text="@string/eventDownloadScript" />
 
         </LinearLayout>
     </ScrollView>
