@@ -7,7 +7,7 @@
     tools:context=".com.headquarter.activity.activity.activity.RegisterActivity">
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/progressBarReg"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

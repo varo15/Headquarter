@@ -13,7 +13,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText telefono;
     Spinner spinner;
     Button button;
+    ProgressBar progressbar;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     ArrayList<Equipo> teamsList = new ArrayList<>();
     final Calendar myCalendar = Calendar.getInstance();
@@ -59,7 +62,10 @@ public class RegisterActivity extends AppCompatActivity {
         cumpleanios = findViewById(R.id.birthday);
         spinner = findViewById(R.id.spinner);
         button = findViewById(R.id.button2);
+        progressbar = findViewById(R.id.progressBarReg);
+        progressbar.setVisibility(View.GONE);
 
+        numeroFAA.setText("No miembro");
 
         //Spinner listener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -80,8 +86,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkbox.isChecked()) {
                     numeroFAA.setVisibility(View.VISIBLE);
+                    numeroFAA.setText("");
                 } else {
                     numeroFAA.setVisibility(View.GONE);
+                    numeroFAA.setText("No Miembro");
                 }
             }
         });
@@ -90,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressbar.setVisibility(View.VISIBLE);
                 new RegisterUserInDatabase().execute();
             }
         });
@@ -201,6 +210,11 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            progressbar.setVisibility(View.GONE);
         }
     }
 }
