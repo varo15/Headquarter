@@ -95,10 +95,10 @@
                         android:id="@+id/textViewEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="16dp"
                         android:text="@string/email"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -106,12 +106,12 @@
                         android:id="@+id/userEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="50dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/useremail"
                         android:textColor="#000000"
                         android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -119,10 +119,10 @@
                         android:id="@+id/textViewDNI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:text="@string/DNI"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
@@ -130,12 +130,12 @@
                         android:id="@+id/userDNI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userDNI"
                         android:textColor="#000000"
                         android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
@@ -143,10 +143,10 @@
                         android:id="@+id/textViewFechaNacimiento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:text="@string/date"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewDNI" />
 
@@ -154,12 +154,12 @@
                         android:id="@+id/userDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/date"
                         android:textColor="#000000"
                         android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/userDNI" />
 
@@ -167,10 +167,10 @@
                         android:id="@+id/textViewTelefono"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:text="@string/phone"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewFechaNacimiento" />
 
@@ -178,12 +178,12 @@
                         android:id="@+id/userPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userPhone"
                         android:textColor="#000000"
                         android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/userDate" />
 
@@ -191,10 +191,10 @@
                         android:id="@+id/textViewTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:text="@string/team"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewTelefono" />
 
@@ -202,12 +202,12 @@
                         android:id="@+id/userTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userTeam"
                         android:textColor="#000000"
                         android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/userPhone" />
 
@@ -215,10 +215,10 @@
                         android:id="@+id/textViewFAANumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:text="@string/FAANumber"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewTeam" />
 
@@ -226,12 +226,12 @@
                         android:id="@+id/userFAANumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="50dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userFAA"
                         android:textColor="#000000"
                         android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/userTeam" />
 
