@@ -1,5 +1,6 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.headquarter.R;
@@ -54,6 +56,15 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         BottomNavigationView navView = findViewById(R.id.mTextMessage);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        this.getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
 
         fragmentManager.beginTransaction().add(R.id.main_fragment_placeholder, fragment3, "3").hide(fragment3).commit();
         fragmentManager.beginTransaction().add(R.id.main_fragment_placeholder, fragment2, "2").hide(fragment2).commit();
