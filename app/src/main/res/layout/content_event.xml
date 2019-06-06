@@ -202,6 +202,37 @@
                 android:backgroundTint="#000000" />
 
             <TextView
+                android:id="@+id/txtMacroAmbiental"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginTop="20dp"
+                android:paddingHorizontal="10dp"
+                android:text="@string/eventMacro"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/macroambiental"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-black"
+                android:paddingHorizontal="30dp"
+                android:text="@string/exampleText"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider13"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#000000" />
+
+            <TextView
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

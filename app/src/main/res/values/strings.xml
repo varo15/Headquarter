@@ -20,12 +20,13 @@
     <string name="eventField">Campo</string>
     <string name="eventDate">Fecha</string>
     <string name="eventScript">Guión</string>
+    <string name="eventMacro">Marco Ambiental</string>
     <string name="eventDownloadScript">Descargar el guión</string>
     <string name="userImageDescription">Imagen del usuario</string>
     <string name="userPhone">UserPhone</string>
-    <string name="team">Equipo:</string>
-    <string name="name">Nombre:</string>
-    <string name="email">Email:</string>
+    <string name="team">Equipo</string>
+    <string name="name">Nombre</string>
+    <string name="email">Email</string>
     <string name="events">Eventos</string>
     <string name="userTeam">UserTeam</string>
     <string name="userFAA">UserFAA</string>
@@ -37,7 +38,7 @@
     <string name="Password">Contraseña</string>
     <string name="FAANumber">Numero FAA</string>
     <string name="date">Fecha de Nacimiento</string>
-    <string name="DNI">DNI:</string>
+    <string name="DNI">DNI</string>
     <string name="completeProfile">Necesitamos que completes los datos de tu perfil.</string>
     <string name="userDNI">userDNI</string>
     <string name="title_activity_event">EventActivity</string>
@@ -46,4 +47,5 @@
     <string name="registerTitle">Registro</string>
     <string name="register">Registrar</string>
     <string name="phone">Telefono</string>
+    <string name="exampleText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere erat. Quisque hendrerit facilisis venenatis. Etiam blandit porttitor sapien, vitae lacinia dolor gravida non. Mauris luctus pulvinar nisl ut euismod. Aliquam dui metus, vestibulum vel mi id, fermentum imperdiet ipsum. Fusce in ligula hendrerit, laoreet leo nec, laoreet tellus. Vivamus sed enim feugiat, condimentum massa viverra, varius neque. Vestibulum sagittis commodo nulla. Maecenas dapibus enim sit amet varius fringilla. Cras eu arcu at tortor porta pulvinar. Sed condimentum a tortor ut molestie. Ut porttitor feugiat ipsum id euismod.</string>
 </resources>

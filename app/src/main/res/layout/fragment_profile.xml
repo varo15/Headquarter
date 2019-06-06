@@ -97,10 +97,10 @@
                         android:id="@+id/textViewEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/email"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -108,7 +108,6 @@
                         android:id="@+id/userEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_marginStart="24dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/useremail"
@@ -123,10 +122,10 @@
                         android:id="@+id/textViewDNI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/DNI"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toStartOf="@+id/divider9"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
@@ -134,9 +133,7 @@
                         android:id="@+id/userDNI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userDNI"
                         android:textColor="#000000"
@@ -149,10 +146,10 @@
                         android:id="@+id/textViewFechaNacimiento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/date"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/divider9"
                         app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
@@ -160,9 +157,7 @@
                         android:id="@+id/userDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/date"
                         android:textColor="#000000"
@@ -175,10 +170,10 @@
                         android:id="@+id/textViewTelefono"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/phone"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider12" />
 
@@ -200,10 +195,10 @@
                         android:id="@+id/textViewTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/team"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toStartOf="@+id/divider9"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
@@ -211,9 +206,7 @@
                         android:id="@+id/userTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userTeam"
                         android:textColor="#000000"
@@ -227,10 +220,10 @@
                         android:id="@+id/textViewFAANumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@string/FAANumber"
                         android:textColor="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/divider9"
                         app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
@@ -238,14 +231,12 @@
                         android:id="@+id/userFAANumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
                         android:fontFamily="sans-serif-black"
                         android:text="@string/userFAA"
                         android:textColor="#000000"
                         android:visibility="visible"
-                        app:layout_constraintEnd_toEndOf="@+id/divider10"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/divider9"
                         app:layout_constraintTop_toBottomOf="@+id/textViewFAANumber" />
 
