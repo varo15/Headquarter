@@ -93,6 +93,8 @@ public class EventActivity extends AppCompatActivity {
         campo.setText(partida.getCampoPartida());
         TextView fecha = findViewById(R.id.fecha);
         fecha.setText(partida.getFechaPartida().toString());
+        TextView marcoAmbiental = findViewById(R.id.macroambiental);
+        marcoAmbiental.setText(partida.getMarcoAmbiental());
 
     }
 

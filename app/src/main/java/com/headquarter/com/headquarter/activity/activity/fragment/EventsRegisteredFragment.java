@@ -128,6 +128,7 @@ public class EventsRegisteredFragment extends Fragment {
                     partida.setAforoPartida(resultSet.getString("aforoPartida"));
                     partida.setTipoPartida(resultSet.getString("tipoPartida"));
                     partida.setCampoPartida(resultSet.getString("nombreCampo"));
+                    partida.setMarcoAmbiental((resultSet.getString("marcoAmbiental")));
 
                     getListOfEventsRegistered.add(partida);
                 }
