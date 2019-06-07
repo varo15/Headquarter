@@ -1,6 +1,8 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,8 +14,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -31,6 +36,9 @@ public class EventRegisteredActivity extends AppCompatActivity {
 
     public View activityView;
     public ImageView imagenPartida;
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     Button btnAtras;
 
@@ -118,6 +126,21 @@ public class EventRegisteredActivity extends AppCompatActivity {
         fecha.setText(partida.getFechaPartida().toString());
         TextView marcoAmbiental = findViewById(R.id.macroambiental);
         marcoAmbiental.setText(partida.getMarcoAmbiental());
+        Button btnDescargar = findViewById(R.id.btnDescargarReg);
+
+        btnDescargar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                storageRef.child("partidas/" + "partida" + partida.getIdPartida() +"/" + partida.getIdPartida() + ".pdf" ).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        System.out.println(uri);
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(uri))));
+                    }
+                });
+            }
+        });
 
 
     }

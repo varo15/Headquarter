@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -105,7 +103,7 @@ public class EventActivity extends AppCompatActivity {
         fecha.setText(partida.getFechaPartida().toString());
         TextView marcoAmbiental = findViewById(R.id.macroambiental);
         marcoAmbiental.setText(partida.getMarcoAmbiental());
-        Button btnDescargar = findViewById(R.id.btnDescargar);
+        Button btnDescargar = findViewById(R.id.btnDescargarReg);
 
         btnDescargar.setOnClickListener(new View.OnClickListener() {
             @Override
