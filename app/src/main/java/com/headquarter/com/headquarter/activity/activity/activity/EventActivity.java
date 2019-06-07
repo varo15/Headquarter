@@ -38,7 +38,6 @@ public class EventActivity extends AppCompatActivity {
 
     public ImageView imagenPartida;
 
-    private StorageReference mStorageRef;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
 
@@ -112,19 +111,12 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                storageRef.child("partidas/" + "partida"+partida.getIdPartida() +"/"+ partida.getIdPartida()+".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                //gs://headquarter-5a58f.appspot.com/partidas/partida1/1.pdf
+                storageRef.child("partidas/" + "partida" + 1 +"/" + 1 + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         System.out.println(uri);
-
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(uri))));
-
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
                     }
                 });
             }
