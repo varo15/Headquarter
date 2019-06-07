@@ -12,13 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
-import com.headquarter.com.headquarter.activity.activity.activity.SplashScreenActivity;
 import com.headquarter.com.headquarter.activity.activity.adapter.EventsRegisteredFragmentAdapter;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
@@ -58,9 +56,6 @@ public class EventsRegisteredFragment extends Fragment {
 
         //Lamamos al emtodo para obtener el usuario y preparar la consulta
         getUser();
-
-        //Ejecutar la tarea que devulve la consulta
-        //new EventsRegisteredTask().execute();
 
         adapter = new EventsRegisteredFragmentAdapter(getListOfEventsRegistered);
         super.onCreate(savedInstanceState);
@@ -152,8 +147,6 @@ public class EventsRegisteredFragment extends Fragment {
     }
 
     public void loadEventsRegisteredCards() {
-        //En este metodo ira todo el codigo necesario para que se carguen los datos y se dibujen los cardviews, antes de que se dibujen se mostrara el fragment en blanco con el progresbar dando vueltas
-        //Una vez que carguen, el progressbar se desactiva y se pintan las tarjetas
         recycler.setAdapter(adapter);
     }
 

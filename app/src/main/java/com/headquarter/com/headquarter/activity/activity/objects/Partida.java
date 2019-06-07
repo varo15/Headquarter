@@ -1,9 +1,7 @@
 package com.headquarter.com.headquarter.activity.activity.objects;
 
 import android.graphics.Bitmap;
-import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
 /*
@@ -22,18 +20,6 @@ public class Partida {
     String marcoAmbiental;
 
     public Partida() {
-    }
-
-    public Partida(int idPartida, String nombrePartida, Date fechaPartida, Blob fotoPartida, Bitmap fotoPartidaBitmap, String aforoPartida, String tipoPartida, String campoPartida, String marcoAmbiental) {
-        this.idPartida = idPartida;
-        this.nombrePartida = nombrePartida;
-        this.fechaPartida = fechaPartida;
-        this.fotoPartida = fotoPartida;
-        this.fotoPartidaBitmap = fotoPartidaBitmap;
-        this.aforoPartida = aforoPartida;
-        this.tipoPartida = tipoPartida;
-        this.campoPartida = campoPartida;
-        this.marcoAmbiental = marcoAmbiental;
     }
 
     public Bitmap getFotoPartidaBitmap() {

@@ -9,12 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.headquarter.R;
-
 import com.headquarter.com.headquarter.activity.activity.activity.EventActivity;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
@@ -106,6 +104,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
                 byte[] blobAsBytes = blob.getBytes(1, blobLength);
                 blob.free();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
+
                 partida.setFotoPartidaBitmap(bitmap);
             } catch (SQLException e) {
                 e.printStackTrace();

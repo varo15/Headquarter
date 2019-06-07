@@ -1,7 +1,5 @@
 package com.headquarter.com.headquarter.activity.activity.objects;
 
-import android.text.Editable;
-
 public class Jugador {
 
     public String idGoogle;
@@ -16,19 +14,6 @@ public class Jugador {
     public int registrado;
 
     public Jugador() {
-    }
-
-    public Jugador(String idGoogle, String DNI, String nombre, String fechaNacimiento, String telefono, String email, int id_equipo_fk, String equipo, String numeroFAA, int registrado) {
-        this.idGoogle = idGoogle;
-        this.DNI = DNI;
-        this.nombre = nombre;
-        this.fechaNacimiento = fechaNacimiento;
-        this.telefono = telefono;
-        this.email = email;
-        this.id_equipo_fk = id_equipo_fk;
-        this.equipo = equipo;
-        this.numeroFAA = numeroFAA;
-        this.registrado = registrado;
     }
 
     public String getIdGoogle() {

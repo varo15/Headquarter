@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
-import com.headquarter.com.headquarter.activity.activity.activity.SplashScreenActivity;
 import com.headquarter.com.headquarter.activity.activity.adapter.EventsFragmentAdapter;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
@@ -52,15 +51,11 @@ public class EventsFragment extends Fragment {
     }
 
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        getUser();
 
         //Lamamos al emtodo para obtener el usuario y preparar la consulta
-
-        //Ejecutar la tarea que devulve la consulta
-        //new EventsTask().execute();
+        getUser();
 
         adapter = new EventsFragmentAdapter(listOfEvents);
         super.onCreate(savedInstanceState);
@@ -129,7 +124,7 @@ public class EventsFragment extends Fragment {
                     listOfEvents.add(partida);
                 }
 
-            System.out.println("Termina");
+                System.out.println("Termina");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -147,8 +142,6 @@ public class EventsFragment extends Fragment {
     }
 
     private void loadEventsCards() {
-        //En este metodo ira todo el codigo necesario para que se carguen los datos y se dibujen los cardviews, antes de que se dibujen se mostrara el fragment en blanco con el progresbar dando vueltas
-        //Una vez que carguen, el progressbar se desactiva y se pintan las tarjet
         recycler.setAdapter(adapter);
     }
 

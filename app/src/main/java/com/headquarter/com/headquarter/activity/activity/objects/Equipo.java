@@ -10,12 +10,6 @@ public class Equipo {
     public Equipo() {
     }
 
-    public Equipo(int idEquipo, String nombreEquipo, Blob escudoEquipo) {
-        this.idEquipo = idEquipo;
-        this.nombreEquipo = nombreEquipo;
-        this.escudoEquipo = escudoEquipo;
-    }
-
     public int getIdEquipo() {
         return idEquipo;
     }
