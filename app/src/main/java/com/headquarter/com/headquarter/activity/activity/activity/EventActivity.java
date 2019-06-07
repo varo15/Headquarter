@@ -112,7 +112,7 @@ public class EventActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //gs://headquarter-5a58f.appspot.com/partidas/partida1/1.pdf
-                storageRef.child("partidas/" + "partida" + 1 +"/" + 1 + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                storageRef.child("partidas/" + "partida" + partida.getIdPartida() +"/" + partida.getIdPartida() + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         System.out.println(uri);
