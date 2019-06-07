@@ -30,7 +30,6 @@ import java.util.ArrayList;
  */
 public class EventsRegisteredFragment extends Fragment {
 
-    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
@@ -40,25 +39,18 @@ public class EventsRegisteredFragment extends Fragment {
     private static ProgressBar progressBar;
     private static SwipeRefreshLayout swipeRefreshLayout;
 
-    //ArrayList necesarios para la carga de datos
     static ArrayList<Partida> getListOfEventsRegistered = new ArrayList<>();
 
-    //Inicializamos el adapter
     private EventsRegisteredFragmentAdapter adapter;
 
 
     public EventsRegisteredFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
-        //Lamamos al emtodo para obtener el usuario y preparar la consulta
         getUser();
-
-        //Ejecutar la tarea que devulve la consulta
-        //new EventsRegisteredTask().execute();
 
         adapter = new EventsRegisteredFragmentAdapter(getListOfEventsRegistered);
         super.onCreate(savedInstanceState);
@@ -68,17 +60,14 @@ public class EventsRegisteredFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_events_registered, container, false);
         recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        //ProgressBar
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        // Refresh
         swipeRefreshLayout = view.findViewById(R.id.pullToRefresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -95,13 +84,16 @@ public class EventsRegisteredFragment extends Fragment {
         super.onResume();
     }
 
+    /**
+     * EventsRegisteredTask
+     * Mostramos los eventos en los que el usuario se ha registrado
+     */
     private class EventsRegisteredTask extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {
 
 
-            //Preparamos la consulta con el uui de nuestro usuario logeado
             sql = "SELECT `partida`.*, `campo`.`nombreCampo`, `participa`.*, `jugador`.`idGoogle` FROM `partida`" +
                     "LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo`" +
                     "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
@@ -150,14 +142,9 @@ public class EventsRegisteredFragment extends Fragment {
     }
 
     public void loadEventsRegisteredCards() {
-        //En este metodo ira todo el codigo necesario para que se carguen los datos y se dibujen los cardviews, antes de que se dibujen se mostrara el fragment en blanco con el progresbar dando vueltas
-        //Una vez que carguen, el progressbar se desactiva y se pintan las tarjetas
         recycler.setAdapter(adapter);
     }
 
-    /*
-        Metodo que nos devuelve el usuario de firebase
-     */
     private void getUser() {
 
         firebaseAuth = FirebaseAuth.getInstance();

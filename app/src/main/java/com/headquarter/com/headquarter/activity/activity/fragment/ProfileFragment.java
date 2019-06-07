@@ -36,10 +36,8 @@ import java.sql.Statement;
  */
 public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
-    //Variables datos del usuario
     private TextView userEmail;
     private TextView userName;
     private TextView userDNI;
@@ -57,12 +55,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    //Variable consulta sql
     private String sql;
 
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
 
@@ -95,7 +91,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Cerrar sesion y volver a la pagina principal
                 try {
                     firebaseAuth.signOut();
 
@@ -145,31 +140,31 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     public void showUserData() {
 
-            userImage = view.findViewById(R.id.userImage);
+        userImage = view.findViewById(R.id.userImage);
 
         Picasso.get().load(user.getPhotoUrl()).resize(650, 650).transform(new CircleTransform()).into(userImage);
 
 
-            userEmail.setVisibility(View.VISIBLE);
-            userEmail.setText(jugador.getEmail());
+        userEmail.setVisibility(View.VISIBLE);
+        userEmail.setText(jugador.getEmail());
 
-            userName.setVisibility(View.VISIBLE);
-            userName.setText(jugador.getNombre());
+        userName.setVisibility(View.VISIBLE);
+        userName.setText(jugador.getNombre());
 
-            userDNI.setVisibility(View.VISIBLE);
-            userDNI.setText(jugador.getDNI());
+        userDNI.setVisibility(View.VISIBLE);
+        userDNI.setText(jugador.getDNI());
 
-            userBirthDate.setVisibility(View.VISIBLE);
-            userBirthDate.setText(jugador.getFechaNacimiento());
+        userBirthDate.setVisibility(View.VISIBLE);
+        userBirthDate.setText(jugador.getFechaNacimiento());
 
-            userPhone.setVisibility(View.VISIBLE);
-            userPhone.setText(jugador.telefono);
+        userPhone.setVisibility(View.VISIBLE);
+        userPhone.setText(jugador.telefono);
 
-            userTeam.setVisibility(View.VISIBLE);
-            userTeam.setText(jugador.getEquipo());
+        userTeam.setVisibility(View.VISIBLE);
+        userTeam.setText(jugador.getEquipo());
 
-            userFAANumber.setVisibility(View.VISIBLE);
-            userFAANumber.setText(jugador.getNumeroFAA());
+        userFAANumber.setVisibility(View.VISIBLE);
+        userFAANumber.setText(jugador.getNumeroFAA());
 
     }
 
@@ -178,7 +173,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
 
-    /*
+    /**
+     * CircleTransform
      *Metodo que permite dar una forma redonda a la imagen del usuario
      */
     public class CircleTransform implements Transformation {
@@ -217,7 +213,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     }
 
-    /*
+    /**
+     * ProfileTask
      *Clase Asincrona en la cual se realiza la consulta de los datos del jugador
      */
     private class ProfileTask extends AsyncTask {
@@ -259,6 +256,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
+    /**
+     * getUser
+     * Obtiene el jugador
+     */
     private void getUser() {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();

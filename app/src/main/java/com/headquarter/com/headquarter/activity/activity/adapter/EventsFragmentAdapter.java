@@ -151,6 +151,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
                 byte[] blobAsBytes = blob.getBytes(1, blobLength);
                 blob.free();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
+
                 partida.setFotoPartidaBitmap(bitmap);
             } catch (SQLException e) {
                 e.printStackTrace();

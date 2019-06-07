@@ -53,14 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-//        this.getWindow().getDecorView().setSystemUiVisibility(
-//                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-//                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
         checkbox = findViewById(R.id.checkBox);
         numeroFAA = findViewById(R.id.editNumero);
         DNI = findViewById(R.id.editDNI);
@@ -73,7 +65,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         numeroFAA.setText("No miembro");
 
-        //Spinner listener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -86,7 +77,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        //Checkbox listener
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -138,9 +128,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * updateLabel
+     * seleccionamos la fecha que el usuario elige en el calendario y la pasamos al EditText
+     */
     private void updateLabel() {
-        String myFormat = "yyyy-MM-dd "; //In which you need put here
+        String myFormat = "yyyy-MM-dd ";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         cumpleanios.setText(sdf.format(myCalendar.getTime()));
@@ -151,7 +144,10 @@ public class RegisterActivity extends AppCompatActivity {
         equipo = (Equipo) spinner.getSelectedItem();
     }
 
-
+    /**
+     * PopulateTeamsSpinner
+     * Extiende de AsynkTask y hace una seleccion de los nombres de la tabla equipos para cargarlos en el spinner
+     */
     private class PopulateTeamsSpinner extends AsyncTask {
 
         String sql = "SELECT * FROM equipo";
@@ -185,6 +181,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * RegisterUserInDatabase
+     * Extiende de AsynkTask y registra al usuario en la base de datos
+     */
     private class RegisterUserInDatabase extends AsyncTask {
 
         private Jugador jugador = new Jugador();
