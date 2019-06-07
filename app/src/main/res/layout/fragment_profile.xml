@@ -1,270 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".com.headquarter.activity.activity.fragment.ProfileFragment">
+public class CheckIfUserExist extends AsyncTask<Void, FirebaseUser, Boolean> {
 
-    <!-- TODO: Update blank fragment layout -->
+        private Boolean checkUser = false;
+        private String sql = "SELECT `jugador`.`registrado`, `jugador`.`idGoogle`" +
+                "FROM `jugador`" +
+                "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "'";
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/pullToRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        @Override
+        protected void onPreExecute() {
+            new ConnectionDB().execute();
+        }
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            Connection connection = ConnectionDB.conn;
+            try {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+                checkUser = resultSet.getBoolean("registrado");
 
+            } catch (SQLException e) {
+                checkUser = false;
+                e.printStackTrace();
+            }
+            return checkUser;
+        }
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/profileCard"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonLogOut"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            progressBar.setVisibility(View.GONE);
+            if (aBoolean) {
+                Intent menuIntent = new Intent(LogInActivity.this,BottomNavigationViewActivity.class);
+                LogInActivity.this.startActivity(menuIntent);
 
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="47dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/userImage"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="32dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@tools:sample/avatars"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                    <TextView
-                        android:id="@+id/userName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="@string/userName"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
-                        android:visibility="visible"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userImage" />
-
-                    <View
-                        android:id="@+id/divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="?android:attr/listDivider"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userName" />
-
-                    <TextView
-                        android:id="@+id/textViewEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="32dp"
-                        android:text="@string/email"
-                        android:textColor="#000000"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-                    <TextView
-                        android:id="@+id/userEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="32dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="@string/useremail"
-                        android:textColor="#000000"
-                        android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-                    <TextView
-                        android:id="@+id/textViewDNI"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
-                        android:text="@string/DNI"
-                        android:textColor="#000000"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
-
-                    <TextView
-                        android:id="@+id/userDNI"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="@string/userDNI"
-                        android:textColor="#000000"
-                        android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userEmail" />
-
-                    <TextView
-                        android:id="@+id/textViewFechaNacimiento"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
-                        android:text="@string/date"
-                        android:textColor="#000000"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewDNI" />
-
-                    <TextView
-                        android:id="@+id/userDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="@string/date"
-                        android:textColor="#000000"
-                        android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userDNI" />
-
-                    <TextView
-                        android:id="@+id/textViewTelefono"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
-                        android:text="Telefono"
-                        android:textColor="#000000"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewFechaNacimiento" />
-
-                    <TextView
-                        android:id="@+id/userPhone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="TextView"
-                        android:textColor="#000000"
-                        android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userDate" />
-
-                    <TextView
-                        android:id="@+id/textViewTeam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
-                        android:text="Equipo"
-                        android:textColor="#000000"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewTelefono" />
-
-                    <TextView
-                        android:id="@+id/userTeam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="TextView"
-                        android:textColor="#000000"
-                        android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userPhone" />
-
-                    <TextView
-                        android:id="@+id/textViewFAANumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="24dp"
-                        android:text="@string/FAANumber"
-                        android:textColor="#000000"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewTeam" />
-
-                    <TextView
-                        android:id="@+id/userFAANumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="TextView"
-                        android:textColor="#000000"
-                        android:visibility="visible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/userTeam" />
-
-                </android.support.constraint.ConstraintLayout>
-            </android.support.v7.widget.CardView>
-
-
-            <Button
-                android:id="@+id/buttonLogOut"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="#464545"
-                android:text="@string/logOut"
-                android:textColor="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileCard" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="47dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.883" />
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-</FrameLayout>
+            } else {
+                Intent registerIntent = new Intent(LogInActivity.this, RegisterActivity.class);
+                LogInActivity.this.startActivity(registerIntent);
+            }
+            super.onPostExecute(aBoolean);
+        }
+    }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".com.headquarter.activity.activity.activity.EventActivity"
     tools:showIn="@layout/activity_event">
@@ -22,13 +23,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageEvent"
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="fitXY"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:id="@+id/imageEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="@string/eventImageDescription"
+                    android:scaleType="fitXY"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </android.support.v7.widget.CardView>
 
             <TextView
                 android:id="@+id/title"
@@ -38,9 +49,9 @@
                 android:background="#00FFFFFF"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="TextView"
+                android:text="@string/eventTitle"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#525438"
                 android:textSize="30sp" />
 
             <View
@@ -49,30 +60,41 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginVertical="20dp"
-                android:background="#FFFFFF" />
+                android:background="#000000" />
 
             <TextView
                 android:id="@+id/txtTipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:background="#000000"
-                android:paddingStart="10dp"
-                android:text="Tipo"
+                android:background="#00FFFFFF"
+                android:paddingHorizontal="10dp"
+                android:text="@string/eventType"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:text="TextView"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif-black"
+                android:paddingHorizontal="30dp"
+                android:text="@string/eventType"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#000000" />
 
             <TextView
                 android:id="@+id/txtAforo"
@@ -80,23 +102,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:layout_marginTop="20dp"
-                android:background="#000000"
-                android:paddingStart="10dp"
-                android:text="Aforo"
+                android:background="#00FFFFFF"
+                android:paddingHorizontal="10dp"
+                android:text="@string/eventSize"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/aforo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:text="TextView"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif-black"
+                android:paddingHorizontal="30dp"
+                android:text="@string/eventSize"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#000000" />
 
             <TextView
                 android:id="@+id/txtCampo"
@@ -104,23 +137,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:layout_marginTop="20dp"
-                android:background="#000000"
-                android:paddingStart="10dp"
-                android:text="Campo"
+                android:background="#00FFFFFF"
+                android:paddingHorizontal="10dp"
+                android:text="@string/eventField"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/campo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:text="TextView"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif-black"
+                android:paddingHorizontal="30dp"
+                android:text="@string/eventField"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#000000" />
 
             <TextView
                 android:id="@+id/txtFecha"
@@ -128,23 +172,64 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:layout_marginTop="20dp"
-                android:background="#000000"
-                android:paddingStart="10dp"
-                android:text="Fecha"
+                android:background="#00FFFFFF"
+                android:paddingHorizontal="10dp"
+                android:text="@string/eventDate"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:text="TextView"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif-black"
+                android:paddingHorizontal="30dp"
+                android:text="@string/eventDate"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#000000" />
+
+            <TextView
+                android:id="@+id/txtMacroAmbiental"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginTop="20dp"
+                android:paddingHorizontal="10dp"
+                android:text="@string/eventMacro"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/macroambiental"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-black"
+                android:paddingHorizontal="30dp"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider13"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#000000" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -152,12 +237,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:layout_marginTop="20dp"
-                android:background="#000000"
-                android:paddingStart="10dp"
-                android:text="TxtGuion"
+                android:background="#00FFFFFF"
+                android:paddingHorizontal="10dp"
+                android:text="@string/eventScript"
                 android:textAlignment="textStart"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/btnDescargarReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#373A24"
+                android:text="@string/eventDownloadScript" />
 
         </LinearLayout>
     </ScrollView>

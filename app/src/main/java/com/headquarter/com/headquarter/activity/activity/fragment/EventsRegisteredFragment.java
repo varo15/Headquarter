@@ -30,37 +30,29 @@ import java.util.ArrayList;
  */
 public class EventsRegisteredFragment extends Fragment {
 
-    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
-    RecyclerView recycler;
-    private ResultSet resultSet;
-    private String sql;
-    private ProgressBar progressBar;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    static RecyclerView recycler;
+    private static ResultSet resultSet;
+    private static String sql;
+    private static ProgressBar progressBar;
+    private static SwipeRefreshLayout swipeRefreshLayout;
 
-    //ArrayList necesarios para la carga de datos
     static ArrayList<Partida> getListOfEventsRegistered = new ArrayList<>();
 
+    private EventsRegisteredFragmentAdapter adapter;
+
+
     public EventsRegisteredFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
-        //Lamamos al emtodo para obtener el usuario y preparar la consulta
         getUser();
-        //Preparamos la consulta con el uui de nuestro usuario logeado
-        sql = "SELECT `partida`.*, `campo`.`nombreCampo`, `participa`.*, `jugador`.`idGoogle` FROM `partida`" +
-                "LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo`" +
-                "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
-                "LEFT JOIN `jugador` ON `participa`.`idGoogle_fk` = `jugador`.`idGoogle`" +
-                "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "'";
 
-        //Ejecutar la tarea que devulve la consulta
-        new EventsRegisteredTask().execute();
+        adapter = new EventsRegisteredFragmentAdapter(getListOfEventsRegistered);
         super.onCreate(savedInstanceState);
     }
 
@@ -68,17 +60,14 @@ public class EventsRegisteredFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_events_registered, container, false);
         recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        //ProgressBar
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        // Refresh
         swipeRefreshLayout = view.findViewById(R.id.pullToRefresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -89,14 +78,27 @@ public class EventsRegisteredFragment extends Fragment {
         return view;
     }
 
-    
+    @Override
+    public void onResume() {
+        new EventsRegisteredTask().execute();
+        super.onResume();
+    }
 
-    public class EventsRegisteredTask extends AsyncTask {
-
+    /**
+     * EventsRegisteredTask
+     * Mostramos los eventos en los que el usuario se ha registrado
+     */
+    private class EventsRegisteredTask extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {
 
+
+            sql = "SELECT `partida`.*, `campo`.`nombreCampo`, `participa`.*, `jugador`.`idGoogle` FROM `partida`" +
+                    "LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo`" +
+                    "LEFT JOIN `participa` ON `participa`.`idPartida_fk` = `partida`.`idPartida`" +
+                    "LEFT JOIN `jugador` ON `participa`.`idGoogle_fk` = `jugador`.`idGoogle`" +
+                    "WHERE `jugador`.`idGoogle` = '" + user.getUid() + "' ORDER BY `partida`.`fechaPartida` DESC";
 
             try {
 
@@ -111,12 +113,12 @@ public class EventsRegisteredFragment extends Fragment {
 
                     partida.setIdPartida(resultSet.getInt("idPartida"));
                     partida.setNombrePartida(resultSet.getString("nombrePartida"));
-                    partida.setGuionPartida(resultSet.getBlob("guionPartida"));
                     partida.setFechaPartida(resultSet.getDate("fechaPartida"));
                     partida.setFotoPartida(resultSet.getBlob("fotoPartida"));
                     partida.setAforoPartida(resultSet.getString("aforoPartida"));
                     partida.setTipoPartida(resultSet.getString("tipoPartida"));
                     partida.setCampoPartida(resultSet.getString("nombreCampo"));
+                    partida.setMarcoAmbiental((resultSet.getString("marcoAmbiental")));
 
                     getListOfEventsRegistered.add(partida);
                 }
@@ -139,18 +141,12 @@ public class EventsRegisteredFragment extends Fragment {
         }
     }
 
-    private void loadEventsRegisteredCards() {
-        //En este metodo ira todo el codigo necesario para que se carguen los datos y se dibujen los cardviews, antes de que se dibujen se mostrara el fragment en blanco con el progresbar dando vueltas
-        //Una vez que carguen, el progressbar se desactiva y se pintan las tarjetas
-
-        EventsRegisteredFragmentAdapter adapter = new EventsRegisteredFragmentAdapter(getListOfEventsRegistered);
+    public void loadEventsRegisteredCards() {
         recycler.setAdapter(adapter);
     }
 
-    /*
-        Metodo que nos devuelve el usuario de firebase
-     */
     private void getUser() {
+
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
     }

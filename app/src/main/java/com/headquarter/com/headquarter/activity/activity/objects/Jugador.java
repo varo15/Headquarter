@@ -1,23 +1,25 @@
 package com.headquarter.com.headquarter.activity.activity.objects;
 
-import java.util.Date;
+import android.text.Editable;
 
 public class Jugador {
 
+    public String idGoogle;
     public String DNI;
     public String nombre;
-    public Date fechaNacimiento;
+    public String fechaNacimiento;
     public String telefono;
     public String email;
     public int id_equipo_fk;
     public String equipo;
     public String numeroFAA;
-    public boolean registrado;
+    public int registrado;
 
     public Jugador() {
     }
 
-    public Jugador(String DNI, String nombre, Date fechaNacimiento, String telefono, String email, int id_equipo_fk, String equipo, String numeroFAA, boolean registrado) {
+    public Jugador(String idGoogle, String DNI, String nombre, String fechaNacimiento, String telefono, String email, int id_equipo_fk, String equipo, String numeroFAA, int registrado) {
+        this.idGoogle = idGoogle;
         this.DNI = DNI;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
@@ -27,6 +29,14 @@ public class Jugador {
         this.equipo = equipo;
         this.numeroFAA = numeroFAA;
         this.registrado = registrado;
+    }
+
+    public String getIdGoogle() {
+        return idGoogle;
+    }
+
+    public void setIdGoogle(String idGoogle) {
+        this.idGoogle = idGoogle;
     }
 
     public String getDNI() {
@@ -45,11 +55,11 @@ public class Jugador {
         this.nombre = nombre;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -93,11 +103,11 @@ public class Jugador {
         this.numeroFAA = numeroFAA;
     }
 
-    public boolean isRegistrado() {
+    public int getRegistrado() {
         return registrado;
     }
 
-    public void setRegistrado(boolean registrado) {
+    public void setRegistrado(int registrado) {
         this.registrado = registrado;
     }
 }

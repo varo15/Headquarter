@@ -11,29 +11,29 @@ import java.util.Date;
  */
 public class Partida {
 
-    public int idPartida;
-    public String nombrePartida;
-    public Blob guionPartida;
-    public Date fechaPartida;
-    public Blob fotoPartida;
-    public Bitmap fotoPartidaBitmap;
-    public String aforoPartida;
-    public String tipoPartida;
-    public String campoPartida;
+    int idPartida;
+    String nombrePartida;
+    Date fechaPartida;
+    Blob fotoPartida;
+    Bitmap fotoPartidaBitmap;
+    String aforoPartida;
+    String tipoPartida;
+    String campoPartida;
+    String marcoAmbiental;
 
     public Partida() {
     }
 
-    public Partida(int idPartida, String nombrePartida, Blob guionPartida, Date fechaPartida, Blob fotoPartida, Bitmap fotoPartidaBitmap, String aforoPartida, String tipoPartida, String campoPartida) {
+    public Partida(int idPartida, String nombrePartida, Date fechaPartida, Blob fotoPartida, Bitmap fotoPartidaBitmap, String aforoPartida, String tipoPartida, String campoPartida, String marcoAmbiental) {
         this.idPartida = idPartida;
         this.nombrePartida = nombrePartida;
-        this.guionPartida = guionPartida;
         this.fechaPartida = fechaPartida;
         this.fotoPartida = fotoPartida;
         this.fotoPartidaBitmap = fotoPartidaBitmap;
         this.aforoPartida = aforoPartida;
         this.tipoPartida = tipoPartida;
         this.campoPartida = campoPartida;
+        this.marcoAmbiental = marcoAmbiental;
     }
 
     public Bitmap getFotoPartidaBitmap() {
@@ -58,14 +58,6 @@ public class Partida {
 
     public void setNombrePartida(String nombrePartida) {
         this.nombrePartida = nombrePartida;
-    }
-
-    public Blob getGuionPartida() {
-        return guionPartida;
-    }
-
-    public void setGuionPartida(Blob guionPartida) {
-        this.guionPartida = guionPartida;
     }
 
     public Date getFechaPartida() {
@@ -106,5 +98,13 @@ public class Partida {
 
     public void setCampoPartida(String campoPartida) {
         this.campoPartida = campoPartida;
+    }
+
+    public String getMarcoAmbiental() {
+        return marcoAmbiental;
+    }
+
+    public void setMarcoAmbiental(String marcoAmbiental) {
+        this.marcoAmbiental = marcoAmbiental;
     }
 }

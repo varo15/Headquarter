@@ -9,12 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.headquarter.R;
-
 import com.headquarter.com.headquarter.activity.activity.activity.EventActivity;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
@@ -25,12 +23,25 @@ import java.util.ArrayList;
 
 public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAdapter.ViewHolderRecycler> {
 
+    /**
+     * Declaramos el ArrayList que se va a encargar de almacenar los eventos
+     */
     ArrayList<Partida> listDatos;
 
+    /**
+     * Constructor del adaptador
+     * @param listDatos
+     */
     public EventsFragmentAdapter(ArrayList<Partida> listDatos) {
         this.listDatos = listDatos;
     }
 
+    /**
+     * Metodo que se encarga de asignar el layout al fragment de eventos
+     * @param viewGroup
+     * @param i
+     * @return ViewHolderRecycler(view)
+     */
     @NonNull
     @Override
     public ViewHolderRecycler onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -39,19 +50,35 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
         return new ViewHolderRecycler(view);
     }
 
+    /**
+     * Metodo que se encarga de llamar al metodo para asignar los datos al adapter con la longitud
+     * de datos que le pasemos
+     * @param viewHolderRecycler
+     * @param i
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolderRecycler viewHolderRecycler, int i) {
 
         viewHolderRecycler.asignarDatos(listDatos.get(i));
     }
 
+    /**
+     * Metodo que se encarga de devolvernos la dimesion del array de datos
+     * @return listDatos.size()
+     */
     @Override
     public int getItemCount() {
         return listDatos.size();
     }
 
+    /**
+     * Clase intrinseca del ViewHolder
+     */
     public class ViewHolderRecycler extends RecyclerView.ViewHolder {
 
+        /**
+         * Campos donde se va a mostrar la informacion
+         */
         Partida partidaSelected;
         TextView txtPartidaTitulo;
         TextView txtPartidaFecha;
@@ -60,6 +87,10 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
         ImageView imgPartidaFoto;
 
 
+        /**
+         * Metodo que se encarga de inicializar los campos donde se va a mostrar la informacion
+         * @param itemView
+         */
         public ViewHolderRecycler(@NonNull final View itemView) {
 
             super(itemView);
@@ -73,7 +104,13 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
             txtPartidaTipo.setTypeface(txtPartidaFecha.getTypeface(), Typeface.BOLD);
             txtPartidaCampo.setTypeface(txtPartidaFecha.getTypeface(), Typeface.BOLD);
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Listener que se encarga de entrar en la partida seleccionada cuando pinchemos
+                 * en ella
+                 * @param v
+                 */
                 @Override
                 public void onClick(View v) {
 
@@ -86,6 +123,10 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
             });
         }
 
+        /**
+         * Metodo que se encarga de asignar los datos a las miniaturas de los eventos
+         * @param partida
+         */
         public void asignarDatos(Partida partida) {
 
             partidaSelected = partida;
@@ -98,6 +139,10 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
 
         }
 
+        /**
+         * Metodo que se encarga de recoger la imagen de la partida y asignarsela al evento
+         * @param partida
+         */
         private void getEventImage(Partida partida) {
             Blob blob = partida.getFotoPartida();
             int blobLength = 0;
@@ -106,6 +151,7 @@ public class EventsFragmentAdapter extends RecyclerView.Adapter<EventsFragmentAd
                 byte[] blobAsBytes = blob.getBytes(1, blobLength);
                 blob.free();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(blobAsBytes, 0, blobAsBytes.length);
+
                 partida.setFotoPartidaBitmap(bitmap);
             } catch (SQLException e) {
                 e.printStackTrace();
