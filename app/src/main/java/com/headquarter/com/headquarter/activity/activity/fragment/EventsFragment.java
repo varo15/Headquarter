@@ -92,12 +92,15 @@ public class EventsFragment extends Fragment {
         new EventsTask().execute();
     }
 
+    /**
+     * EventTask
+     * Poblamos la lista con los eventos en los que no este registrado nuestro usuario
+     */
     public class EventsTask extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {
 
-            //Preparamos la consulta con el uui de nuestro usuario logeado
             sql = "SELECT `partida`.*, `campo`.`nombreCampo` FROM partida " +
                     "LEFT JOIN `campo` ON `partida`.`id_campo_fk` = `campo`.`idCampo` " +
                     "WHERE partida.idPartida " +
@@ -145,9 +148,6 @@ public class EventsFragment extends Fragment {
         recycler.setAdapter(adapter);
     }
 
-    /*
-        Metodo que nos devuelve el usuario de firebase
-     */
     private void getUser() {
 
         firebaseAuth = FirebaseAuth.getInstance();

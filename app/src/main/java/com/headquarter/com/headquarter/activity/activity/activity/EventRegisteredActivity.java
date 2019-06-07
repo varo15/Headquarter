@@ -28,7 +28,6 @@ import java.sql.Statement;
 
 public class EventRegisteredActivity extends AppCompatActivity {
 
-    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
@@ -58,20 +57,10 @@ public class EventRegisteredActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-
-
-        /*
-         *Llamada al metodo que carga los datos
-         */
         mostrarDatosPartida();
 
-        /*
-         *Creamos un nuevo AlertDialog gracias al metodo creado mas abajo
-         */
         final AlertDialog alertDialog = getAlertDialog();
-        /*
-         * FloatingActionButton
-         */
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +90,11 @@ public class EventRegisteredActivity extends AppCompatActivity {
         return alertDialog;
     }
 
+
+    /**
+     * mostrarDatosPartida
+     * Metodo que pobla los campos de la activity sacando la informacion del objeto pertinente
+     */
     private void mostrarDatosPartida() {
         //------------------------Aqui se define el imageview y se le asigna el contendio que esta guardado en la clase partida
         imagenPartida = findViewById(R.id.imageEvent);
@@ -124,22 +118,35 @@ public class EventRegisteredActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                storageRef.child("partidas/" + "partida" + partida.getIdPartida() +"/" + partida.getIdPartida() + ".pdf" ).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        System.out.println(uri);
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(uri))));
-                    }
-                });
+                descargarGuion();
             }
         });
 
 
     }
 
+    /**
+     * descargarguion
+     * Metodo que descarga el guion de la partida correspondiente alojado en Firebase Storage
+     */
+    public void descargarGuion() {
+        storageRef.child("partidas/" + "partida" + partida.getIdPartida() + "/" + partida.getIdPartida() + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                System.out.println(uri);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(uri))));
+            }
+        });
+    }
+
+    /**
+     * BorrarPartidaTask
+     * Extiende de AsynkTask y eleminia a un usuario de una partida
+     */
     private class BorrarPartidaTask extends AsyncTask<Void, Void, Boolean> {
 
         private boolean success;
+
         @Override
         protected Boolean doInBackground(Void... voids) {
 
@@ -148,7 +155,7 @@ public class EventRegisteredActivity extends AppCompatActivity {
             try {
                 statement.executeUpdate(sql);
                 success = true;
-            } catch (MySQLIntegrityConstraintViolationException DuplicateEntry){
+            } catch (MySQLIntegrityConstraintViolationException DuplicateEntry) {
                 success = false;
             } catch (SQLException e) {
 
@@ -160,12 +167,12 @@ public class EventRegisteredActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
-            if (aBoolean == true){
+            if (aBoolean == true) {
                 Snackbar.make(activityView, "Te has borrado de " + partida.getNombrePartida(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
 
-            }else if (aBoolean==false) {
+            } else if (aBoolean == false) {
                 Snackbar.make(activityView, "Servidor caido, intentalo de nuevo mas tarde: ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -173,8 +180,4 @@ public class EventRegisteredActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

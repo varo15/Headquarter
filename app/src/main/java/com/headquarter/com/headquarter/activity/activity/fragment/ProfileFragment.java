@@ -36,10 +36,8 @@ import java.sql.Statement;
  */
 public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
-    //Variables datos del usuario
     private TextView userEmail;
     private TextView userName;
     private TextView userDNI;
@@ -57,12 +55,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    //Variable consulta sql
     private String sql;
 
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
 
@@ -95,7 +91,6 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Cerrar sesion y volver a la pagina principal
                 try {
                     firebaseAuth.signOut();
 
@@ -178,7 +173,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
 
-    /*
+    /**
+     * CircleTransform
      *Metodo que permite dar una forma redonda a la imagen del usuario
      */
     public class CircleTransform implements Transformation {
@@ -217,7 +213,8 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     }
 
-    /*
+    /**
+     * ProfileTask
      *Clase Asincrona en la cual se realiza la consulta de los datos del jugador
      */
     private class ProfileTask extends AsyncTask {
@@ -259,6 +256,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
+    /**
+     * getUser
+     * Obtiene el jugador
+     */
     private void getUser() {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();

@@ -27,7 +27,6 @@ import java.sql.Statement;
 public class EventActivity extends AppCompatActivity {
 
 
-    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
@@ -60,14 +59,8 @@ public class EventActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-        /*
-         *Llamada al metodo que carga los datos
-         */
         mostrarDatosPartida();
 
-        /*
-         * FloatingActionButton
-         */
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +71,11 @@ public class EventActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * mostrarDatosPartida
+     * Metodo que pobla los campos de la activity sacando la informacion del objeto pertinente
+     */
     private void mostrarDatosPartida() {
-        //------------------------Aqui se define el imageview y se le asigna el contendio que esta guardado en la clase partida
         imagenPartida = findViewById(R.id.imageEvent);
         imagenPartida.setImageBitmap(partida.getFotoPartidaBitmap());
 
@@ -101,19 +97,30 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //gs://headquarter-5a58f.appspot.com/partidas/partida1/1.pdf
-                storageRef.child("partidas/" + "partida" + partida.getIdPartida() +"/" + partida.getIdPartida() + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        System.out.println(uri);
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(uri))));
-                    }
-                });
+                descargarGuion();
             }
         });
 
     }
 
+    /**
+     * descargarguion
+     * Metodo que descarga el guion de la partida correspondiente alojado en Firebase Storage
+     */
+    public void descargarGuion() {
+        storageRef.child("partidas/" + "partida" + partida.getIdPartida() + "/" + partida.getIdPartida() + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                System.out.println(uri);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(uri))));
+            }
+        });
+    }
+
+    /**
+     * ApuntarPartidaTask
+     * Extiende de AsyncTask y registra al usuario en una partida
+     */
     private class ApuntarPartidaTask extends AsyncTask<Void, Void, Boolean> {
 
         private boolean success;

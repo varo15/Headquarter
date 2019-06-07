@@ -48,6 +48,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * hidevirtualButtons
+     * esconde los botones del dispositivo
+     */
     private void hideVirtualButtons() {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
