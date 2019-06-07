@@ -4,13 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:id="@+id/eventActivityLayout"
     tools:context=".com.headquarter.activity.activity.activity.EventActivity">
 
-    <include
-        layout="@layout/content_event"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnAtrasReg"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/ic_arrow_back_black_24dp" />
+
+        <include
+            layout="@layout/content_event"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -18,6 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_popup_sync" />
+        android:backgroundTint="#525438"
+        app:borderWidth="0dp"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

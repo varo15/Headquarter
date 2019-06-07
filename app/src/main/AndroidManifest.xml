@@ -11,26 +11,33 @@
         android:roundIcon="@mipmap/ic_launcher_headquarter_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".com.headquarter.activity.activity.activity.SplashScreenActivity">
+        <activity
+            android:name=".com.headquarter.activity.activity.activity.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".com.headquarter.activity.activity.activity.RegisterActivity" />
+        <activity android:name=".com.headquarter.activity.activity.activity.RegisterActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".com.headquarter.activity.activity.activity.EventRegisteredActivity"
             android:label="@string/title_activity_event_registered"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".com.headquarter.activity.activity.activity.EventActivity"
             android:label="@string/title_activity_event"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".com.headquarter.activity.activity.activity.BottomNavigationViewActivity"
-            android:label="@string/title_activity_menu" />
-        <activity android:name=".com.headquarter.activity.activity.activity.LogInActivity" />
+            android:label="@string/title_activity_menu"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".com.headquarter.activity.activity.activity.LogInActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

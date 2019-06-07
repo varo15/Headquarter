@@ -19,11 +19,12 @@ public class Partida {
     String aforoPartida;
     String tipoPartida;
     String campoPartida;
+    String marcoAmbiental;
 
     public Partida() {
     }
 
-    public Partida(int idPartida, String nombrePartida, Date fechaPartida, Blob fotoPartida, Bitmap fotoPartidaBitmap, String aforoPartida, String tipoPartida, String campoPartida) {
+    public Partida(int idPartida, String nombrePartida, Date fechaPartida, Blob fotoPartida, Bitmap fotoPartidaBitmap, String aforoPartida, String tipoPartida, String campoPartida, String marcoAmbiental) {
         this.idPartida = idPartida;
         this.nombrePartida = nombrePartida;
         this.fechaPartida = fechaPartida;
@@ -32,6 +33,7 @@ public class Partida {
         this.aforoPartida = aforoPartida;
         this.tipoPartida = tipoPartida;
         this.campoPartida = campoPartida;
+        this.marcoAmbiental = marcoAmbiental;
     }
 
     public Bitmap getFotoPartidaBitmap() {
@@ -57,7 +59,6 @@ public class Partida {
     public void setNombrePartida(String nombrePartida) {
         this.nombrePartida = nombrePartida;
     }
-
 
     public Date getFechaPartida() {
         return fechaPartida;
@@ -97,5 +98,13 @@ public class Partida {
 
     public void setCampoPartida(String campoPartida) {
         this.campoPartida = campoPartida;
+    }
+
+    public String getMarcoAmbiental() {
+        return marcoAmbiental;
+    }
+
+    public void setMarcoAmbiental(String marcoAmbiental) {
+        this.marcoAmbiental = marcoAmbiental;
     }
 }

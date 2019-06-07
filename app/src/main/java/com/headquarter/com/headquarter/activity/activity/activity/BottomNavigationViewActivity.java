@@ -19,6 +19,9 @@ import com.headquarter.com.headquarter.activity.activity.others.ConnectionDB;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Clase principal con el menu de la aplicacion donde se muestran los 3 fragments principales
+ */
 public class BottomNavigationViewActivity extends AppCompatActivity {
 
     final Fragment fragment1 = new EventsFragment();
@@ -48,6 +51,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,25 +76,29 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
         active = fragmentName;
     }
 
+    /**
+     * onDestroy
+     * Cierra la conexion con la bbdd cuando se destruye la activity
+     */
     @Override
     protected void onDestroy() {
         try {
             BottomNavigationViewActivity.statement.close();
             ConnectionDB.conn.close();
-            System.out.println("Conexion cerrada");
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error al cerrar la conexion en BootnNav");
         }
         super.onDestroy();
     }
 
     boolean doubleBackToExitPressedOnce = false;
 
-
+    /**
+     * onBackPressed
+     * Controla que el usuario pueda cerrar la aplicacion haciendo doble click en la flecha de atras
+     */
     @Override
-
     public void onBackPressed() {
 
         if (doubleBackToExitPressedOnce) {

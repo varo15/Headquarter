@@ -33,15 +33,12 @@ import java.sql.Statement;
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //defining view objects
     private static final String TAG = "EmailPassword";
     private static final int RC_SIGN_IN = 9001;
     public static GoogleSignInClient mGoogleSignInClient;
 
-    //Declaramos el progressbar
     private ProgressBar progressBar;
 
-    //Declaramos un objeto firebaseAuth
     private FirebaseAuth firebaseAuth;
     public static FirebaseUser firebaseUser = SplashScreenActivity.firebaseUser;
 
@@ -50,14 +47,12 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //inicializamos el objeto firebaseAuth
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        //Vinculamos el progressbar y lo hacemos invisible
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
-        //attaching listener to button
         findViewById(R.id.botonGoogle).setOnClickListener(this);
 
         if (firebaseUser != null) {
@@ -131,10 +126,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     }
     // [END auth_with_google]
 
-    /*
-        Meodo onStart
-        Checkea si algun usuario se logeo alguna vez en la aplicacion y recupera sus datos
-     */
 
     // [START signinGoogle]
     private void signInGoogle() {
@@ -159,6 +150,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * CheckIfUserExist
+     * Extiende de AsynkTask y hace una comprobacion para saber si el usuario ya esta registrado en la base de datos o no
+     */
     public class CheckIfUserExist extends AsyncTask<Void, Void, Boolean> {
 
         @Override

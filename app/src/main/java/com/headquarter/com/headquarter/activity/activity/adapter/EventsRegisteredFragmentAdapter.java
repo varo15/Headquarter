@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.headquarter.R;
-import com.headquarter.com.headquarter.activity.activity.activity.EventActivity;
 import com.headquarter.com.headquarter.activity.activity.activity.EventRegisteredActivity;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 
@@ -25,12 +23,25 @@ import java.util.ArrayList;
 
 public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<EventsRegisteredFragmentAdapter.ViewHolderRecycler> {
 
+    /**
+     * Declaramos el ArrayList que se va a encargar de almacenar los eventos registrados
+     */
     ArrayList<Partida> listDatos;
 
+    /**
+     * Constructor del adaptador
+     * @param listDatos
+     */
     public EventsRegisteredFragmentAdapter(ArrayList<Partida> listDatos) {
         this.listDatos = listDatos;
     }
 
+    /**
+     * Metodo que se encarga de asignar el layout al fragment de eventos registrados
+     * @param viewGroup
+     * @param i
+     * @return ViewHolderRecycler(view)
+     */
     @NonNull
     @Override
     public ViewHolderRecycler onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -39,20 +50,35 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
         return new ViewHolderRecycler(view);
     }
 
+    /**
+     * Metodo que se encarga de llamar al metodo para asignar los datos al adapter con la longitud
+     * @param viewHolderRecycler
+     * @param i
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolderRecycler viewHolderRecycler, int i) {
 
         viewHolderRecycler.asignarDatos(listDatos.get(i));
     }
 
+    /**
+     * Metodo que se encarga de devolvernos la dimesion del array de datos
+     * @return listDatos.size()
+     */
     @Override
     public int getItemCount() {
         return listDatos.size();
     }
 
+    /**
+     * Clase intrinseca del ViewHolder
+     */
     public class ViewHolderRecycler extends RecyclerView.ViewHolder {
 
 
+        /**
+         * Campos donde se va a mostrar la informacion
+         */
         Partida partidaSelected;
         TextView txtPartidaTitulo;
         TextView txtPartidaFecha;
@@ -60,6 +86,10 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
         TextView txtPartidaCampo;
         ImageView imgPartidaFoto;
 
+        /**
+         * Metodo que se encarga de inicializar los campos donde se va a mostrar la informacion
+         * @param itemView
+         */
         public ViewHolderRecycler(@NonNull final View itemView) {
             super(itemView);
             txtPartidaTitulo = itemView.findViewById(R.id.txtTituloEvento);
@@ -73,6 +103,10 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
             txtPartidaCampo.setTypeface(txtPartidaFecha.getTypeface(), Typeface.BOLD);
 
             itemView.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Listener que se encarga de entrar en la partida seleccionada cuando pinchemos
+                 * @param v
+                 */
                 @Override
                 public void onClick(View v) {
 
@@ -83,6 +117,10 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
             });
         }
 
+        /**
+         * Metodo que se encarga de asignar los datos a las miniaturas de los eventos registrados
+         * @param partida
+         */
         public void asignarDatos(Partida partida) {
             partidaSelected = partida;
             txtPartidaTitulo.setText(partida.getNombrePartida());
@@ -96,6 +134,10 @@ public class EventsRegisteredFragmentAdapter extends RecyclerView.Adapter<Events
 
         }
 
+        /**
+         * Metodo que se encarga de recoger la imagen de la partida y asignarsela al evento registrado
+         * @param partida
+         */
         private void getEventImage(Partida partida) {
             Blob blob = partida.getFotoPartida();
             int blobLength = 0;

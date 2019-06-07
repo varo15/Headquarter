@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.activity.BottomNavigationViewActivity;
 import com.headquarter.com.headquarter.activity.activity.activity.LogInActivity;
-import com.headquarter.com.headquarter.activity.activity.activity.SplashScreenActivity;
 import com.headquarter.com.headquarter.activity.activity.objects.Jugador;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -37,10 +36,8 @@ import java.sql.Statement;
  */
 public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
-    //Variables datos del usuario
     private TextView userEmail;
     private TextView userName;
     private TextView userDNI;
@@ -58,12 +55,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    //Variable consulta sql
     private String sql;
 
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
 
@@ -82,22 +77,20 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        userImage = view.findViewById(R.id.userImage);
-        Picasso.get().load(user.getPhotoUrl()).resize(550, 550).transform(new CircleTransform()).into(userImage);
+        initializeComponents();
 
-        userEmail = view.findViewById(R.id.userEmail);
+        userImage = view.findViewById(R.id.userImage);
+        Picasso.get().load(user.getPhotoUrl()).resize(600, 600).transform(new CircleTransform()).into(userImage);
+
         userEmail.setVisibility(View.VISIBLE);
         userEmail.setText(user.getEmail());
 
-        userName = view.findViewById(R.id.userName);
         userName.setVisibility(View.VISIBLE);
         userName.setText(user.getDisplayName());
 
-        buttonLogOut = view.findViewById(R.id.buttonLogOut);
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Cerrar sesion y volver a la pagina principal
                 try {
                     firebaseAuth.signOut();
 
@@ -125,46 +118,54 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         return view;
     }
 
+    public void initializeComponents() {
+        userEmail = view.findViewById(R.id.userEmail);
+        userEmail.setVisibility(View.GONE);
+        userName = view.findViewById(R.id.userName);
+        userName.setVisibility(View.GONE);
+        userDNI = view.findViewById(R.id.userDNI);
+        userDNI.setVisibility(View.GONE);
+        userBirthDate = view.findViewById(R.id.userDate);
+        userBirthDate.setVisibility(View.GONE);
+        userPhone = view.findViewById(R.id.userPhone);
+        userPhone.setVisibility(View.GONE);
+        userTeam = view.findViewById(R.id.userTeam);
+        userTeam.setVisibility(View.GONE);
+        userFAANumber = view.findViewById(R.id.userFAANumber);
+        userFAANumber.setVisibility(View.GONE);
+        userEmail = view.findViewById(R.id.userEmail);
+        userEmail.setVisibility(View.GONE);
+        buttonLogOut = view.findViewById(R.id.buttonLogOut);
+    }
+
     public void showUserData() {
 
-        try {
-            userImage = view.findViewById(R.id.userImage);
+        userImage = view.findViewById(R.id.userImage);
 
-            Picasso.get().load(user.getPhotoUrl()).resize(550, 550).transform(new CircleTransform()).into(userImage);
-
-
-            userEmail = view.findViewById(R.id.userEmail);
-            userEmail.setVisibility(View.VISIBLE);
-            userEmail.setText(jugador.getEmail());
-
-            userName = view.findViewById(R.id.userName);
-            userName.setVisibility(View.VISIBLE);
-            userName.setText(jugador.getNombre());
-
-            userDNI = view.findViewById(R.id.userDNI);
-            userDNI.setVisibility(View.VISIBLE);
-            userDNI.setText(jugador.getDNI());
-
-            userBirthDate = view.findViewById(R.id.userDate);
-            userBirthDate.setVisibility(View.VISIBLE);
-            userBirthDate.setText(jugador.getFechaNacimiento());
-
-            userPhone = view.findViewById(R.id.userPhone);
-            userPhone.setVisibility(View.VISIBLE);
-            userPhone.setText(jugador.getTelefono());
-
-            userTeam = view.findViewById(R.id.userTeam);
-            userTeam.setVisibility(View.VISIBLE);
-            userTeam.setText(jugador.getEquipo());
-
-            userFAANumber = view.findViewById(R.id.userFAANumber);
-            userFAANumber.setVisibility(View.VISIBLE);
-            userFAANumber.setText(jugador.getNumeroFAA());
+        Picasso.get().load(user.getPhotoUrl()).resize(650, 650).transform(new CircleTransform()).into(userImage);
 
 
-        } catch (Exception e) {
+        userEmail.setVisibility(View.VISIBLE);
+        userEmail.setText(jugador.getEmail());
 
-        }
+        userName.setVisibility(View.VISIBLE);
+        userName.setText(jugador.getNombre());
+
+        userDNI.setVisibility(View.VISIBLE);
+        userDNI.setText(jugador.getDNI());
+
+        userBirthDate.setVisibility(View.VISIBLE);
+        userBirthDate.setText(jugador.getFechaNacimiento());
+
+        userPhone.setVisibility(View.VISIBLE);
+        userPhone.setText(jugador.telefono);
+
+        userTeam.setVisibility(View.VISIBLE);
+        userTeam.setText(jugador.getEquipo());
+
+        userFAANumber.setVisibility(View.VISIBLE);
+        userFAANumber.setText(jugador.getNumeroFAA());
+
     }
 
     @Override
@@ -172,6 +173,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
 
+    /**
+     * CircleTransform
+     *Metodo que permite dar una forma redonda a la imagen del usuario
+     */
     public class CircleTransform implements Transformation {
         @Override
         public Bitmap transform(Bitmap source) {
@@ -206,11 +211,13 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
             return "circle";
         }
 
-
     }
 
+    /**
+     * ProfileTask
+     *Clase Asincrona en la cual se realiza la consulta de los datos del jugador
+     */
     private class ProfileTask extends AsyncTask {
-
 
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -228,7 +235,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 jugador.setNombre(user.getDisplayName());
                 jugador.setFechaNacimiento(resultSet.getString("fechaNacimiento"));
                 jugador.setEmail(resultSet.getString("emailJugador"));
-                jugador.setTelefono(user.getPhoneNumber());
+                jugador.setTelefono(resultSet.getString("telefonoJugador"));
                 jugador.setEquipo(resultSet.getString("nombreEquipo"));
                 jugador.setNumeroFAA(resultSet.getString("numeroFAA"));
 
@@ -249,6 +256,10 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
+    /**
+     * getUser
+     * Obtiene el jugador
+     */
     private void getUser() {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();

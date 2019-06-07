@@ -1,16 +1,22 @@
 package com.headquarter.com.headquarter.activity.activity.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.headquarter.R;
 import com.headquarter.com.headquarter.activity.activity.objects.Partida;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -21,7 +27,6 @@ import java.sql.Statement;
 public class EventActivity extends AppCompatActivity {
 
 
-    //Variables usuario firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
 
@@ -30,24 +35,32 @@ public class EventActivity extends AppCompatActivity {
 
     public ImageView imagenPartida;
 
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+
+    Button btnAtras;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
+        btnAtras = findViewById(R.id.btnAtrasReg);
+
+        btnAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         activityView = findViewById(R.id.eventActivityLayout);
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
 
-        /*
-         *Llamada al metodo que carga los datos
-         */
         mostrarDatosPartida();
 
-        /*
-         * FloatingActionButton
-         */
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +71,11 @@ public class EventActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * mostrarDatosPartida
+     * Metodo que pobla los campos de la activity sacando la informacion del objeto pertinente
+     */
     private void mostrarDatosPartida() {
-        //------------------------Aqui se define el imageview y se le asigna el contendio que esta guardado en la clase partida
         imagenPartida = findViewById(R.id.imageEvent);
         imagenPartida.setImageBitmap(partida.getFotoPartidaBitmap());
 
@@ -73,9 +89,38 @@ public class EventActivity extends AppCompatActivity {
         campo.setText(partida.getCampoPartida());
         TextView fecha = findViewById(R.id.fecha);
         fecha.setText(partida.getFechaPartida().toString());
+        TextView marcoAmbiental = findViewById(R.id.macroambiental);
+        marcoAmbiental.setText(partida.getMarcoAmbiental());
+        Button btnDescargar = findViewById(R.id.btnDescargarReg);
+
+        btnDescargar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                descargarGuion();
+            }
+        });
 
     }
 
+    /**
+     * descargarguion
+     * Metodo que descarga el guion de la partida correspondiente alojado en Firebase Storage
+     */
+    public void descargarGuion() {
+        storageRef.child("partidas/" + "partida" + partida.getIdPartida() + "/" + partida.getIdPartida() + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                System.out.println(uri);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(uri))));
+            }
+        });
+    }
+
+    /**
+     * ApuntarPartidaTask
+     * Extiende de AsyncTask y registra al usuario en una partida
+     */
     private class ApuntarPartidaTask extends AsyncTask<Void, Void, Boolean> {
 
         private boolean success;
