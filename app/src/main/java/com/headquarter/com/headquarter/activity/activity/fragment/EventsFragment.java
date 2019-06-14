@@ -89,7 +89,7 @@ public class EventsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        new EventsTask().execute();
+        //new EventsTask().execute();
     }
 
     /**

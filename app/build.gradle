@@ -37,4 +37,6 @@ dependencies {
     implementation project(path: ':mysql-connector-java-5.1.47-bin')
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0'
 }
