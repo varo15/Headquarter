@@ -80,7 +80,7 @@ public class EventsRegisteredFragment extends Fragment {
 
     @Override
     public void onResume() {
-        //new EventsRegisteredTask().execute();
+        new EventsRegisteredTask().execute();
         super.onResume();
     }
 
